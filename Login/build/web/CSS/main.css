@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 13, 2024, 10:18:11 PM
+    Author     : GIGABYTE
+*/
+
+header{
+    background-color: gray;
+    display: flex;
+    justify-content: space-between;   
+    align-items: center;
+}
+.logo img{
+    width: 150px;
+    border-radius: 50%;
+}
+.title{
+    
+}
+

@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  padding:0 ;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.header {
+  background-color: rgb(93, 152, 37);
+  padding: 10px 0;
+  border: 5px solid black;
+  border-radius: 2rem;
+}
+.header_logo {
+  text-align: left;
+}
+.header_logo img {
+  width: 30%;
+  border-radius: 50%;
+}
+.header_title {
+  color: white;
+  text-align: center;
+  margin-top: 80px;
+}
+.header h1 {
+  font-size: 30px;
+}
+.header-search {
+  align-items: center;
+  text-align: center;
+  margin-top: 100px;
+}
+.menu {
+  display: flex;
+  justify-content: center;
+  background-color: green;
+  border-radius: 2rem;
+}
