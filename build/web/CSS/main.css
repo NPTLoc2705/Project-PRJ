@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+body{
+  background: url(https://miro.medium.com/v2/resize:fit:1200/1*6Jp3vJWe7VFlFHZ9WhSJng.jpeg);
+}
 .header {
   background-color: rgb(93, 152, 37);
   padding: 10px 0;
@@ -16,11 +19,12 @@
 .header_logo img {
   width: 30%;
   border-radius: 50%;
+  height: 20vh;
 }
 .header_title {
-  color: white;
+  color: black;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 .header h1 {
   font-size: 30px;
@@ -28,14 +32,10 @@
 .header-search {
   align-items: center;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 50px;
 }
-.menu {
-  display: flex;
-  justify-content: center;
-  background-color: green;
-  border-radius: 2rem;
-}
+
+
 .Login_body {
   display: flex;
   justify-content: center;
@@ -43,10 +43,15 @@
   min-height: 50vh;
   padding: 100px;
 }
+.Login_body h1{
+  color:black
+}
 .LG_form {
   width: 420px;
-  background-color: greenyellow;
+  background-color: rgb(220, 227, 210);
   color: white;
+  border-radius: 20px;
+  padding: 0 30px;
 }
 .LG_form h1 {
   font-weight: 10px;
@@ -65,7 +70,7 @@
   border: none;
   outline: none;
   border: 2px solid black;
-  border-radius: 4 0px;
+  border-radius: 40px;
   font-size: 16px;
   padding :20px 45px 20px 20px ;
 }
@@ -75,9 +80,13 @@
 .user i{
   position: absolute;
   right: 20px;
-  top:50%;
+  top:30%;
   transform: translate(-50%);
   font-size: 20px;
+  color: black;
+}
+.user input::placeholder{
+  color: black;
 }
 .LG_form .Remember-forgot{
   display: flex;
@@ -90,11 +99,14 @@
   margin-right: 3px;
 }
 .Remember-forgot a{
-  color: white;
+  color:black;
   text-decoration: none;
 }
 .Remember-forgot a:hover{
   text-decoration: underline;
+}
+.Rem{
+  color: black;
 }
 .LG_form .btn{
   width: 100%;
@@ -104,5 +116,28 @@
   outline: none;
   border-radius: 40px;
   box-shadow: 0 0 10px rgba(0,0,0,.1);
+  cursor: pointer;
+  font-size: #333;
+  font-weight: 600;
+}
+.btn{
+  color: black;
+  margin:10px
+}
+.LG_form .SU{
+  font-size: 14.5px;
+  text-align: center;
+  margin-top: 20px;
+}
+.SU p a{
+  color: white;
+  text-decoration: none;
+}
+.SU p a:hover{
+  text-decoration: underline;
+}
+.SU{
+  color: black;
+  margin-top: 30px;
 }
 
