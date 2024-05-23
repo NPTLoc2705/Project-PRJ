@@ -5,7 +5,6 @@ package com.login;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -37,18 +36,18 @@ public class Accounts extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-           String auth_name = request.getParameter("user");
+        String auth_name = request.getParameter("user");
         String auth_password = request.getParameter("pass");
 
         try (Connection connection = ConnectDb.ConnectDB.getConnect();
-             PrintWriter out = response.getWriter()) {
+                PrintWriter out = response.getWriter()) {
             System.out.println("Connection established");
 
             String sql = "SELECT * FROM users WHERE name=? AND password=?";
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setString(1, auth_name);
                 stmt.setString(2, auth_password);
-                
+
                 try (ResultSet result = stmt.executeQuery()) {
                     if (result.next()) {
                         out.println("Login success");
@@ -58,7 +57,7 @@ public class Accounts extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("index.html");
                         rd.forward(request, response);
                         out.println("Login failed");
-                        
+
                     }
                 }
             }

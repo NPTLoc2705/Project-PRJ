@@ -4,9 +4,9 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body{
-  background: url(https://tse2.mm.bing.net/th?id=OIP.nVP3SWopxfMf4iav7i1muAHaE8&pid=Api&P=0&h=220);
-
+body
+{
+background-color: red;
 }
 .header {
   background-color: rgb(93, 152, 37);
@@ -147,5 +147,6 @@ body{
 .SU{
   color: black;
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 
