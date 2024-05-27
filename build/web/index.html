@@ -11,40 +11,20 @@
     />
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="header row">
-        <div class="header_logo col-md-4">
-          <img
-            src="IMAGE/download.png"
-            width="204"
-            height="192"
-            alt="download"
-          />
-        </div>
-        <div class="header-search col-md-4">
-          <!-- Actual search box -->
-          <div class="form-group has-feedback has-search">
-            <span
-              class="glyphicon glyphicon-search form-control-feedback"
-            ></span>
-            <input
-              type="text"
-              class="form-control sizesearch"
-              placeholder="Search"
-            />
-          </div>
-        </div>
-        <div class="header_title col-md-4">
-          <a href="MP.html"><h1>Book Store</h1></a>
-          
-        </div>
-      </div>
-    </div>
-    <!-- Content menu-->
+    <header class="header">
+      <a href="#" class="Logo">Logo</a>
+      <nav class="navbar">
+        <a href="MP.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Gallery</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
 
     <div class="Login_body">
       <div class="LG_form">
-        <form action="./Login">
+        <form action="./search/search.jsp">
           <h1>Login</h1>
           <div class="user">
             <input type="text" name="user" placeholder="Ex:Trieu" />
@@ -56,7 +36,7 @@
           </div>
           <div class="Remember-forgot">
             <div class="Rem"><input type="checkbox" />Remember me</div>
-            <a href="getpass">Forget password</a> 
+            <a href="getpass">Forget password</a>
           </div>
           <input type="submit" value="Login" class="btn" /> <br />
           <div class="SU">
