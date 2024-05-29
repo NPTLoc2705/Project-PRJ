@@ -20,28 +20,63 @@
       </nav>
     </header>
 
-    <div class="Login_body">
-      <div class="LG_form">
-        <form action="/Login">
-          <h1>Login</h1>
-          <div class="user">
-            <input type="text" name="user" placeholder="Ex:Trieu" />
-            <i class="bx bxs-user"></i> <br />
+    <div class="container" id="container">
+      <div class="form-container sign-up">
+        <form action="/SignUp">
+          <h1>Create Account</h1>
+          <div class="social-icons">
+            <a href="#" class="icons"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="icons"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class="icons"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="icons"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
           </div>
-          <div class="user">
-            <input type="password" name="pass" placeholder="Ex:123" />
-            <i class="bx bx-hide"></i> <br />
-          </div>
-          <div class="Remember-forgot">
-            <div class="Rem"><input type="checkbox" />Remember me</div>
-            <a href="getpass">Forget password</a>
-          </div>
-          <input type="submit" value="Login" class="btn" /> <br />
-          <div class="SU">
-            Not a members?<a href="signup.html">Sign up now</a>
-          </div>
+          <span>or use your email for registeration</span>
+          <input type="text" placeholder="Name" name="user" />
+          <input type="email" placeholder="Email"  name="email"/>
+          <input type="password" placeholder="Ex:123" name="pass" />
+          <button>Sign Up</button>
         </form>
       </div>
+      <div class="form-container sign-in">
+        <form action="/Login">
+          <h1>Sign In</h1>
+          <div class="social-icons">
+            <a href="#" class="icons"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="icons"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class="icons"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="icons"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+          </div>
+          <span>or use your email password</span>
+          <input type="text" placeholder="Email or User Name" name="user" />
+          <input type="password" placeholder="Ex:123" name="pass"/>
+          <a href="#">Forget Your Password?</a>
+          <button>Sign Ip</button>
+        </form>
+      </div>
+      <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Friend!</h1>
+                <p> You must be new here,please use your personal details to use all of sites features</p>
+                <button class="hidden" id="login">Sign In</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Enter your personal details to use all of site features</p>
+                <button class="hidden" id="register">Sign Up</button>
+            </div>
+        </div>
+      </div>
     </div>
+
+    <script src="login.js"></script>
   </body>
 </html>
