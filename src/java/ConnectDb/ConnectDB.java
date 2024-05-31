@@ -22,7 +22,7 @@ public class ConnectDB {
     public static Connection getConnect(){
         try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                return  DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=BOOKS;encrypt=true;trustServerCertificate=true","sa" ,"123");
+                return  DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=BOOKS;encrypt=true;trustServerCertificate=true","sa" ,"123456");
         }catch(Exception e){
                 return null;
         }

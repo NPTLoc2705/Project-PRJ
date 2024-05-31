@@ -7,6 +7,7 @@
 a {
     color: black;
     text-decoration: none;
+    display: inline
 }
 a:hover h2{
     color:#00A0C6; 
@@ -73,22 +74,26 @@ main{
 
 .Book_box{
 margin-top: 10%;
-  margin-left: 5%;
-  
+  margin-left: 20%;
+  margin-right: 30%
 }
+
 .home-container {
-  width: 95%;
-  height: 143px;
+  width: 100%;
   margin-top: 1%;
   display: flex;
   box-shadow: 5px 5px 10px 0px ;
   align-items: flex-start;
   justify-content: flex-start;
-  background-color: rgb(22,27,34)
+  background-color: rgb(22,27,34);
+ border-radius: 2em; 
+ padding-bottom: 0.5%;
+ padding-top: 0.5%;
+ overflow: hidden;
 }
 
 .home-image {
-  width: 149px;
+  width: 7rem;
   height: 100%;
   object-fit: cover;
 }
@@ -158,6 +163,7 @@ margin-top: 10%;
 }
 .INFO{
     margin-left:20px;
+    padding-top: 10px   
 }
 .INFO span,h2{
     color:white
