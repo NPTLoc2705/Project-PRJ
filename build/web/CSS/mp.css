@@ -139,7 +139,7 @@ margin-top: 10%;
   top: 0;
   right: 0;
   border-radius: 50%;
-  color: #8c52ff;
+  color: #30cd74;
   text-align: center;
   font-size: 1.2em;
   transition: all 1s;
@@ -155,7 +155,7 @@ margin-top: 10%;
 }
 
 .box form:hover .fa{
-  background: #8c52ff;
+  background: #4fd276;
   color: white;
 }
 .home-container img{
@@ -169,3 +169,11 @@ margin-top: 10%;
     color:white
 }
 
+.About{
+  display: flex;
+  justify-content:left;
+  margin-top:100px ;
+}
+.About h1 p{
+  color: red;
+}
