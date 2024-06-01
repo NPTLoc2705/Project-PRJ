@@ -4,10 +4,6 @@
  */
 package com.login.User;
 
-/**
- *
- * @author DUNGHUYNH
- */
 public class UserDTO {
     private String Username;
     private int UserID;

@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-/**
- *
- * @author DUNGHUYNH
- */
+
 public class UserDAO{
     
     public UserDTO login(String username, String password){
@@ -40,5 +37,5 @@ public class UserDAO{
         return null;
         
     }
-    
+   
 }
