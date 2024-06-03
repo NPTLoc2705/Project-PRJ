@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Tab135
  */
 @WebServlet(urlPatterns = {"/Accounts"})
-public class Accounts extends HttpServlet {
+public class AccountsLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -37,5 +37,32 @@ public class UserDAO{
         return null;
         
     }
+     public UserDTO signup(String email, String username, String password){
+         try(Connection con = ConnectDb.ConnectDB.getConnect()) {
+                String sql = "INSERT INTO  Users(UserID, Email, UserName, Password) ";
+                sql +=" values(3,?,?,?)";
+            try(PreparedStatement stmt = con.prepareStatement(sql);){
+                stmt.setString(1, email);
+                stmt.setString(2, username);
+                stmt.setString(3, password);
+                
+                    int rs = stmt.executeUpdate();
+                    if (rs >= 1){
+                        UserDTO user = new UserDTO();
+                        user.setEmail(email);
+                        user.setUsername(username);
+                        user.setPassword(password);
+                        return user;                  
+                    }
+            }
+                
+            } catch (SQLException ex) {                
+                System.out.println("Error in servlet. Details:" + ex.getMessage());
+                ex.printStackTrace();
+                
+            }
+        return null;
+        
+    }
    
 }

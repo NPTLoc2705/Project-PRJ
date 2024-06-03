@@ -2,11 +2,19 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>AccountsLogin</servlet-name>
-        <servlet-class>com.login.servlet.Accounts</servlet-class>
+        <servlet-class>com.login.servlet.AccountsLogin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountsLogin</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+        <servlet>
+        <servlet-name>AccountsSignUp</servlet-name>
+        <servlet-class>com.login.servlet.AccountsSignUp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountsSignUp</servlet-name>
+        <url-pattern>/SignUp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
