@@ -39,8 +39,8 @@ public class UserDAO{
     }
      public UserDTO signup(String email, String username, String password){
          try(Connection con = ConnectDb.ConnectDB.getConnect()) {
-                String sql = "INSERT INTO  Users(UserID, Email, UserName, Password) ";
-                sql +=" values(3,?,?,?)";
+                String sql = "INSERT INTO  Users(Email, UserName, Password) ";
+                sql +=" values(?,?,?)";
             try(PreparedStatement stmt = con.prepareStatement(sql);){
                 stmt.setString(1, email);
                 stmt.setString(2, username);
