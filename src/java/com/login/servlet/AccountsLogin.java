@@ -42,10 +42,10 @@ public class AccountsLogin extends HttpServlet {
         UserDAO dao = new UserDAO();
         UserDTO user = dao.login(auth_name, auth_password);
         if(user != null){
-                RequestDispatcher rd = request.getRequestDispatcher("MP.html");
+                RequestDispatcher rd = request.getRequestDispatcher("index.html");
                 rd.forward(request, response);
         }else{
-            response.sendRedirect("index.html");
+            response.sendRedirect("Login.html");
         }
        
     }
