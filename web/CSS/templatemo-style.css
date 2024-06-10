@@ -60,9 +60,28 @@ height: 100px;
 margin-top: 50px;
 }
 
-
-
-
+.navbar-nav {
+    display: flex;
+}
+.search-box {
+    display: flex;
+    margin-top: 58px;
+    margin-right: 100px;
+    justify-content: center;
+    outline: none;
+    background: white;
+    border: none;
+}
+.search-box-input {
+    width: 566.71014px;
+    border: none;
+    outline: none;
+}
+.search-box-bth {
+    border: none;
+    background-color: none;
+    padding-left: 10px;
+}
 .tm-main-nav { font-size: 1.2rem; }
 
 .navbar-nav .nav-link {

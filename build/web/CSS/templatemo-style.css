@@ -52,20 +52,36 @@ h2 { font-size: 2.2rem; }
 	height: 100px;
 	margin-bottom: 70px;
 }
-
-.tm-site-name {
-	color: #50d284;
-	display: block;
-	font-size: 2.6rem;
-	font-weight: 400;
-	height: 100px;
-}
-.tm-site-name img{
-	width: 30%;
-	border: 1px solid orange;
-	border-radius: 50%;
+.tm-header-logo img{
+width: 100%;
+border: 2px solid white;
+border-radius: 50%;
+height: 100px;
+margin-top: 50px;
 }
 
+.navbar-nav {
+    display: flex;
+}
+.search-box {
+    display: flex;
+    margin-top: 58px;
+    margin-right: 100px;
+    justify-content: center;
+    outline: none;
+    background: white;
+    border: none;
+}
+.search-box-input {
+    width: 566.71014px;
+    border: none;
+    outline: none;
+}
+.search-box-bth {
+    border: none;
+    background-color: none;
+    padding-left: 10px;
+}
 .tm-main-nav { font-size: 1.2rem; }
 
 .navbar-nav .nav-link {
@@ -96,7 +112,8 @@ h2 { font-size: 2.2rem; }
 	background-size: auto;
 	background-position: center;
 	background-repeat: no-repeat;
-	height: 500px;
+	height: 400px;
+	
 }
 
 .tm-about-img-container { background-image: url('../img/tm-about-img.jpg');	}
