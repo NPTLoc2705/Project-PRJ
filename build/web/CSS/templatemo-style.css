@@ -50,6 +50,7 @@ h2 { font-size: 2.2rem; }
 	    -ms-flex-pack: justify;
 	        justify-content: space-between;
 	height: 100px;
+	margin-bottom: 70px;
 }
 
 .tm-site-name {
@@ -57,6 +58,12 @@ h2 { font-size: 2.2rem; }
 	display: block;
 	font-size: 2.6rem;
 	font-weight: 400;
+	height: 100px;
+}
+.tm-site-name img{
+	width: 30%;
+	border: 1px solid orange;
+	border-radius: 50%;
 }
 
 .tm-main-nav { font-size: 1.2rem; }
@@ -66,7 +73,9 @@ h2 { font-size: 2.2rem; }
 	color: black;
 	padding: 10px 40px;
 }
-
+.nav-item{
+	margin-top: 50px;
+}
 .nav-item.active .nav-link,
 .nav-link:hover,
 .nav-link:focus {
@@ -117,6 +126,7 @@ h2 { font-size: 2.2rem; }
 .tm-content-box {
 	max-width: 310px;
 	margin: 0 auto;
+	margin-top: 2em;
 }
 
 h3 { font-size: 1.65rem; }
@@ -127,16 +137,17 @@ h4 {
 
 .tm-btn {
 	color: white;
-	background-color: #cc9900;
+	background-color: #c93c3c;
 	border: none;
-	border-radius: 5px;
+	border-radius: 2rem;
 	display: inline-block;
-	padding: 10px 30px;
+	padding: 1rem 1rem;
+	
 }
 
 .tm-btn:hover,
 .tm-btn:focus {
-	background-color: #906E09;
+	background-color: #eeb826;
 	color: white;
 	outline: none;
 }
@@ -210,6 +221,9 @@ p { line-height: 1.9; }
 	background-color: #CCCCCC; 
 	color: black;
 	padding: 30px 20px 20px;
+}
+.tm-gray-bg img{
+	width: 100%;
 }
 .tm-footer-content-box-title { margin-bottom: 30px; }
 

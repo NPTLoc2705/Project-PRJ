@@ -46,6 +46,7 @@ public class AccountsLogin extends HttpServlet {
                 rd.forward(request, response);
         }else{
             response.sendRedirect("Login.html");
+            
         }
        
     }

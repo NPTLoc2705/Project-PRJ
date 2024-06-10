@@ -20,7 +20,7 @@ public class UserDAO{
                 stmt.setString(1, username);
                 stmt.setString(2,password);
                 
-                ResultSet rs = stmt.executeQuery();
+                ResultSet rs = stmt.executeQuery(); //Quẻy trả về kết quả
                     if (rs.next()){
                         UserDTO user = new UserDTO();
                         user.setPassword(rs.getString("Password"));
@@ -46,7 +46,7 @@ public class UserDAO{
                 stmt.setString(2, username);
                 stmt.setString(3, password);
                 
-                    int rs = stmt.executeUpdate();
+                    int rs = stmt.executeUpdate(); //trả về số dòng update 
                     if (rs >= 1){
                         UserDTO user = new UserDTO();
                         user.setEmail(email);
