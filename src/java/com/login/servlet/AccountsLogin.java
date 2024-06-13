@@ -35,23 +35,22 @@ public class AccountsLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String auth_name = request.getParameter("user");
         String auth_password = request.getParameter("pass");
-        
+
         UserDAO dao = new UserDAO();
         UserDTO user = dao.login(auth_name, auth_password);
-        if(user != null){
-                RequestDispatcher rd = request.getRequestDispatcher("index.html");
-                rd.forward(request, response);
-        }else{
-            response.sendRedirect("Login.html");
-            
+        if (user != null) {
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("Login.jsp");
         }
-       
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -90,5 +89,4 @@ public class AccountsLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

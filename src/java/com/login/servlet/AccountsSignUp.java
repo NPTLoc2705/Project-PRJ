@@ -34,10 +34,10 @@ public class AccountsSignUp extends HttpServlet {
         UserDAO dao = new UserDAO();
         UserDTO user = dao.signup(auth_email, auth_name, auth_password);
         if(user != null){
-                RequestDispatcher rd = request.getRequestDispatcher("Login.html");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
         }else{
-            response.sendRedirect("Login.html");
+            response.sendRedirect("Login.jsp");
         }
        
     }
