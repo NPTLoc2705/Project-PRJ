@@ -16,9 +16,20 @@
         <servlet-name>AccountsSignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BookUpload</servlet-name>
+        <servlet-class>FileUpload.BookUpload</servlet-class>
+    </servlet>
+        <servlet-mapping>
+        <servlet-name>BookUpload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+        <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

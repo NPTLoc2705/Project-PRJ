@@ -1,0 +1,123 @@
+body {
+	color: black;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	font-weight: 300;
+	overflow-x: hidden;
+	background-color: #e2dda2;
+	
+}
+
+a, button { transition: all 0.3s ease; }
+a:hover,
+a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+h2 { font-size: 2.2rem; }
+.tm-thin-font { font-weight: 300; }
+
+.container-fluid {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1390px;
+	overflow-x: hidden;
+}
+
+@media (max-width: 1390px) {
+	.container-fluid {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+}
+
+.tm-header-inner {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-justify-content: space-between;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	height: 100px;
+	margin-bottom: 70px;
+}
+.tm-header-logo img{
+width: 100%;
+border: 2px solid white;
+border-radius: 50%;
+height: 100px;
+margin-top: 50px;
+}
+
+.navbar-nav {
+    display: flex;
+}
+.search-box {
+    display: flex;
+    margin-top: 58px;
+    margin-right: 100px;
+    justify-content: center;
+    outline: none;
+    background: white;
+    border: none;
+}
+.search-box-input {
+    width: 566.71014px;
+    border: none;
+    outline: none;
+}
+.search-box-bth {
+    border: none;
+    background-color: none;
+    padding-left: 10px;
+}
+.tm-main-nav { font-size: 1.2rem; }
+
+.navbar-nav .nav-link {
+	border-radius: 6px;
+	color: black;
+	padding: 10px 40px;
+}
+.nav-item{
+	margin-top: 50px;
+}
+.nav-item.active .nav-link,
+.nav-link:hover,
+.nav-link:focus {
+	color: black;
+	background-color: #5ed799;
+
+}
+
+.tm-gold-text { color: #cc9900; }
+
+.tm-section {
+	padding-top: 80px;
+	padding-bottom: 100px;
+}
+
+.tm-home-img-container {
+	background-image: url('../img/1_6Jp3vJWe7VFlFHZ9WhSJng.jpg');
+	background-size: auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 400px;
+	
+}
+
+.tm-about-img-container { background-image: url('../img/tm-about-img.jpg');	}
+.tm-blog-img-container { background-image: url('../img/tm-blog-img.jpg'); }
+.tm-contact-img-container { background-image: url('../img/tm-contact-img.jpg'); }
+
+.tm-about-img-container,
+.tm-blog-img-container,
+.tm-contact-img-container {
+	background-size: auto 200px;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 200px;
+}
