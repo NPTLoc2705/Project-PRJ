@@ -33,7 +33,11 @@
             <div class="container-fluid">
                 <div class="tm-header-inner">
                     <div class="tm-header-logo">
-                      
+
+                        <a href="#" class="navbar-brand tm-site-name"
+                           ><img src="img/hinh.png" alt=""
+                              /></a>
+
                     </div>
 
 
