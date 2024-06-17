@@ -5,6 +5,8 @@
  */
 package FileUpload;
 
+import com.books.BookDAO;
+import com.books.BookDTO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,10 +34,13 @@ public class BookUpload extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String author = request.getParameter("author");
+            String description = request.getParameter("description");
              String extension = "";
              String Booknames="";
               Part part = request.getPart("file");
               String original_name = part.getSubmittedFileName();
+              InputStream input = part.getInputStream();
              
               int dot_index = original_name.lastIndexOf('.');
               if (dot_index > 0 && dot_index < original_name.length() - 1) {
@@ -54,42 +59,16 @@ if ("pdf".equals(extension) || "epub".equals(extension)) {
         }
               
               
-              String path = "D:\\PUBLIC_DB\\" + Booknames ; // Nên để database qua ổ D, đừng bỏ vào folder của project luôn, nó nặng lúc sync github
-             
-              InputStream input = part.getInputStream();
-              
-///Check succes upload
-             boolean success = FileUploader(input, path);
-             if (success){
-                 out.println("Done: " + path);
+            BookDAO dao = new BookDAO();
+            BookDTO book = dao.FileUploader(input, Booknames,author,description);
+             if (book != null){
+                 out.println("Done: ");
              }
              else{
                  response.sendRedirect("./FileUpload.jsp");
              }
         }
     }
-    
-    
-    
-public boolean FileUploader(InputStream input, String path) {
-    boolean Success = false;
-    try {
-        byte[] bytes = new byte[input.available()];
-        
-//Đọc byte và ghi xuống path
-        int bytesRead = input.read(bytes); 
-        if (bytesRead > 0) {
-            FileOutputStream outputBook = new FileOutputStream(path);
-            outputBook.write(bytes, 0, bytesRead); 
-            outputBook.flush();
-            outputBook.close();
-            Success= true;
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return Success;
-}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
