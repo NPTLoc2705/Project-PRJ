@@ -80,8 +80,9 @@
                     <a href="#">Forget Your Password?</a>
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
-                    
-                    <h3 color="red"> <%= error%> </h3>
+                    <style>
+                        <h3 color="red"> <%= error%> </h3>
+                    </style>
                     <% }%>
                     <button>Sign In</button>
                 </form>
