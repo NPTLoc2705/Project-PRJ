@@ -6,16 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <title>Classic - Responsive Bootstrap 4.0 Template</title>
-   
+
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"
             />
-     
+
         <link rel="stylesheet" href="CSS/bootstrap.min.css" />
-   
+
         <link rel="stylesheet" href="CSS/templatemo-style.css" />
-     
+
     </head>
     <body>
         <div class="tm-header">
@@ -78,6 +78,11 @@
                     <input type="text" placeholder="Email or User Name" name="user" />
                     <input type="password" placeholder="Ex:123" name="pass" />
                     <a href="#">Forget Your Password?</a>
+                    <% String error = (String) request.getAttribute("error"); %>
+                    <% if (error != null) {%>
+                    
+                    <h3 color="red"> <%= error%> </h3>
+                    <% }%>
                     <button>Sign In</button>
                 </form>
             </div>
