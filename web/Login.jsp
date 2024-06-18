@@ -78,11 +78,18 @@
                     <input type="text" placeholder="Email or User Name" name="user" />
                     <input type="password" placeholder="Ex:123" name="pass" />
                     <a href="#">Forget Your Password?</a>
+                    <style>
+                        h3{
+                            color:red;
+                            font-size:80%;
+                        }
+                        
+                    </style>
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
-                    <style>
+                   
                         <h3 color="red"> <%= error%> </h3>
-                    </style>
+                    
                     <% }%>
                     <button>Sign In</button>
                 </form>
