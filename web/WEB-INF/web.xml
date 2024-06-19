@@ -4,11 +4,15 @@
         <servlet-name>AccountsLogin</servlet-name>
         <servlet-class>com.login.servlet.AccountsLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ratingServlet</servlet-name>
+        <servlet-class>com.login.servlet.ratingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountsLogin</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>AccountsSignUp</servlet-name>
         <servlet-class>com.login.servlet.AccountsSignUp</servlet-class>
     </servlet>
@@ -18,18 +22,22 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>BookUpload</servlet-name>
-        <servlet-class>FileUpload.BookUpload</servlet-class>
+        <servlet-class>com.login.servlet.BookUpload</servlet-class>
     </servlet>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>BookUpload</servlet-name>
         <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ratingServlet</servlet-name>
+        <url-pattern>/Bookdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-        <welcome-file-list>
+    <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>
