@@ -36,17 +36,12 @@ public class BookDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
 
-        if (action.isEmpty()) {
-
             ReviewDAO dao = new ReviewDAO();
             List<ReviewDTO> list = dao.ListReview();
 
             request.setAttribute("reviewList", list);
             request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);;
-        }
-        if(action.equals("submitReview")){
-            
-        }
+        
         
     }
 
