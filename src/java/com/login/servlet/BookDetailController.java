@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tab135
  */
-public class ratingController extends HttpServlet {
+public class BookDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,13 +34,20 @@ public class ratingController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         
-    ReviewDAO dao = new ReviewDAO();
-    List<ReviewDTO> list = dao.ListReview();
-       
-    request.setAttribute("reviewList", list);
-     request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);;
-    
+        String action = request.getParameter("action");
+
+        if (action.isEmpty()) {
+
+            ReviewDAO dao = new ReviewDAO();
+            List<ReviewDTO> list = dao.ListReview();
+
+            request.setAttribute("reviewList", list);
+            request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);;
+        }
+        if(action.equals("submitReview")){
+            
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +66,7 @@ public class ratingController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method. dd
      *
      * @param request servlet request
      * @param response servlet response

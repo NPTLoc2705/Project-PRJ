@@ -5,8 +5,8 @@ package com.login.servlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.login.User.UserDAO;
-import com.login.User.UserDTO;
+import com.User.UserDAO;
+import com.User.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;

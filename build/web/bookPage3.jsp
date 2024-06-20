@@ -104,7 +104,7 @@
                 <div class="text">Thanks for rating us!</div>
                 <div class="edit">EDIT</div>
             </div>
-            <form action="./rating" method="post">
+            <form action="./Bookdetail" method="post">
                 <div class="star-widget">
                     <input type="radio" name="rate" value = "5" id="rate-5">
                     <label for="rate-5" class="fas fa-star"></label>
@@ -121,7 +121,9 @@
                         <textarea name="comment" cols="30"  placeholder="Describe your experience.."></textarea>
                     </div>
                     <div class="post-btn">
+                        <a href="Bookdetail?action=submitReview">
                         <button type="submit" class="rating-post-btn">Post</button>
+                        </a>
                     </div>
             </form>
             

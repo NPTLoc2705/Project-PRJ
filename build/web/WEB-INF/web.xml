@@ -5,8 +5,8 @@
         <servlet-class>com.login.servlet.AccountsLogin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ratingServlet</servlet-name>
-        <servlet-class>com.login.servlet.ratingController</servlet-class>
+        <servlet-name>BookDetail</servlet-name>
+        <servlet-class>com.login.servlet.BookDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountsLogin</servlet-name>
@@ -29,7 +29,7 @@
         <url-pattern>/Upload</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ratingServlet</servlet-name>
+        <servlet-name>BookDetail</servlet-name>
         <url-pattern>/Bookdetail</url-pattern>
     </servlet-mapping>
     <session-config>

@@ -149,7 +149,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <div class=\"text\">Thanks for rating us!</div>\r\n");
       out.write("                <div class=\"edit\">EDIT</div>\r\n");
       out.write("            </div>\r\n");
-      out.write("            <form action=\"./rating\" method=\"post\">\r\n");
+      out.write("            <form action=\"./Bookdetail\" method=\"post\">\r\n");
       out.write("                <div class=\"star-widget\">\r\n");
       out.write("                    <input type=\"radio\" name=\"rate\" value = \"5\" id=\"rate-5\">\r\n");
       out.write("                    <label for=\"rate-5\" class=\"fas fa-star\"></label>\r\n");
@@ -166,7 +166,9 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <textarea name=\"comment\" cols=\"30\"  placeholder=\"Describe your experience..\"></textarea>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"post-btn\">\r\n");
+      out.write("                        <a href=\"Bookdetail?action=submitReview\">\r\n");
       out.write("                        <button type=\"submit\" class=\"rating-post-btn\">Post</button>\r\n");
+      out.write("                        </a>\r\n");
       out.write("                    </div>\r\n");
       out.write("            </form>\r\n");
       out.write("            \r\n");

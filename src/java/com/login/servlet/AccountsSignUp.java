@@ -5,8 +5,8 @@
  */
 package com.login.servlet;
 
-import com.login.User.UserDAO;
-import com.login.User.UserDTO;
+import com.User.UserDAO;
+import com.User.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
