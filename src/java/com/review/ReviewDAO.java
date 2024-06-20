@@ -5,6 +5,7 @@
  */
 package com.review;
 
+import com.books.BookDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,4 +50,14 @@ public class ReviewDAO {
 
         return listReview;
     }
+    
+    public BookDTO postReview(){
+        try(Connection con = ConnectDb.ConnectDB.getConnect()){
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }
