@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author Tab135
@@ -33,15 +32,34 @@ public class BookDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        
+    request.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
+    response.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
-
+        System.out.println(action);
+        if(action == null){
             ReviewDAO dao = new ReviewDAO();
             List<ReviewDTO> list = dao.ListReview();
-
+            
             request.setAttribute("reviewList", list);
-            request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);;
+            request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
+        }
+        else if(action.equals("submitReview")){
+
+            String rate = request.getParameter("rate");
+            String comment = request.getParameter("comment");
+            System.out.println(comment);
+            if(rate !=null && comment !=null){
+             int rate_ = Integer.parseInt(rate);
+            ReviewDAO dao = new ReviewDAO();
+            ReviewDTO review = dao.postReview(rate_, 1, 1, comment);
+            }
+            response.sendRedirect("./Bookdetail");
+        }
+
         
+
         
     }
 

@@ -1,9 +1,10 @@
+ <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.review.ReviewDTO"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Adventure messenger</title>  
@@ -65,8 +66,8 @@
                 <img src="img/434253443_970851104438224_6556823117598086585_n.jpg" alt=""/>
             </div>
             <div class="movie-details">
-                <p><strong>Director:</strong>Tran Son Trieu</p>
-                <p><strong>Actors:</strong> Tran Son Trieu, Nguyen Phan Tan Loc</p>
+                <p><strong>Director:</strong>Trần Sơn Triều</p>
+                <p><strong>Actors:</strong> Tran Son Trieu, Nguyen Phan Tan Loc </p>
                 <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero, Sex Content</p>
                 <p><strong>Opening:</strong>May 24, 2024</p>
                 <p><strong>Language:</strong> Japanese - Vietnamese subtitles; Voiceover</p>
@@ -104,7 +105,7 @@
                 <div class="text">Thanks for rating us!</div>
                 <div class="edit">EDIT</div>
             </div>
-            <form action="./Bookdetail" method="post">
+            <form action="Bookdetail?action=submitReview" method="post">
                 <div class="star-widget">
                     <input type="radio" name="rate" value = "5" id="rate-5">
                     <label for="rate-5" class="fas fa-star"></label>
@@ -121,9 +122,8 @@
                         <textarea name="comment" cols="30"  placeholder="Describe your experience.."></textarea>
                     </div>
                     <div class="post-btn">
-                        <a href="Bookdetail?action=submitReview">
+                        
                         <button type="submit" class="rating-post-btn">Post</button>
-                        </a>
                     </div>
             </form>
             
@@ -139,7 +139,7 @@
                 
     %>
                 <tr>
-                    <td><%= reviews.getUserID() %></td>
+                    <td><%= reviews.getUserName() %></td>
                     <td><%= reviews.getRating() %></td>
                     <td><%= reviews.getComment() %></td>
                 </tr>

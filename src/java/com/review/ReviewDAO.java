@@ -5,7 +5,6 @@
  */
 package com.review;
 
-import com.books.BookDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +19,9 @@ import java.util.List;
 public class ReviewDAO {
     public List<ReviewDTO> ListReview() {
         List<ReviewDTO> listReview = new ArrayList<>();
-        System.out.println("hjferhjfbuerberhjb");
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
             
-            String getReview = "SELECT ReviewID, Rating, BookID, UserID, Comment FROM Review";
+            String getReview = "SELECT r.ReviewID, r.Rating, r.BookID, r.UserID, r.Comment, u.UserName FROM Review r JOIN Users u ON r.UserID = u.UserID";
             PreparedStatement stmt = con.prepareStatement(getReview);
             ResultSet rs = stmt.executeQuery();
 
@@ -34,6 +32,7 @@ public class ReviewDAO {
                 int bookID = rs.getInt("BookID");
                 int userID = rs.getInt("UserID");
                 String comment = rs.getString("Comment");
+                String userName = rs.getString("UserName");
 
                 ReviewDTO review = new ReviewDTO();
                 review.setReviewID(reviewID);
@@ -41,6 +40,7 @@ public class ReviewDAO {
                 review.setBookID(bookID);
                 review.setUserID(userID);
                 review.setComment(comment);
+                review.setUserName(userName);
 
                 listReview.add(review);
             }
@@ -51,9 +51,24 @@ public class ReviewDAO {
         return listReview;
     }
     
-    public BookDTO postReview(){
+    public ReviewDTO postReview(int Rating, int BookID, int UserID, String Comment){
         try(Connection con = ConnectDb.ConnectDB.getConnect()){
             
+            String postReview = "Insert into Review (Rating,BookID,UserID,Comment) values (?,?,?,?) ";
+              try(PreparedStatement stmt = con.prepareStatement(postReview)){
+                stmt.setInt(1, Rating);
+                stmt.setInt(2,BookID);
+                stmt.setInt(3,UserID);
+                stmt.setString(4, Comment);
+               int rs = stmt.executeUpdate(); //trả về số dòng update 
+                    if (rs != 0){
+                        ReviewDTO review = new ReviewDTO();
+                        review.setRating(Rating);
+                        review.setUserID(UserID);
+                        review.setComment(Comment);
+                        return review;                  
+                    }
+             }
         }catch(SQLException e){
             e.printStackTrace();
         }

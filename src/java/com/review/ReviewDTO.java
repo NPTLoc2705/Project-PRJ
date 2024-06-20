@@ -15,6 +15,15 @@ public class ReviewDTO {
     private int BookID;
     private int UserID;
     private String Comment;
+    private String UserName;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
 
     public int getReviewID() {
         return reviewID;
