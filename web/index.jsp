@@ -1,3 +1,4 @@
+<%@page import="com.User.UserDTO"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,8 +55,15 @@
                                 <li class="nav-item">
                                     <a href="about.html" class="nav-link">About</a>
                                 </li>
+                                <% UserDTO user = (UserDTO)request.getAttribute("session");
+                                    if(user != null){
+                                %>
+                                <li class="nav-item">
+                                    <a href="Login.jsp" class="nav-link">Sign out</a>
+                                    <% }  else{%>
                                 <li class="nav-item">
                                     <a href="Login.jsp" class="nav-link">Sign up</a>
+                                    <% } %>
                                 </li>
                             </ul>
                         </div>

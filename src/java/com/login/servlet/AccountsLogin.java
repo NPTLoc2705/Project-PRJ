@@ -42,8 +42,9 @@ public class AccountsLogin extends HttpServlet {
         UserDAO dao = new UserDAO();
         UserDTO user = dao.login(auth_name, auth_password);
         if (user != null) {
-
-            response.sendRedirect("index.html");
+                request.setAttribute("session", user);
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
         } else {
             request.setAttribute("error", "Username or password is incorrect");
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");

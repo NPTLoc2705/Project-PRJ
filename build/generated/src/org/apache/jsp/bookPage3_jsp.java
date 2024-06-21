@@ -32,7 +32,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext _jspx_page_context = null;
 
     try {
-      response.setContentType("text/html");
+      response.setContentType("text/html; charset=UTF-8");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -43,12 +43,13 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write(" \r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("        <meta charset=\"utf-8\" />\r\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"> \r\n");
       out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\r\n");
       out.write("        <title>Adventure messenger</title>  \r\n");
@@ -110,8 +111,8 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <img src=\"img/434253443_970851104438224_6556823117598086585_n.jpg\" alt=\"\"/>\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"movie-details\">\r\n");
-      out.write("                <p><strong>Director:</strong>Tran Son Trieu</p>\r\n");
-      out.write("                <p><strong>Actors:</strong> Tran Son Trieu, Nguyen Phan Tan Loc</p>\r\n");
+      out.write("                <p><strong>Director:</strong>Trần Sơn Triều</p>\r\n");
+      out.write("                <p><strong>Actors:</strong> Tran Son Trieu, Nguyen Phan Tan Loc </p>\r\n");
       out.write("                <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero, Sex Content</p>\r\n");
       out.write("                <p><strong>Opening:</strong>May 24, 2024</p>\r\n");
       out.write("                <p><strong>Language:</strong> Japanese - Vietnamese subtitles; Voiceover</p>\r\n");
@@ -166,6 +167,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <textarea name=\"comment\" cols=\"30\"  placeholder=\"Describe your experience..\"></textarea>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"post-btn\">\r\n");
+      out.write("                        \r\n");
       out.write("                        <button type=\"submit\" class=\"rating-post-btn\">Post</button>\r\n");
       out.write("                    </div>\r\n");
       out.write("            </form>\r\n");
@@ -185,7 +187,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                <tr>\r\n");
       out.write("                    <td>");
-      out.print( reviews.getUserID() );
+      out.print( reviews.getUserName() );
       out.write("</td>\r\n");
       out.write("                    <td>");
       out.print( reviews.getRating() );
