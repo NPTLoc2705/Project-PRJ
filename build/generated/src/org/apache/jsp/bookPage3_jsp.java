@@ -43,7 +43,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write(" \r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -167,50 +167,68 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <textarea name=\"comment\" cols=\"30\"  placeholder=\"Describe your experience..\"></textarea>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div class=\"post-btn\">\r\n");
-      out.write("                        \r\n");
+      out.write("\r\n");
       out.write("                        <button type=\"submit\" class=\"rating-post-btn\">Post</button>\r\n");
       out.write("                    </div>\r\n");
       out.write("            </form>\r\n");
-      out.write("            \r\n");
-      out.write("            \r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("        </div>\r\n");
       out.write("    </div>\r\n");
-      out.write("<table>\r\n");
-      out.write("    ");
-
-       
-        List<ReviewDTO> list = (List<ReviewDTO>) request.getAttribute("reviewList");
-        if (list != null && !list.isEmpty()) {
-            for (ReviewDTO reviews : list) {
-                
-    
       out.write("\r\n");
-      out.write("                <tr>\r\n");
-      out.write("                    <td>");
-      out.print( reviews.getUserName() );
-      out.write("</td>\r\n");
-      out.write("                    <td>");
-      out.print( reviews.getRating() );
-      out.write("</td>\r\n");
-      out.write("                    <td>");
-      out.print( reviews.getComment() );
-      out.write("</td>\r\n");
-      out.write("                </tr>\r\n");
-      out.write("    ");
+      out.write("    <div class=\"testimonial-box-container\">\r\n");
+      out.write("        ");
+
+            List<ReviewDTO> list = (List<ReviewDTO>) request.getAttribute("reviewList");
+            if (list != null) {
+                for (ReviewDTO review : list) {
+        
+      out.write("\r\n");
+      out.write("        <!--BOX-1-------------->\r\n");
+      out.write("        <div class=\"testimonial-box\">\r\n");
+      out.write("            <!--top------------------------->\r\n");
+      out.write("            <div class=\"box-top\">\r\n");
+      out.write("                <!--profile----->\r\n");
+      out.write("                <div class=\"profile\">\r\n");
+      out.write("                    <!--img---->\r\n");
+      out.write("                    <div class=\"profile-img\">\r\n");
+      out.write("\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                    <!--name-and-username-->\r\n");
+      out.write("                    <div class=\"name-user\">\r\n");
+      out.write("                        <p class=\"username\">");
+      out.print( review.getUserName());
+      out.write("</p>\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                </div>\r\n");
+      out.write("                <!--reviews------>\r\n");
+      out.write("                <div class=\"reviews\">\r\n");
+      out.write("                    <p class=\"rating\">Rating: ");
+      out.print( review.getRating());
+      out.write(" / 5</p>\r\n");
+      out.write("                </div>\r\n");
+      out.write("            </div>\r\n");
+      out.write("            <!--Comments---------------------------------------->\r\n");
+      out.write("            <div class=\"client-comment\">\r\n");
+      out.write("                <p>");
+      out.print( review.getComment());
+      out.write("</p>\r\n");
+      out.write("            </div>\r\n");
+      out.write("        </div>\r\n");
+      out.write("        ");
 
             }
         } else {
-    
+        
       out.write("\r\n");
-      out.write("            <tr>\r\n");
-      out.write("                <td colspan=\"3\">No reviews available.</td>\r\n");
-      out.write("            </tr>\r\n");
-      out.write("    ");
+      out.write("        <p>No reviews available.</p> \r\n");
+      out.write("        ");
 
-        }
-    
+            }
+        
       out.write("\r\n");
-      out.write("</table>\r\n");
+      out.write("    </div>\r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("    <script>\r\n");
       out.write("\r\n");
@@ -230,6 +248,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                post.style.display = \"none\";\r\n");
       out.write("            };\r\n");
       out.write("        };\r\n");
+      out.write("\r\n");
       out.write("    </script>\r\n");
       out.write("\r\n");
       out.write("    <!-- load JS files -->\r\n");

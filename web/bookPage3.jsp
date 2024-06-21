@@ -1,4 +1,4 @@
- <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.review.ReviewDTO"%>
 <!DOCTYPE html>
@@ -122,38 +122,56 @@
                         <textarea name="comment" cols="30"  placeholder="Describe your experience.."></textarea>
                     </div>
                     <div class="post-btn">
-                        
+
                         <button type="submit" class="rating-post-btn">Post</button>
                     </div>
             </form>
-            
-            
+
+
         </div>
     </div>
-<table>
-    <%
-       
-        List<ReviewDTO> list = (List<ReviewDTO>) request.getAttribute("reviewList");
-        if (list != null && !list.isEmpty()) {
-            for (ReviewDTO reviews : list) {
-                
-    %>
-                <tr>
-                    <td><%= reviews.getUserName() %></td>
-                    <td><%= reviews.getRating() %></td>
-                    <td><%= reviews.getComment() %></td>
-                </tr>
-    <%
+
+    <div class="testimonial-box-container">
+        <%
+            List<ReviewDTO> list = (List<ReviewDTO>) request.getAttribute("reviewList");
+            if (list != null) {
+                for (ReviewDTO review : list) {
+        %>
+        <!--BOX-1-------------->
+        <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                    <div class="profile-img">
+
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <p class="username"><%= review.getUserName()%></p>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">
+                    <p class="rating">Rating: <%= review.getRating()%> / 5</p>
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p><%= review.getComment()%></p>
+            </div>
+        </div>
+        <%
             }
         } else {
-    %>
-            <tr>
-                <td colspan="3">No reviews available.</td>
-            </tr>
-    <%
-        }
-    %>
-</table>
+        %>
+        <p>No reviews available.</p> 
+        <%
+            }
+        %>
+    </div>
+
 
     <script>
 
@@ -173,6 +191,7 @@
                 post.style.display = "none";
             };
         };
+
     </script>
 
     <!-- load JS files -->
