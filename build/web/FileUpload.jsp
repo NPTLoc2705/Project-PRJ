@@ -85,6 +85,17 @@
                         <input type="file" id="cover-upload" class="file-input">
                         <input type="text" placeholder="Book cover" class="text-input">
                     </div>
+<div class="input-group">
+    <label for="genres">Choose a book genre(s):</label><br>
+    <input type="checkbox" id="horror" name="genres" value="Horror">
+    <label for="horror">Horror</label><br>
+    <input type="checkbox" id="sex-content" name="genres" value="Sex-Content">
+    <label for="sex-content">Sexual Content</label><br>
+    <input type="checkbox" id="romance" name="genres" value="Romance">
+    <label for="romance">Romance</label><br>
+    <input type="checkbox" id="dark-fantasy" name="genres" value="Dark-Fantasy">
+    <label for="dark-fantasy">Dark Fantasy</label><br>
+</div>
                     <div class="text-fields">
                         <input type="text" placeholder="Author" class="text-input">
                         <input type="text" placeholder="Book name" class="text-input">

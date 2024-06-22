@@ -225,18 +225,18 @@ form .post-btn button:hover{
     text-transform: uppercase;
 }
 .testimonial-box-container{
-    display: flex;
+    
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     width:100%;
 }
 .testimonial-box{
-    width:500px;
+    width:89%;
     box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
     background-color: #ffffff;
-    padding: 20px;
-    margin: 15px;
+    padding: 1.5%;
+    margin: 5%;
     cursor: pointer;
 }
 .profile-img{
@@ -271,6 +271,7 @@ form .post-btn button:hover{
 }
 .reviews{
     color: #f9d71c;
+    font-size: 32px;
 }
 .box-top{
     display: flex;

@@ -124,6 +124,17 @@ public final class FileUpload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <input type=\"file\" id=\"cover-upload\" class=\"file-input\">\r\n");
       out.write("                        <input type=\"text\" placeholder=\"Book cover\" class=\"text-input\">\r\n");
       out.write("                    </div>\r\n");
+      out.write("<div class=\"input-group\">\r\n");
+      out.write("    <label for=\"genres\">Choose a book genre(s):</label><br>\r\n");
+      out.write("    <input type=\"checkbox\" id=\"horror\" name=\"genres\" value=\"Horror\">\r\n");
+      out.write("    <label for=\"horror\">Horror</label><br>\r\n");
+      out.write("    <input type=\"checkbox\" id=\"sex-content\" name=\"genres\" value=\"Sex-Content\">\r\n");
+      out.write("    <label for=\"sex-content\">Sexual Content</label><br>\r\n");
+      out.write("    <input type=\"checkbox\" id=\"romance\" name=\"genres\" value=\"Romance\">\r\n");
+      out.write("    <label for=\"romance\">Romance</label><br>\r\n");
+      out.write("    <input type=\"checkbox\" id=\"dark-fantasy\" name=\"genres\" value=\"Dark-Fantasy\">\r\n");
+      out.write("    <label for=\"dark-fantasy\">Dark Fantasy</label><br>\r\n");
+      out.write("</div>\r\n");
       out.write("                    <div class=\"text-fields\">\r\n");
       out.write("                        <input type=\"text\" placeholder=\"Author\" class=\"text-input\">\r\n");
       out.write("                        <input type=\"text\" placeholder=\"Book name\" class=\"text-input\">\r\n");

@@ -154,7 +154,23 @@
                 </div>
                 <!--reviews------>
                 <div class="reviews">
-                    <p class="rating">Rating: <%= review.getRating()%> / 5</p>
+                    <p class="rating">
+                        <%
+                            int rating = review.getRating();
+                            // Hiển thị sao đầy
+                            for (int i = 0; i < rating; i++) {
+                        %>
+                        <span class="star">&#9733;</span> <!-- Sao đầy -->
+                        <%
+                            }
+                            // Hiển thị sao trống
+                            for (int i = rating; i < 5; i++) {
+                        %>
+                        <span class="star" style="color: #ddd;">&#9733;</span> <!-- Sao trống -->
+                        <%
+                            }
+                        %>
+                    </p>
                 </div>
             </div>
             <!--Comments---------------------------------------->
