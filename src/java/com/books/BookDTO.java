@@ -10,10 +10,25 @@ package com.books;
  * @author Tab135
  */
 public class BookDTO {
+
     private String Title;
     private String Author;
     private String Description;
     private String DownloadLink;
+
+    public BookDTO(String Title, String Description, String Author, String DownloadLink) {
+
+        this.Title = Title;
+        this.Description = Description;
+        this.Author = Author;
+        this.DownloadLink = DownloadLink;
+    }
+
+    BookDTO() {
+        
+    }
+
+    
 
     public String getTitle() {
         return Title;
@@ -46,5 +61,5 @@ public class BookDTO {
     public void setDownloadLink(String DownloadLink) {
         this.DownloadLink = DownloadLink;
     }
-    
+
 }

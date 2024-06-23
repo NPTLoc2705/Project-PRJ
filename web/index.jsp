@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.books.BookDTO"%>
 <%@page import="com.User.UserDTO"%>
 <!DOCTYPE html>
 <html>
@@ -7,8 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <title>Stolen Books</title>
-      
-  
+
+
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"
@@ -22,56 +24,8 @@
     </head>
 
     <body>
-        <div class="tm-header">
-            <div class="container-fluid">
-                <div class="tm-header-inner">
-                    <div class="tm-header-logo">
-                        <a href="#" class="navbar-brand tm-site-name"
-                           ><img src="img/hinh.png" alt=""
-                              /></a>
-                    </div>
 
-                    <!-- navbar -->
-                    <nav class="navbar tm-main-nav">
-                        <button
-                            class="navbar-toggler hidden-md-up"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#tmNavbar"
-                            >
-                            &#9776;
-                        </button>
-
-                        <div class="collapse navbar-toggleable-sm" id="tmNavbar">
-                            <ul class="nav navbar-nav">
-                                <div class ="search-box">
-                                    <input class="search-box-input" type="text">
-                                    <button class="search-box-bth" type="submit"><ion-icon name="search-outline"></ion-icon></button>
-
-                                </div>
-                                <li class="nav-item active">
-                                    <a href="index.html" class="nav-link">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="about.html" class="nav-link">About</a>
-                                </li>
-                                <% UserDTO user = (UserDTO)request.getAttribute("session");
-                                    if(user != null){
-                                %>
-                                <li class="nav-item">
-                                    <a href="Login.jsp" class="nav-link">Sign out</a>
-                                    <% }  else{%>
-                                <li class="nav-item">
-                                    <a href="Login.jsp" class="nav-link">Sign up</a>
-                                    <% } %>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-
+        <%@ include file="/nav.jsp" %>
         <div class="tm-home-img-container">
             <img
                 src="img/1_6Jp3vJWe7VFlFHZ9WhSJng.jpg"
@@ -91,165 +45,46 @@
                         </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a
-                                href="https://www.youtube.com/watch?v=Rlx2E9Hr7gI&pp=ygUJduG7oyBtw6B5"
-                                target="_blank"
-                                class="tm-btn text-uppercase"
-                                >
-                                <img
-                                    src="img/tm-img-310x180-2.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">Niga Niga</h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a href="#" class="tm-btn text-uppercase">
-                                <img
-                                    src="img/tm-img-310x180-2.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">
-                                    Lorem ipsum dolor #2
-                                </h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
+                <table>
+                    <%
+                        List<BookDTO> list = (List<BookDTO>) request.getAttribute("booklist");
+                        if (list != null) {
+                            for (BookDTO book : list) {
+                                pageContext.setAttribute("book", book);
+                    %>
+                    <div class="row">
+                        <div class="TM col-md-4">
+                            <div class="tm-content-box">
+                                <div class="tm-pic col-md-6 ">
+                                    <img
+                                        src="img/434253443_970851104438224_6556823117598086585_n.jpg"
+                                        alt="Image"
+                                        class="tm-margin-b-20 img-fluid"
+                                        />
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <h4 class="tm-margin-b-20 tm-gold-text">${book.title}</h4>
+                                    </div>
+                                    
+                                    <p class="tm-margin-b-20">
+                                        ${book.description}
+                                    </p>
+                                    <a href="Bookdetail"
+                                       target="_blank"
+                                       class="tm-btn text-uppercase"
+                                       >Details</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a href="#" class="tm-btn text-uppercase">
-                                <img
-                                    src="img/tm-img-310x180-3.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">
-                                    Lorem ipsum dolor #3
-                                </h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a href="#" class="tm-btn text-uppercase">
-                                <img
-                                    src="img/tm-img-310x180-4.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">
-                                    Lorem ipsum dolor #4
-                                </h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a
-                                href="https://www.youtube.com/watch?v=Rlx2E9Hr7gI&pp=ygUJduG7oyBtw6B5"
-                                target="_blank"
-                                class="tm-btn text-uppercase"
-                                >
-                                <img
-                                    src="img/tm-img-310x180-2.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">Niga Niga</h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a href="#" class="tm-btn text-uppercase">
-                                <img
-                                    src="img/tm-img-310x180-2.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">
-                                    Lorem ipsum dolor #2
-                                </h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a href="#" class="tm-btn text-uppercase">
-                                <img
-                                    src="img/tm-img-310x180-3.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">
-                                    Lorem ipsum dolor #3
-                                </h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                        <div class="tm-content-box">
-                            <a href="#" class="tm-btn text-uppercase">
-                                <img
-                                    src="img/tm-img-310x180-4.jpg"
-                                    alt="Image"
-                                    class="tm-margin-b-20 img-fluid"
-                                    />
-                                <h4 class="tm-margin-b-20 tm-gold-text">
-                                    Lorem ipsum dolor #4
-                                </h4>
-                                <p class="tm-margin-b-20">
-                                    Aenean cursus tellus mauris, quis consequat mauris dapibus id.
-                                    Donec scelerisque porttitor pharetra
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- row -->
+                    <% }
+                        } else {
+                            System.out.println("Cannot fetch book");
+                        }
+                    %>
+                </table>
         </section>
 
 
