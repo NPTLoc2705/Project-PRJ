@@ -203,9 +203,29 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("                <!--reviews------>\r\n");
       out.write("                <div class=\"reviews\">\r\n");
-      out.write("                    <p class=\"rating\">Rating: ");
-      out.print( review.getRating());
-      out.write(" / 5</p>\r\n");
+      out.write("                    <p class=\"rating\">\r\n");
+      out.write("                        ");
+
+                            int rating = review.getRating();
+                            // Hiển thị sao đầy
+                            for (int i = 0; i < rating; i++) {
+                        
+      out.write("\r\n");
+      out.write("                        <span class=\"star\">&#9733;</span> <!-- Sao đầy -->\r\n");
+      out.write("                        ");
+
+                            }
+                            // Hiển thị sao trống
+                            for (int i = rating; i < 5; i++) {
+                        
+      out.write("\r\n");
+      out.write("                        <span class=\"star\" style=\"color: #ddd;\">&#9733;</span> <!-- Sao trống -->\r\n");
+      out.write("                        ");
+
+                            }
+                        
+      out.write("\r\n");
+      out.write("                    </p>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("            <!--Comments---------------------------------------->\r\n");

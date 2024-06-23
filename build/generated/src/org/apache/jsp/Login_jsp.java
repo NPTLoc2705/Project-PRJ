@@ -104,12 +104,33 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("        <div class=\"container\" id=\"container\">\r\n");
       out.write("            <div class=\"form-container sign-up\">\r\n");
-      out.write("                <form action=\"./SignUp\">\r\n");
+      out.write("                <form action=\"./SignUp\" method = \"Post\">\r\n");
       out.write("                    <h1>Create Account</h1>\r\n");
       out.write("                    <span>or use your email for registeration</span>\r\n");
       out.write("                    <input type=\"text\" placeholder=\"Name\" name=\"user\" />\r\n");
       out.write("                    <input type=\"email\" placeholder=\"Email\" name=\"email\" />\r\n");
       out.write("                    <input type=\"password\" placeholder=\"Ex:123\" name=\"pass\" />\r\n");
+      out.write("                                        <style>\r\n");
+      out.write("                        h3{\r\n");
+      out.write("                            color:red;\r\n");
+      out.write("                            font-size:80%;\r\n");
+      out.write("                        }\r\n");
+      out.write("                        \r\n");
+      out.write("                    </style>\r\n");
+      out.write("                    ");
+ String errorSignup = (String) request.getAttribute("errorSignUp"); 
+      out.write("\r\n");
+      out.write("                    ");
+ if (errorSignup != null) {
+      out.write("\r\n");
+      out.write("                   \r\n");
+      out.write("                        <h3 color=\"red\"> ");
+      out.print( errorSignup);
+      out.write(" </h3>\r\n");
+      out.write("                    \r\n");
+      out.write("                    ");
+ }
+      out.write("\r\n");
       out.write("                    <button>Sign Up</button>\r\n");
       out.write("\r\n");
       out.write("                </form>\r\n");
@@ -121,17 +142,24 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <input type=\"text\" placeholder=\"Email or User Name\" name=\"user\" />\r\n");
       out.write("                    <input type=\"password\" placeholder=\"Ex:123\" name=\"pass\" />\r\n");
       out.write("                    <a href=\"#\">Forget Your Password?</a>\r\n");
+      out.write("                    <style>\r\n");
+      out.write("                        h3{\r\n");
+      out.write("                            color:red;\r\n");
+      out.write("                            font-size:80%;\r\n");
+      out.write("                        }\r\n");
+      out.write("                        \r\n");
+      out.write("                    </style>\r\n");
       out.write("                    ");
  String error = (String) request.getAttribute("error"); 
       out.write("\r\n");
       out.write("                    ");
  if (error != null) {
       out.write("\r\n");
-      out.write("                    <style>\r\n");
+      out.write("                   \r\n");
       out.write("                        <h3 color=\"red\"> ");
       out.print( error);
       out.write(" </h3>\r\n");
-      out.write("                    </style>\r\n");
+      out.write("                    \r\n");
       out.write("                    ");
  }
       out.write("\r\n");
@@ -156,7 +184,6 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
-      out.write("\r\n");
       out.write("        <script src=\"js/login.js\"></script>\r\n");
       out.write("    </body>\r\n");
       out.write("</html>\r\n");

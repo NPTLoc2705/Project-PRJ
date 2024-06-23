@@ -34,10 +34,10 @@ public class BookUpload extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String extension = "";
+             String Booknames="";
             String author = request.getParameter("author");
             String description = request.getParameter("description");
-             String extension = "";
-             String Booknames="";
               Part part = request.getPart("file");
               String original_name = part.getSubmittedFileName();
               InputStream input = part.getInputStream();
@@ -55,7 +55,7 @@ if ("pdf".equals(extension) || "epub".equals(extension)) {
                 out.println("Need book name");
             }
         } else {
-         out.println( "Only PDF and EPUB files are allowed.");
+         System.out.println( "Only PDF and EPUB files are allowed.");
         }
               
               

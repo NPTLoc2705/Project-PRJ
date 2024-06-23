@@ -37,7 +37,9 @@ public class AccountsSignUp extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
         }else{
-            response.sendRedirect("Login.jsp");
+            request.setAttribute("error", "User name or email already exist, please sign up again");
+            RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+            rd.forward(request, response);
         }
        
     }

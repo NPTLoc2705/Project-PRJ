@@ -38,25 +38,36 @@ public class UserDAO{
         
     }
      public UserDTO signup(String email, String username, String password){
-         try(Connection con = ConnectDb.ConnectDB.getConnect()) {
-                String sql = "INSERT INTO  Users(Email, UserName, Password) ";
-                sql +=" values(?,?,?)";
-            try(PreparedStatement stmt = con.prepareStatement(sql);){
-                stmt.setString(1, email);
-                stmt.setString(2, username);
-                stmt.setString(3, password);
-                
-                    int rs = stmt.executeUpdate(); //trả về số dòng update 
-                    if (rs >= 1){
-                        UserDTO user = new UserDTO();
-                        user.setEmail(email);
-                        user.setUsername(username);
-                        user.setPassword(password);
-                        return user;                  
-                    }
+    try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+        // Check User exist
+        String checkSql = "SELECT COUNT(*) FROM Users WHERE Email = ? OR UserName = ?";
+        try (PreparedStatement checkStmt = con.prepareStatement(checkSql)) {
+            checkStmt.setString(1, email);
+            checkStmt.setString(2, username);
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return null;
+                }
             }
-                
-            } catch (SQLException ex) {                
+        }
+        
+        //Signup user
+        String sql = "INSERT INTO Users(Email, UserName, Password) values(?,?,?)";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, username);
+            stmt.setString(3, password);
+
+            int rowsInserted = stmt.executeUpdate(); // Returns number of rows inserted
+            if (rowsInserted >= 1) {
+                UserDTO user = new UserDTO();
+                user.setEmail(email);
+                user.setUsername(username);
+                user.setPassword(password);
+                return user;
+            }
+        }
+    } catch (SQLException ex) {                
                 System.out.println("Error in servlet. Details:" + ex.getMessage());
                 ex.printStackTrace();
                 

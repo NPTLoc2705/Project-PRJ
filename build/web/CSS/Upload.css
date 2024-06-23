@@ -52,6 +52,10 @@ form {
     display: none;
 }
 
+#file-chosen{
+  margin-left: 0.3rem;
+  font-family: sans-serif;
+}
 .text-input {
     width: 100%;
     padding: 10px;
