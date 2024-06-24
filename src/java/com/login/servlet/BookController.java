@@ -32,7 +32,7 @@ public class BookController extends HttpServlet {
             keyword = "";
         }
 
-        if (action == null || action.equals("list")) {
+        if (action == null || action.equals("list")|| action.equals("login")) {
 
             BookDAO dao = new BookDAO();
             List<BookDTO> list = dao.list(keyword);

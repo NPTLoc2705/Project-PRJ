@@ -36,10 +36,12 @@ public class AccountsLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
         String auth_name = request.getParameter("user");
         String auth_password = request.getParameter("pass");
-
-        UserDAO dao = new UserDAO();
+        System.out.println();
+        if(action.equals("login")){
+               UserDAO dao = new UserDAO();
         UserDTO user = dao.login(auth_name, auth_password);
         if (user != null) {
                 request.setAttribute("session", user);
@@ -50,6 +52,21 @@ public class AccountsLogin extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
             rd.forward(request, response);
         }
+        }
+        if(action.equals("signup")){
+                String auth_email = request.getParameter("email");
+        UserDAO dao = new UserDAO();
+        UserDTO user = dao.signup(auth_email, auth_name, auth_password);
+        if(user != null){
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                rd.forward(request, response);
+        }else{
+            request.setAttribute("error", "User name or email already exist, please sign up again");
+            RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+            rd.forward(request, response);
+        }
+        }
+     
 
     }
 

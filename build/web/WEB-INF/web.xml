@@ -13,14 +13,6 @@
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AccountsSignUp</servlet-name>
-        <servlet-class>com.login.servlet.AccountsSignUp</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AccountsSignUp</servlet-name>
-        <url-pattern>/SignUp</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>BookController</servlet-name>
         <servlet-class>com.login.servlet.BookController</servlet-class>
     </servlet>
@@ -46,6 +38,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>BookController</welcome-file>
     </welcome-file-list>
 </web-app>

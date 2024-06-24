@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import com.User.UserDTO;
 
 public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -10,6 +11,11 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
+
+  static {
+    _jspx_dependants = new java.util.ArrayList<String>(1);
+    _jspx_dependants.add("/nav.jsp");
+  }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -61,17 +67,16 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
-      out.write("        <div class=\"tm-header\">\r\n");
+      out.write("        ");
+      out.write("\r\n");
+      out.write("<div class=\"tm-header\">\r\n");
       out.write("            <div class=\"container-fluid\">\r\n");
       out.write("                <div class=\"tm-header-inner\">\r\n");
       out.write("                    <div class=\"tm-header-logo\">\r\n");
-      out.write("\r\n");
-      out.write("                        <a href=\"#\" class=\"navbar-brand tm-site-name\"\r\n");
+      out.write("                        <a href=\"BookController\" class=\"navbar-brand tm-site-name\"\r\n");
       out.write("                           ><img src=\"img/hinh.png\" alt=\"\"\r\n");
       out.write("                              /></a>\r\n");
-      out.write("\r\n");
       out.write("                    </div>\r\n");
-      out.write("\r\n");
       out.write("\r\n");
       out.write("                    <!-- navbar -->\r\n");
       out.write("                    <nav class=\"navbar tm-main-nav\">\r\n");
@@ -86,21 +91,44 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                        <div class=\"collapse navbar-toggleable-sm\" id=\"tmNavbar\">\r\n");
       out.write("                            <ul class=\"nav navbar-nav\">\r\n");
-      out.write("                                <li class=\"nav-item\">\r\n");
-      out.write("                                    <a href=\"index.html\" class=\"nav-link\">Home</a>\r\n");
+      out.write("                                <div class =\"search-box\">\r\n");
+      out.write("                                    <form action=\"BookController\" method=\"GET\">\r\n");
+      out.write("                                        <input class=\"search-box-input\" type=\"text\" name=\"keyword\" value=\"");
+      out.print(request.getParameter("keyword") != null ? request.getParameter("keyword") : "");
+      out.write("\">\r\n");
+      out.write("                                        <button class=\"search-box-bth\" type=\"submit\" value=\"search\"><ion-icon name=\"search-outline\"></ion-icon></button>\r\n");
+      out.write("                                    </form>\r\n");
+      out.write("\r\n");
+      out.write("                                </div>\r\n");
+      out.write("                                <li class=\"nav-item \">\r\n");
+      out.write("                                    <a href=\"index.jsp\" class=\"nav-link\">Home</a>\r\n");
       out.write("                                </li>\r\n");
       out.write("                                <li class=\"nav-item\">\r\n");
-      out.write("                                    <a href=\"about.html\" class=\"nav-link\">About</a>\r\n");
+      out.write("                                    <a href=\"FileUpload.jsp\" class=\"nav-link\">Upload</a>\r\n");
       out.write("                                </li>\r\n");
-      out.write("                                <li class=\"nav-item active\">\r\n");
+      out.write("                                ");
+ UserDTO user = (UserDTO) request.getAttribute("session");
+                                    if (user != null) {
+                                
+      out.write("\r\n");
+      out.write("                                <li class=\"nav-item\">\r\n");
+      out.write("                                    <a href=\"Login.jsp\" class=\"nav-link\">Sign out</a>\r\n");
+      out.write("                                    ");
+ } else {
+      out.write("\r\n");
+      out.write("                                <li class=\"nav-item\">\r\n");
       out.write("                                    <a href=\"Login.jsp\" class=\"nav-link\">Sign up</a>\r\n");
+      out.write("                                    ");
+ }
+      out.write("\r\n");
       out.write("                                </li>\r\n");
       out.write("                            </ul>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </nav>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
-      out.write("        </div>\r\n");
+      out.write("        </div>");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("        <div class=\"container\" id=\"container\">\r\n");
       out.write("            <div class=\"form-container sign-up\">\r\n");
@@ -110,33 +138,12 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <input type=\"text\" placeholder=\"Name\" name=\"user\" />\r\n");
       out.write("                    <input type=\"email\" placeholder=\"Email\" name=\"email\" />\r\n");
       out.write("                    <input type=\"password\" placeholder=\"Ex:123\" name=\"pass\" />\r\n");
-      out.write("                                        <style>\r\n");
-      out.write("                        h3{\r\n");
-      out.write("                            color:red;\r\n");
-      out.write("                            font-size:80%;\r\n");
-      out.write("                        }\r\n");
-      out.write("                        \r\n");
-      out.write("                    </style>\r\n");
-      out.write("                    ");
- String errorSignup = (String) request.getAttribute("errorSignUp"); 
-      out.write("\r\n");
-      out.write("                    ");
- if (errorSignup != null) {
-      out.write("\r\n");
-      out.write("                   \r\n");
-      out.write("                        <h3 color=\"red\"> ");
-      out.print( errorSignup);
-      out.write(" </h3>\r\n");
-      out.write("                    \r\n");
-      out.write("                    ");
- }
-      out.write("\r\n");
       out.write("                    <button>Sign Up</button>\r\n");
       out.write("\r\n");
       out.write("                </form>\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"form-container sign-in\">\r\n");
-      out.write("                <form action=\"./Login\" method=\"post\">\r\n");
+      out.write("                <form action=\"./Login?action=login\" method=\"post\">\r\n");
       out.write("                    <h1>Sign In</h1>\r\n");
       out.write("                    <span>or use your email password</span>\r\n");
       out.write("                    <input type=\"text\" placeholder=\"Email or User Name\" name=\"user\" />\r\n");

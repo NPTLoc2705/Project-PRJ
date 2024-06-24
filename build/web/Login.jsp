@@ -22,7 +22,7 @@
 
         <div class="container" id="container">
             <div class="form-container sign-up">
-                <form action="./SignUp" method = "Post">
+                <form action="./Login?action=signup" method = "Post">
                     <h1>Create Account</h1>
                     <span>or use your email for registeration</span>
                     <input type="text" placeholder="Name" name="user" />
@@ -33,7 +33,7 @@
                 </form>
             </div>
             <div class="form-container sign-in">
-                <form action="./Login" method="post">
+                <form action="./Login?action=login" method="post">
                     <h1>Sign In</h1>
                     <span>or use your email password</span>
                     <input type="text" placeholder="Email or User Name" name="user" />
