@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,7 +45,8 @@ public class AccountsLogin extends HttpServlet {
                UserDAO dao = new UserDAO();
         UserDTO user = dao.login(auth_name, auth_password);
         if (user != null) {
-                request.setAttribute("session", user);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("loginSession", user);
                 RequestDispatcher rd = request.getRequestDispatcher("BookController");
                 rd.forward(request, response);
         } else {
@@ -52,6 +54,7 @@ public class AccountsLogin extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
             rd.forward(request, response);
         }
+        
         }
         if(action.equals("signup")){
                 String auth_email = request.getParameter("email");
@@ -65,6 +68,12 @@ public class AccountsLogin extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
             rd.forward(request, response);
         }
+        }
+        
+        if(action.equals("signout")){
+            HttpSession session = request.getSession(false);
+            request.getSession().invalidate();
+            response.sendRedirect("Login");
         }
      
 

@@ -46,7 +46,7 @@
 
                                 </div>
                                 <li class="nav-item active">
-                                    <a href="index.html" class="nav-link">Home</a>
+                                    <a href="index.jsp" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="about.html" class="nav-link">About</a>

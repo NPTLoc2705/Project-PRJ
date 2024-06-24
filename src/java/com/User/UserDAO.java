@@ -14,7 +14,7 @@ public class UserDAO{
     
     public UserDTO login(String username, String password){
          try(Connection con = ConnectDb.ConnectDB.getConnect()) {
-                String sql = "select UserName, Password from users ";
+                String sql = "select UserID, UserName, Password from Users ";
                 sql +=" where UserName = ? and Password = ?";
             try(PreparedStatement stmt = con.prepareStatement(sql);){
                 stmt.setString(1, username);
@@ -23,7 +23,7 @@ public class UserDAO{
                 ResultSet rs = stmt.executeQuery(); //Quẻy trả về kết quả
                     if (rs.next()){
                         UserDTO user = new UserDTO();
-                        user.setPassword(rs.getString("Password"));
+                        user.setUserID(rs.getInt("UserID"));
                         user.setUsername(rs.getString("UserName"));
                         return user;                  
                     }

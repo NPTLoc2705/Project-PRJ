@@ -5,16 +5,21 @@
  */
 package com.login.servlet;
 
+import com.User.UserDTO;
 import com.review.ReviewDAO;
 import com.review.ReviewDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Tab135
@@ -46,16 +51,28 @@ public class BookDetailController extends HttpServlet {
             request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
         }
         else if(action.equals("submitReview")){
-
-            String rate = request.getParameter("rate");
+            try(Connection conn = ConnectDb.ConnectDB.getConnect()){
+                String get_user = "Select UserName from Users where UserID = ?";
+                try(PreparedStatement stmt = conn.prepareStatement(get_user)){
+                    HttpSession session = request.getSession(false);
+                    UserDTO user =  (UserDTO) session.getAttribute("loginSession");
+                    stmt.setInt(1,  user.getUserID());
+                     String rate = request.getParameter("rate");
             String comment = request.getParameter("comment");
-            System.out.println(comment);
             if(rate !=null && comment !=null){
              int rate_ = Integer.parseInt(rate);
             ReviewDAO dao = new ReviewDAO();
-            ReviewDTO review = dao.postReview(rate_, 1, 1, comment);
+            ReviewDTO review = dao.postReview(rate_, 1, user.getUserID(), comment);
             }
             response.sendRedirect("./Bookdetail");
+                }
+                
+                
+                
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+           
         }
 
         

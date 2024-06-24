@@ -76,7 +76,6 @@ public class BookDAO {
                     book.setTitle(book_title);
                     book.setDescription(book_Des);
                     list.add(book);
-                    System.out.println(list);
                 }
             }
         } catch (SQLException ex) {

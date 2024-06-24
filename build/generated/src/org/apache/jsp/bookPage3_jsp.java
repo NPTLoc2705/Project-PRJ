@@ -62,6 +62,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </head>\r\n");
       out.write("\r\n");
       out.write("    <body>\r\n");
+      out.write("   \r\n");
       out.write("        <div class=\"tm-header\">\r\n");
       out.write("            <div class=\"container-fluid\">\r\n");
       out.write("                <div class=\"tm-header-inner\">\r\n");
@@ -90,7 +91,7 @@ public final class bookPage3_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                                </div>\r\n");
       out.write("                                <li class=\"nav-item active\">\r\n");
-      out.write("                                    <a href=\"index.html\" class=\"nav-link\">Home</a>\r\n");
+      out.write("                                    <a href=\"index.jsp\" class=\"nav-link\">Home</a>\r\n");
       out.write("                                </li>\r\n");
       out.write("                                <li class=\"nav-item\">\r\n");
       out.write("                                    <a href=\"about.html\" class=\"nav-link\">About</a>\r\n");

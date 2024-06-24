@@ -34,11 +34,11 @@
                                 <li class="nav-item">
                                     <a href="FileUpload.jsp" class="nav-link">Upload</a>
                                 </li>
-                                <% UserDTO user = (UserDTO) request.getAttribute("session");
-                                    if (user != null) {
+                                <% HttpSession sessions = request.getSession(false);
+                                    if (sessions.getAttribute("loginSession") != null) {
                                 %>
                                 <li class="nav-item">
-                                    <a href="Login.jsp" class="nav-link">Sign out</a>
+                                    <a href="Login?action=signout" class="nav-link">Sign out</a>
                                     <% } else {%>
                                 <li class="nav-item">
                                     <a href="Login.jsp" class="nav-link">Sign up</a>
