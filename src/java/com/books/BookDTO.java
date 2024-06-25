@@ -15,20 +15,28 @@ public class BookDTO {
     private String Author;
     private String Description;
     private String DownloadLink;
+    private String Cover;
 
-    public BookDTO(String Title, String Description, String Author, String DownloadLink) {
-
+    public BookDTO(String Title, String Author, String Description, String DownloadLink, String Cover) {
         this.Title = Title;
-        this.Description = Description;
         this.Author = Author;
+        this.Description = Description;
         this.DownloadLink = DownloadLink;
+        this.Cover = Cover;
     }
+
 
     BookDTO() {
         
     }
 
-    
+    public String getCover() {
+        return Cover;
+    }
+
+    public void setCover(String Cover) {
+        this.Cover = Cover;
+    }
 
     public String getTitle() {
         return Title;

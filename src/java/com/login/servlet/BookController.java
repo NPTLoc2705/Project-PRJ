@@ -7,6 +7,7 @@ package com.login.servlet;
 
 import com.books.BookDAO;
 import com.books.BookDTO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -33,7 +34,7 @@ public class BookController extends HttpServlet {
         }
 
         if (action == null || action.equals("list")|| action.equals("login")) {
-
+            System.out.println(getServletContext().getRealPath("img"));   
             BookDAO dao = new BookDAO();
             List<BookDTO> list = dao.list(keyword);
             request.setAttribute("booklist", list);

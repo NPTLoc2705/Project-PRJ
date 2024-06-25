@@ -39,9 +39,12 @@ public class BookUpload extends HttpServlet {
             String author = request.getParameter("author");
             String description = request.getParameter("description");
               Part part = request.getPart("file");
+              Part cover = request.getPart("cover-image");
               String original_name = part.getSubmittedFileName();
-              InputStream input = part.getInputStream();
-             
+              InputStream input_file = part.getInputStream();
+              String cover_name = cover.getSubmittedFileName();
+              InputStream input_cover= cover.getInputStream();
+             String Image_path = request.getServletContext().getRealPath("") + File.separator + "img" + File.separator;
               int dot_index = original_name.lastIndexOf('.');
               if (dot_index > 0 && dot_index < original_name.length() - 1) {
             extension = original_name.substring(dot_index + 1);
@@ -57,10 +60,10 @@ if ("pdf".equals(extension) || "epub".equals(extension)) {
         } else {
          System.out.println( "Only PDF and EPUB files are allowed.");
         }
-              
+
               
             BookDAO dao = new BookDAO();
-            BookDTO book = dao.FileUploader(input, Booknames,author,description);
+            BookDTO book = dao.FileUploader(input_file, Booknames,author,description,input_cover,cover_name,Image_path);
              if (book != null){
                  out.println("Done: ");
              }

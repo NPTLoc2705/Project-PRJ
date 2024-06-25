@@ -5,26 +5,20 @@
  */
 package com.login.servlet;
 
-import com.User.UserDTO;
-import com.review.ReviewDAO;
-import com.review.ReviewDTO;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 /**
  *
  * @author Tab135
  */
-public class BookDetailController extends HttpServlet {
+public class BookCoverDisplay extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,48 +31,33 @@ public class BookDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-    request.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;charset=UTF-8");
-    response.setCharacterEncoding("UTF-8");
-        String action = request.getParameter("action");
-        System.out.println(action);
-        if(action == null){
-            ReviewDAO dao = new ReviewDAO();
-            List<ReviewDTO> list = dao.ListReview();
-            
-            request.setAttribute("reviewList", list);
-            request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
-        }
-        else if(action.equals("submitReview")){
-            try(Connection conn = ConnectDb.ConnectDB.getConnect()){
-                String get_user = "Select UserName from Users where UserID = ?";
-                try(PreparedStatement stmt = conn.prepareStatement(get_user)){
-                    HttpSession session = request.getSession(false);
-                    UserDTO user =  (UserDTO) session.getAttribute("loginSession");
-                    stmt.setInt(1,  user.getUserID());
-                     String rate = request.getParameter("rate");
-            String comment = request.getParameter("comment");
-            if(rate !=null && comment !=null){
-             int rate_ = Integer.parseInt(rate);
-            ReviewDAO dao = new ReviewDAO();
-            ReviewDTO review = dao.postReview(rate_, 1, user.getUserID(), comment);
-            }
-            response.sendRedirect("./Bookdetail");
-                }
-                
-                
-                
-            }catch(SQLException e){
-                e.printStackTrace();
-            }
-           
-        }
-
-        
-
-        
+        response.setContentType("text/html;charset=UTF-8");
+// Get the filename parameter from the request (optional)
+    String filename = request.getParameter("filename");
+ 
+    // Replace with your actual external directory path
+    String filePath = "D:\\PUBLIC_DB\\Image/" + filename;
+ 
+    File file = new File(filePath);
+ 
+    if (file.exists()) {
+      // Set response content type based on file type (optional)
+      response.setContentType("application/octet-stream");
+ 
+      try (FileInputStream inputStream = new FileInputStream(file)) {
+        byte[] data = new byte[(int) file.length()];
+        inputStream.read(data);
+ 
+        // Write file data to the response
+        response.getOutputStream().write(data);
+      }
+    } else {
+      // Handle case where file doesn't exist
+      response.setStatus(404);
     }
+  
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -96,7 +75,7 @@ public class BookDetailController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method. dd
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response

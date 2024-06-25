@@ -29,7 +29,7 @@
 
                                 </div>
                                 <li class="nav-item ">
-                                    <a href="index.jsp" class="nav-link">Home</a>
+                                    <a href="BookController" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="FileUpload.jsp" class="nav-link">Upload</a>

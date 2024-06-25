@@ -53,7 +53,7 @@
                         <c:forEach var="book" items="${booklist}">
                             <div class="book">
                                 <img
-                                    src="img/tm-img-100x100-1.jpg"
+                                    src="testy?filename=${book.cover}"
                                     alt="Living in the Light"
                                     />
                                 <div class="book-details">

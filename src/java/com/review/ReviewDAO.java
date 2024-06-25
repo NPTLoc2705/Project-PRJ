@@ -21,7 +21,7 @@ public class ReviewDAO {
         List<ReviewDTO> listReview = new ArrayList<>();
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
             
-            String getReview = "SELECT r.ReviewID, r.Rating, r.BookID, r.UserID, r.Comment, u.UserName FROM Review r JOIN Users u ON r.UserID = u.UserID";
+            String getReview = "SELECT r.ReviewID, r.Rating, r.BookID, r.UserID, r.Comment, u.UserName FROM Review r JOIN Users u ON r.UserID = u.UserID ORDER BY r.ReviewID DESC";
             PreparedStatement stmt = con.prepareStatement(getReview);
             ResultSet rs = stmt.executeQuery();
 
