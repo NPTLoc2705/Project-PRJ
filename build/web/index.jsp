@@ -46,44 +46,32 @@
                     </div>
                 </div>
 
+                <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                 <table>
-                    <%
-                        List<BookDTO> list = (List<BookDTO>) request.getAttribute("booklist");
-                        if (list != null) {
-                            for (BookDTO book : list) {
-                                pageContext.setAttribute("book", book);
-                    %>
-                    <div class="row">
-                        <div class="TM col-md-4">
-                            <div class="tm-content-box">
-                                <div class="tm-pic col-md-6 ">
-                                    <img
-                                        src="img/434253443_970851104438224_6556823117598086585_n.jpg"
-                                        alt="Image"
-                                        class="tm-margin-b-20 img-fluid"
-                                        />
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <h4 class="tm-margin-b-20 tm-gold-text">${book.title}</h4>
-                                    </div>
-                                    
-                                    <p class="tm-margin-b-20">
-                                        ${book.description}
+                    <c:set var="booklist" value="${requestScope.booklist}" />
+                    <c:if test="${not empty booklist}">
+                        <c:forEach var="book" items="${booklist}">
+                            <div class="book">
+                                <img
+                                    src="img/tm-img-100x100-1.jpg"
+                                    alt="Living in the Light"
+                                    />
+                                <div class="book-details">
+                                    <p class="book-title">
+                                        ${book.title}
                                     </p>
-                                    <a href="Bookdetail"
-                                       target="_blank"
-                                       class="tm-btn text-uppercase"
-                                       >Details</a>
+                                    <p class="book-meta">${book.description}</p>
+                                    <div class="book-actions">
+                                        <button>Download</button>
+                                        <button class="like-button"><a href="Bookdetail"> Detail</a></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <% }
-                        } else {
-                            System.out.println("Cannot fetch book");
-                        }
-                    %>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty booklist}">
+                        <div>Cannot fetch book</div>
+                    </c:if>
                 </table>
         </section>
 
@@ -169,9 +157,7 @@
                                 Aenean cursus tellus mauris, quis consequat mauris dapibus id.
                                 Donec scelerisque porttitor pharetra.
                             </p>
-                            <a href="#" class="tm-btn tm-btn-gray text-uppercase"
-                               >Read More</a
-                            >
+
                         </div>
                     </div>
 
@@ -216,7 +202,7 @@
                                 Curabitur dui massa, aliquam quis mi sed, tempor vulputate
                                 tellus. Sed vestibulum non neque.
                             </p>
-                            <a href="#" class="tm-btn tm-btn-gray text-uppercase">Browse</a>
+
                         </div>
                     </div>
                 </div>

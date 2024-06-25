@@ -72,6 +72,8 @@ public class BookDAO {
 
                     String book_title = rs.getString("Title");
                     String book_Des = rs.getString("Description");
+                    
+                    
                     BookDTO book = new BookDTO();
                     book.setTitle(book_title);
                     book.setDescription(book_Des);
