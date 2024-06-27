@@ -17,7 +17,7 @@
     </head>
 
     <body>
-   
+
         <div class="tm-header">
             <div class="container-fluid">
                 <div class="tm-header-inner">
@@ -72,7 +72,17 @@
                 <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero, Sex Content</p>
                 <p><strong>Opening:</strong>May 24, 2024</p>
                 <p><strong>Language:</strong> Japanese - Vietnamese subtitles; Voiceover</p>
-                <p><strong>Rate: STORY IS ALLOWED TO BE POPULAR TO READERS OF ALL AGES</strong>       
+                <p><strong>Rate: STORY IS ALLOWED TO BE POPULAR TO READERS OF ALL AGES</strong></p>
+                <p><strong>Average Rating:</strong>
+                    <%
+                        Double averageRating = (Double) request.getAttribute("averageRating");
+                        if (averageRating != null) {
+                            out.print(String.format("%.2f", averageRating)); // Hiển thị giá trị trung bình với 2 chữ số thập phân
+                        } else {
+                            out.print("No ratings yet");
+                        }
+                    %>
+                </p>
             </div>
 
             <div class="action">
