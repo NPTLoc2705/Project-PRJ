@@ -68,7 +68,7 @@ public class ReviewController extends HttpServlet {
                         // Đặt các thuộc tính vào request
                         request.setAttribute("reviewList", list);
                         request.setAttribute("averageRating", averageRating);
-
+                        request.setAttribute("ID", bookID);
                         // Chuyển tiếp đến trang JSP
                         request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
                     }

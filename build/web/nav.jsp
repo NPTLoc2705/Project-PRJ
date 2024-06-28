@@ -31,16 +31,19 @@
                                 <li class="nav-item ">
                                     <a href="BookController" class="nav-link">Home</a>
                                 </li>
+                            <% HttpSession sessions = request.getSession(false);
+                                    if (sessions.getAttribute("loginSession") != null) {
+                                %>
                                 <li class="nav-item">
                                     <a href="FileUpload.jsp" class="nav-link">Upload</a>
                                 </li>
-                                <% HttpSession sessions = request.getSession(false);
-                                    if (sessions.getAttribute("loginSession") != null) {
-                                %>
                                 <li class="nav-item">
                                     <a href="Login?action=signout" class="nav-link">Sign out</a>
                                 </li>
                                     <% } else {%>
+                                <li class="nav-item">
+                                    <a href="Login.jsp" class="nav-link">Upload</a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="Login.jsp" class="nav-link">Sign up</a>
                                      </li>
