@@ -27,11 +27,11 @@ public class ReviewController extends HttpServlet {
         System.out.println(action);
 
         ReviewDAO dao = new ReviewDAO();
-        int bookID = 1; // Giả sử BookID là 1. Bạn có thể thay đổi điều này tùy theo ứng dụng của bạn.
+        int bookID = Integer.parseInt(request.getParameter("id"));
 
         if (action == null) {
             // Lấy danh sách review
-            List<ReviewDTO> list = dao.ListReview();
+            List<ReviewDTO> list = dao.ListReview(bookID);
 
             // Lấy AverageRating
             double averageRating = dao.getBookAverageRating(bookID);
@@ -39,7 +39,7 @@ public class ReviewController extends HttpServlet {
             // Đặt các thuộc tính vào request
             request.setAttribute("reviewList", list);
             request.setAttribute("averageRating", averageRating);
-
+            request.setAttribute("ID", bookID);
             // Chuyển tiếp đến trang JSP
             request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
         } else if (action.equals("submitReview")) {
@@ -63,7 +63,7 @@ public class ReviewController extends HttpServlet {
                         double averageRating = dao.getBookAverageRating(bookID);
 
                         // Lấy danh sách review cập nhật
-                        List<ReviewDTO> list = dao.ListReview();
+                        List<ReviewDTO> list = dao.ListReview(bookID);
 
                         // Đặt các thuộc tính vào request
                         request.setAttribute("reviewList", list);

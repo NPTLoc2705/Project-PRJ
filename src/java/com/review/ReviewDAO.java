@@ -18,12 +18,13 @@ import java.util.List;
  */
 public class ReviewDAO {
 
-    public List<ReviewDTO> ListReview() {
+    public List<ReviewDTO> ListReview(int BookID) {
         List<ReviewDTO> listReview = new ArrayList<>();
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
 
-            String getReview = "SELECT r.ReviewID, r.Rating, r.BookID, r.UserID, r.Comment, u.UserName FROM Review r JOIN Users u ON r.UserID = u.UserID ORDER BY r.ReviewID DESC";
+            String getReview = "SELECT r.ReviewID, r.Rating, r.BookID, r.UserID, r.Comment, u.UserName FROM Review r JOIN Users u ON r.UserID = u.UserID  Where r.BookID = ? ORDER BY r.ReviewID DESC";
             PreparedStatement stmt = con.prepareStatement(getReview);
+            stmt.setInt(1, BookID);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -63,7 +63,7 @@
                                     <p class="book-meta">${book.description}</p>
                                     <div class="book-actions">
                                         <button>Download</button>
-                                        <button class="like-button"><a href="Bookdetail"> Detail</a></button>
+                                        <button class="like-button"><a href="Bookdetail?id=${book.bookID}"> Detail</a></button>
                                     </div>
                                 </div>
                             </div>

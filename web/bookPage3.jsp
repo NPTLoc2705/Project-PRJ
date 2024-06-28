@@ -45,15 +45,23 @@
                                     <button class="search-box-bth" type="submit"><ion-icon name="search-outline"></ion-icon></button>
 
                                 </div>
-                                <li class="nav-item active">
-                                    <a href="index.jsp" class="nav-link">Home</a>
+                                <li class="nav-item ">
+                                    <a href="BookController" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="about.html" class="nav-link">About</a>
+                                    <a href="FileUpload.jsp" class="nav-link">Upload</a>
                                 </li>
+                                <% HttpSession sessions = request.getSession(false);
+                                    if (sessions.getAttribute("loginSession") != null) {
+                                %>
+                                <li class="nav-item">
+                                    <a href="Login?action=signout" class="nav-link">Sign out</a>
+                                </li>
+                                    <% } else {%>
                                 <li class="nav-item">
                                     <a href="Login.jsp" class="nav-link">Sign up</a>
-                                </li>
+                                     </li>
+                                    <% }%>
                             </ul>
                         </div>
                     </nav>
@@ -116,7 +124,7 @@
                 <div class="text">Thanks for rating us!</div>
                 <div class="edit">EDIT</div>
             </div>
-            <form action="Bookdetail?action=submitReview" method="post">
+            <form action="Bookdetail?action=submitReview&id=<%= request.getAttribute("ID") %>" method="post">
                 <div class="star-widget">
                     <input type="radio" name="rate" value = "5" id="rate-5">
                     <label for="rate-5" class="fas fa-star"></label>

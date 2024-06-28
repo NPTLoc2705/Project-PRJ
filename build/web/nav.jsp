@@ -39,11 +39,13 @@
                                 %>
                                 <li class="nav-item">
                                     <a href="Login?action=signout" class="nav-link">Sign out</a>
+                                </li>
                                     <% } else {%>
                                 <li class="nav-item">
                                     <a href="Login.jsp" class="nav-link">Sign up</a>
+                                     </li>
                                     <% }%>
-                                </li>
+                               
                             </ul>
                         </div>
                     </nav>

@@ -68,27 +68,30 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; ///rtestdfwefbherbfejrhberjgbejh
+        return null;
     }
 
    public List<BookDTO> list(String Title) {
         List<BookDTO> list = new ArrayList<>();
         try(Connection con = ConnectDb.ConnectDB.getConnect()) {         
-            String sql = " SELECT Title, Description, CoverImage FROM Books WHERE Title LIKE ? ";
+            String sql = " SELECT BookID,Title, Description, CoverImage,AverageRating FROM Books WHERE Title LIKE ? ";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, '%'+Title+'%');
             ResultSet rs = stmt.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
-
+                    int book_ID = rs.getInt("BookID");
                     String book_title = rs.getString("Title");
                     String book_Des = rs.getString("Description");
                     String book_cover = rs.getString("CoverImage");
+                    float average_rating = rs.getFloat("AverageRating");
                     BookDTO book = new BookDTO();
                     book.setTitle(book_title);
                     book.setDescription(book_Des);
                     book.setCover(book_cover);
+                    book.setAverageRating(average_rating);
+                    book.setBookID(book_ID);
                     list.add(book);
                 }
             }

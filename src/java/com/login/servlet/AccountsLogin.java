@@ -40,40 +40,45 @@ public class AccountsLogin extends HttpServlet {
         String action = request.getParameter("action");
         String auth_name = request.getParameter("user");
         String auth_password = request.getParameter("pass");
-        System.out.println();
-        if(action.equals("login")){
-               UserDAO dao = new UserDAO();
-        UserDTO user = dao.login(auth_name, auth_password);
-        if (user != null) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("loginSession", user);
-                RequestDispatcher rd = request.getRequestDispatcher("BookController");
-                rd.forward(request, response);
-        } else {
-            request.setAttribute("error", "Username or password is incorrect");
-            RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-            rd.forward(request, response);
-        }
-        
-        }
-        if(action.equals("signup")){
-                String auth_email = request.getParameter("email");
-        UserDAO dao = new UserDAO();
-        UserDTO user = dao.signup(auth_email, auth_name, auth_password);
-        if(user != null){
-                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                rd.forward(request, response);
-        }else{
-            request.setAttribute("error", "User name or email already exist, please sign up again");
-            RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-            rd.forward(request, response);
-        }
-        }
-        
-        if(action.equals("signout")){
-            HttpSession session = request.getSession(false);
-            request.getSession().invalidate();
-            response.sendRedirect("Login");
+        System.out.println(action);
+        switch (action) {
+            case "login":
+                {
+                    UserDAO dao = new UserDAO();
+                    UserDTO user = dao.login(auth_name, auth_password);
+                    if (user != null) {
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("loginSession", user);
+                        RequestDispatcher rd = request.getRequestDispatcher("BookController");
+                        rd.forward(request, response);
+                        
+                    } else {
+                        request.setAttribute("error", "Username or password is incorrect");
+                        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                        rd.forward(request, response);
+                    }           break;
+                }
+            case "signup":
+                {
+                    String auth_email = request.getParameter("email");
+                    UserDAO dao = new UserDAO();
+                    UserDTO user = dao.signup(auth_email, auth_name, auth_password);
+                    if(user != null){
+                        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                        rd.forward(request, response);
+                    }else{
+                        request.setAttribute("error", "User name or email already exist, please sign up again");
+                        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                        rd.forward(request, response);
+                    }           break;
+                }
+            case "signout":
+                HttpSession session = request.getSession(false);
+                request.getSession().invalidate();
+                response.sendRedirect("Login.jsp");
+                break;
+            default:
+                break;
         }
      
 
