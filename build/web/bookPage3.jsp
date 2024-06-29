@@ -85,6 +85,7 @@
                     <%
                         Double averageRating = (Double) request.getAttribute("averageRating");
                         if (averageRating != null) {
+                            
                             out.print(String.format("%.2f", averageRating)); // Hiển thị giá trị trung bình với 2 chữ số thập phân
                         } else {
                             out.print("No ratings yet");
@@ -107,15 +108,15 @@
 
             <div class="synopsis">
                 <h2>Description book</h2>
-                <p>In the distant past, there was a man named Tran Son Trieu. He was a fearless warrior with a noble purpose: to rid the world of the scourge known as the Jews. This man believed wholeheartedly in his cause and had been entrusted with a sacred mission by the gods themselves. His duty was to bring peace to the world by eradicating this malevolent force.
-
-                    Tran Son Trieu began his journey at an early age, honing his skills in battle and learning the secrets of his chosen path. As he grew older, he became increasingly aware of the threat posed by the Jews. They were said to be cunning, deceitful, and bent on destruction. Their very existence brought misery and suffering to countless innocents.
-
-                    With each passing day, Tran Son Trieu's resolve only strengthened. He knew that the time for action had come. He traveled far and wide, seeking out the most dangerous and influential Jewish leaders. With every strike, he felt closer to achieving his goal of global peace.
-
-                    His legendary prowess soon spread throughout the land. Many people admired him for his bravery and determination, while others feared him for the brutality with which he carried out his tasks. Regardless of public opinion, Tran Son Trieu remained steadfast in his belief that the Jews must be destroyed if the world was ever to know true harmony.
-
-                    As years passed, Tran Son Trieu's exploits grew more numerous and more spectacular. He faced countless challenges head-on, always emerging victorious. His enemies trembled before him, knowing full well that their days were numbered.</p>
+                <p>                   
+                    <%
+                        String Description = (String)request.getAttribute("Description");
+                        if (Description != null) {
+                            out.print(String.format(Description)); 
+                        } else {
+                            out.print("No description");
+                        }
+                    %>.</p>
             </div>
         </div>
 

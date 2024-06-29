@@ -85,7 +85,7 @@ public class BookDAO {
                     String book_title = rs.getString("Title");
                     String book_Des = rs.getString("Description");
                     String book_cover = rs.getString("CoverImage");
-                    float average_rating = rs.getFloat("AverageRating");
+                    double average_rating = rs.getDouble("AverageRating");
                     BookDTO book = new BookDTO();
                     book.setTitle(book_title);
                     book.setDescription(book_Des);

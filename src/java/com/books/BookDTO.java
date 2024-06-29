@@ -17,7 +17,7 @@ public class BookDTO {
     private String DownloadLink;
     private String Cover;
     private int BookID;
-    private float AverageRating;
+    private double AverageRating;
     public BookDTO(String Title, String Author, String Description, String DownloadLink, String Cover) {
         this.Title = Title;
         this.Author = Author;
@@ -31,11 +31,11 @@ public class BookDTO {
         
     }
 
-    public float getAverageRating() {
+    public double getAverageRating() {
         return AverageRating;
     }
 
-    public void setAverageRating(float AverageRating) {
+    public void setAverageRating(double AverageRating) {
         this.AverageRating = AverageRating;
     }
 

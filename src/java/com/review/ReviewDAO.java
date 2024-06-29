@@ -68,6 +68,22 @@ public class ReviewDAO {
         }
         return averageRating;
     }
+    
+        public String getBookDescription(int bookID) {
+        String Description = "";
+        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+            String query = "SELECT Description FROM Books WHERE BookID = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, bookID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Description = rs.getString("Description");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Description;
+    }
 
     public ReviewDTO postReview(int Rating, int BookID, int UserID, String Comment) {
         Connection con = null;
