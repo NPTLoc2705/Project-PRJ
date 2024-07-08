@@ -152,4 +152,18 @@ public class ReviewDAO {
         }
         return null;
     }
+     public boolean delete(Integer id) {
+        String sql = " DElETE Review WHERE ReviewID = ? ";
+        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            con.close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Error at delete ReviewDAO:Detail " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

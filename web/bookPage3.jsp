@@ -22,7 +22,7 @@
             <div class="container-fluid">
                 <div class="tm-header-inner">
                     <div class="tm-header-logo">
-                        <a href="#" class="navbar-brand tm-site-name"
+                        <a href="BookController" class="navbar-brand tm-site-name"
                            ><img src="img/hinh.png" alt=""
                               /></a>
                     </div>
@@ -57,11 +57,11 @@
                                 <li class="nav-item">
                                     <a href="Login?action=signout" class="nav-link">Sign out</a>
                                 </li>
-                                    <% } else {%>
+                                <% } else {%>
                                 <li class="nav-item">
                                     <a href="Login.jsp" class="nav-link">Sign up</a>
-                                     </li>
-                                    <% }%>
+                                </li>
+                                <% }%>
                             </ul>
                         </div>
                     </nav>
@@ -70,53 +70,24 @@
         </div>
 
         <div class="movie-container">
-            <h1 class="movie-title">Messenger of peace adventure notes and his suddenly stuck life</h1>
+            <h1 class="movie-title">${requestScope.object.title}</h1>
             <div class="movie-poster">
-                <img src="img/434253443_970851104438224_6556823117598086585_n.jpg" alt=""/>
+                <img src="testy?filename=${requestScope.object.cover}" alt=""/>
             </div>
             <div class="movie-details">
-                <p><strong>Director:</strong>Trần Sơn Triều</p>
-                <p><strong>Actors:</strong> Tran Son Trieu, Nguyen Phan Tan Loc </p>
+                <p><strong>Author:</strong>${requestScope.object.author}</p>
                 <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero, Sex Content</p>
-                <p><strong>Opening:</strong>May 24, 2024</p>
-                <p><strong>Language:</strong> Japanese - Vietnamese subtitles; Voiceover</p>
-                <p><strong>Rate: STORY IS ALLOWED TO BE POPULAR TO READERS OF ALL AGES</strong></p>
-                <p><strong>Average Rating:</strong>
-                    <%
-                        Double averageRating = (Double) request.getAttribute("averageRating");
-                        if (averageRating != null) {
-                            
-                            out.print(String.format("%.2f", averageRating)); // Hiển thị giá trị trung bình với 2 chữ số thập phân
-                        } else {
-                            out.print("No ratings yet");
-                        }
-                    %>
+                <p><strong>Rate:</strong>
+                    ${requestScope.object.averageRating}
                 </p>
             </div>
-
-            <div class="action">
-                <div>
-                    <a href="https://www.youtube.com/watch?v=qrBNq3isQOE&pp=ygUJZHUgdm8gbWF5">
-                        <i class="fa-regular fa-circle-play"></i> Watch trailer
-                    </a>
-                </div>                
-            </div>
-
             <div class="buyTicket">
                 <a href="seat.html" class="navbar-link btn-box"> Download </a>
             </div>
 
             <div class="synopsis">
                 <h2>Description book</h2>
-                <p>                   
-                    <%
-                        String Description = (String)request.getAttribute("Description");
-                        if (Description != null) {
-                            out.print(String.format(Description)); 
-                        } else {
-                            out.print("No description");
-                        }
-                    %>.</p>
+                <p>${requestScope.object.description}.</p>
             </div>
         </div>
 
@@ -125,7 +96,7 @@
                 <div class="text">Thanks for rating us!</div>
                 <div class="edit">EDIT</div>
             </div>
-            <form action="Bookdetail?action=submitReview&id=<%= request.getAttribute("ID") %>" method="post">
+            <form action="Bookdetail?action=submitReview&id=${object.bookID}" method="post">
                 <div class="star-widget">
                     <input type="radio" name="rate" value = "5" id="rate-5">
                     <label for="rate-5" class="fas fa-star"></label>
@@ -156,6 +127,7 @@
             List<ReviewDTO> list = (List<ReviewDTO>) request.getAttribute("reviewList");
             if (list != null) {
                 for (ReviewDTO review : list) {
+                     pageContext.setAttribute("review", review);
         %>
         <!--BOX-1-------------->
         <div class="testimonial-box">
@@ -198,6 +170,7 @@
                 <p><%= review.getComment()%></p>
             </div>
         </div>
+
         <%
             }
         } else {

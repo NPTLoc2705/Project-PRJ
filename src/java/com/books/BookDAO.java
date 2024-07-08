@@ -102,6 +102,42 @@ public class BookDAO {
         }
         return list;
     }
+   public BookDTO load(int Title) {
+       
+        try(Connection con = ConnectDb.ConnectDB.getConnect()) {         
+            String sql = " SELECT BookID,Title,Author, Description, CoverImage,AverageRating,DownloadLink FROM Books WHERE BookID = ? ";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, Title);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    int book_ID = rs.getInt("BookID");
+                    String book_title = rs.getString("Title");
+                    String book_author = rs.getString("Author");
+                    String book_Des = rs.getString("Description");                   
+                    String book_cover = rs.getString("CoverImage");
+                    double average_rating = rs.getDouble("AverageRating");
+                    String book_link = rs.getString("DownloadLink");
+                    
+                    BookDTO book = new BookDTO();
+                    book.setTitle(book_title);
+                    book.setAuthor(book_author);
+                    book.setDescription(book_Des);               
+                    book.setCover(book_cover);
+                    book.setAverageRating(average_rating);
+                    book.setDownloadLink(book_link);
+                    book.setBookID(book_ID);
+                    return book;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+
+        }
+        return null;
+    }
    
 
 }

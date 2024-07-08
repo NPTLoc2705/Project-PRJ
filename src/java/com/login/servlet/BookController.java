@@ -7,17 +7,12 @@ package com.login.servlet;
 
 import com.books.BookDAO;
 import com.books.BookDTO;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,18 +24,19 @@ public class BookController extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         String keyword = request.getParameter("keyword");
+        BookDAO bd = new BookDAO();
         if (keyword == null) {
             keyword = "";
         }
 
-        if (action == null || action.equals("list")|| action.equals("login")) {
-            System.out.println(getServletContext().getRealPath("img"));   
+        if (action == null || action.equals("list") || action.equals("login")) {
+            System.out.println(getServletContext().getRealPath("img"));
             BookDAO dao = new BookDAO();
             List<BookDTO> list = dao.list(keyword);
             request.setAttribute("booklist", list);
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

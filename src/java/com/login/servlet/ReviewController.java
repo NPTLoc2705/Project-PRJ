@@ -1,6 +1,8 @@
 package com.login.servlet;
 
 import com.User.UserDTO;
+import com.books.BookDAO;
+import com.books.BookDTO;
 import com.review.ReviewDAO;
 import com.review.ReviewDTO;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,28 +25,43 @@ public class ReviewController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-
         String action = request.getParameter("action");
         System.out.println(action);
-
         ReviewDAO dao = new ReviewDAO();
-        int bookID = Integer.parseInt(request.getParameter("id"));
+        BookDAO bd = new BookDAO();
 
         if (action == null) {
-            // Lấy danh sách review
-            List<ReviewDTO> list = dao.ListReview(bookID);
-
-            // Lấy AverageRating
-            double averageRating = dao.getBookAverageRating(bookID);
-            String Description = dao.getBookDescription(bookID);    
-            // Đặt các thuộc tính vào request
+            Integer id = null;
+            try {
+                id = Integer.parseInt(request.getParameter("bookid"));
+            } catch (NumberFormatException e) {
+                log("ID in review detail error");
+            }
+            List<ReviewDTO> list = dao.ListReview(id);
             request.setAttribute("reviewList", list);
-            request.setAttribute("averageRating", averageRating);
-            request.setAttribute("ID", bookID);
-            request.setAttribute("Description", Description);
-            // Chuyển tiếp đến trang JSP
+            request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
+        } else if (action.equals("detail")) {
+            Integer id = null;
+            try {
+                id = Integer.parseInt(request.getParameter("bookid"));
+            } catch (NumberFormatException e) {
+                log("ID in review detail error");
+            }
+            BookDTO rd = null;
+            if (id != null) {
+                rd = bd.load(id);
+            }
+            request.setAttribute("object", rd);
+            List<ReviewDTO> list = dao.ListReview(id);
+            request.setAttribute("reviewList", list);
             request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
         } else if (action.equals("submitReview")) {
+            Integer id = null;
+            try {
+                id = Integer.parseInt(request.getParameter("id"));
+            } catch (NumberFormatException e) {
+                log("ID in review detail error");
+            }
             HttpSession session = request.getSession(false);
             UserDTO user = (UserDTO) session.getAttribute("loginSession");
 
@@ -57,20 +75,24 @@ public class ReviewController extends HttpServlet {
                         String comment = request.getParameter("comment");
                         if (rate != null && comment != null) {
                             int rate_ = Integer.parseInt(rate);
-                            dao.postReview(rate_, bookID, user.getUserID(), comment);
+                            dao.postReview(rate_, id, user.getUserID(), comment);
                         }
 
                         // Sau khi submit review, lấy AverageRating mới nhất
-                        double averageRating = dao.getBookAverageRating(bookID);
+                        double averageRating = dao.getBookAverageRating(id);
 
                         // Lấy danh sách review cập nhật
-                        List<ReviewDTO> list = dao.ListReview(bookID);
-                        String Description = dao.getBookDescription(bookID);    
+                        List<ReviewDTO> list = dao.ListReview(id);
+                        String Description = dao.getBookDescription(id);
                         // Đặt các thuộc tính vào request
+                        BookDTO rd = null;
+                        if (id != null) {
+                            rd = bd.load(id);
+                        }
+                        request.setAttribute("object", rd);
+                      
                         request.setAttribute("reviewList", list);
-                        request.setAttribute("averageRating", averageRating);
-                        request.setAttribute("ID", bookID);
-                        request.setAttribute("Description", Description);
+
                         // Chuyển tiếp đến trang JSP
                         request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
                     }
@@ -81,6 +103,7 @@ public class ReviewController extends HttpServlet {
                 response.sendRedirect("./Login.jsp");
             }
         }
+
     }
 
     @Override

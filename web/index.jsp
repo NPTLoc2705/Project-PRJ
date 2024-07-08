@@ -63,7 +63,11 @@
                                     <p class="book-meta">${book.description}</p>
                                     <div class="book-actions">
                                         <button>Download</button>
-                                        <button class="like-button"><a href="Bookdetail?id=${book.bookID}"> Detail</a></button>
+                                        <form action="Bookdetail">
+                                            <button class="like-button">Detail</button>
+                                            <input name="action" value="detail" type="hidden">
+                                            <input name="bookid" value="${book.bookID}" type="hidden">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
