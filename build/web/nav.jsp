@@ -34,6 +34,7 @@
                             <% HttpSession sessions = request.getSession(false);
                                     if (sessions.getAttribute("loginSession") != null) {
                                 %>
+                                
                                 <li class="nav-item">
                                     <a href="FileUpload.jsp" class="nav-link">Upload</a>
                                 </li>

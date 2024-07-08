@@ -9,6 +9,16 @@ public class UserDTO {
     private int UserID;
     private String Email;
     private String Password;
+    private boolean Admin;
+
+    public boolean isAdmin() {
+        return Admin;
+    }
+
+    public void setAdmin(boolean Admin) {
+        this.Admin = Admin;
+    }
+    
 
     public String getUsername() {
         return Username;

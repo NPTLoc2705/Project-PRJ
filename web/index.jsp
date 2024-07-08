@@ -63,6 +63,13 @@
                                     <p class="book-meta">${book.description}</p>
                                     <div class="book-actions">
                                         <button>Download</button>
+                            <%
+                            UserDTO user = (UserDTO) sessions.getAttribute("loginSession");
+                            if(user.getUsername().equals("Tab135")){
+                                %>
+                                <button>Ban thg Loc</button>
+                                <%}%>
+                                    
                                         <form action="Bookdetail">
                                             <button class="like-button">Detail</button>
                                             <input name="action" value="detail" type="hidden">
