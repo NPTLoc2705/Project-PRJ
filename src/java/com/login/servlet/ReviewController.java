@@ -90,7 +90,7 @@ public class ReviewController extends HttpServlet {
                             rd = bd.load(id);
                         }
                         request.setAttribute("object", rd);
-                      
+
                         request.setAttribute("reviewList", list);
 
                         // Chuyển tiếp đến trang JSP
@@ -99,6 +99,33 @@ public class ReviewController extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            } else {
+                response.sendRedirect("./Login.jsp");
+            }
+        } else if (action.equals("delete")) {
+            Integer id_review = null;
+            Integer id = null;
+            try {
+                id_review = Integer.parseInt(request.getParameter("reviewid"));
+                id = Integer.parseInt(request.getParameter("id"));
+            } catch (NumberFormatException ex) {
+                log("Parameter id has wrong format");
+            }
+            
+
+            HttpSession session = request.getSession(false);
+            UserDTO user = (UserDTO) session.getAttribute("loginSession");
+            if (user != null) {
+                dao.delete(id_review);
+                
+                BookDTO rd = null;
+                if (id_review != null) {
+                    rd = bd.load(id);
+                }
+                request.setAttribute("object", rd);
+                List<ReviewDTO> list = dao.ListReview(id);
+                request.setAttribute("reviewList", list);
+                request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
             } else {
                 response.sendRedirect("./Login.jsp");
             }

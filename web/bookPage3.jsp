@@ -170,6 +170,11 @@
                 <p><%= review.getComment()%></p>
             </div>
         </div>
+            <form action="Bookdetail?id=${object.bookID}" method="POST">
+                        <input name="action" value="delete" type="hidden">
+                        <input name="reviewid" value="${review.reviewID}" type="hidden">
+                        <input type="submit" value="Delete">
+                    </form>
 
         <%
             }
