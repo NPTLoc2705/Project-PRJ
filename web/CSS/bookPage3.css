@@ -35,6 +35,7 @@
 .synopsis {
     clear: both;
     text-align: justify;
+    overflow: hidden;
 }
 .synopsis h2 {
     color: #333;

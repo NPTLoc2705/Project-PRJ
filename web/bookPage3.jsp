@@ -76,10 +76,9 @@
             </div>
             <div class="movie-details">
                 <p><strong>Author:</strong>${requestScope.object.author}</p>
+                <p><strong>Uploaded by:</strong>${requestScope.object.userID}</p>
                 <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero, Sex Content</p>
-                <p><strong>Rate:</strong>
-                    ${requestScope.object.averageRating}
-                </p>
+                <p><strong>Rate:</strong> ${requestScope.object.averageRating}</p>
             </div>
             <div class="buyTicket">
                 <a href="./BookController?action=download&id=${requestScope.object.bookID}" class="navbar-link btn-box"> Download </a>

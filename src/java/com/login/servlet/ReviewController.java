@@ -55,7 +55,9 @@ public class ReviewController extends HttpServlet {
             List<ReviewDTO> list = dao.ListReview(id);
             request.setAttribute("reviewList", list);
             request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
-        } else if (action.equals("submitReview")) {
+        } 
+        
+        else if (action.equals("submitReview")) {
             Integer id = null;
             try {
                 id = Integer.parseInt(request.getParameter("id"));
@@ -81,20 +83,9 @@ public class ReviewController extends HttpServlet {
                         // Sau khi submit review, lấy AverageRating mới nhất
                         double averageRating = dao.getBookAverageRating(id);
 
-                        // Lấy danh sách review cập nhật
-                        List<ReviewDTO> list = dao.ListReview(id);
-                        String Description = dao.getBookDescription(id);
-                        // Đặt các thuộc tính vào request
-                        BookDTO rd = null;
-                        if (id != null) {
-                            rd = bd.load(id);
-                        }
-                        request.setAttribute("object", rd);
-
-                        request.setAttribute("reviewList", list);
 
                         // Chuyển tiếp đến trang JSP
-                        request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
+                        response.sendRedirect("./Bookdetail?action=detail&bookid="+id);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -118,14 +109,7 @@ public class ReviewController extends HttpServlet {
             if (user != null) {
                 dao.delete(id_review);
                 
-                BookDTO rd = null;
-                if (id_review != null) {
-                    rd = bd.load(id);
-                }
-                request.setAttribute("object", rd);
-                List<ReviewDTO> list = dao.ListReview(id);
-                request.setAttribute("reviewList", list);
-                request.getRequestDispatcher("./bookPage3.jsp").forward(request, response);
+            response.sendRedirect("./Bookdetail?action=detail&bookid="+id);
             } else {
                 response.sendRedirect("./Login.jsp");
             }

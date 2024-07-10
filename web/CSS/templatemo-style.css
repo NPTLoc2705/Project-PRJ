@@ -147,6 +147,9 @@ body {
     padding: 20px;
 }
 .book {
+            overflow: hidden;
+            white-space: nowrap; 
+            text-overflow: ellipsis;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #ccc;

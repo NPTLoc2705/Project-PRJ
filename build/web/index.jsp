@@ -90,6 +90,16 @@
                         <div>Cannot fetch book</div>
                     </c:if>
                 </table>
+                    <%
+                        String spageid = request.getParameter("page");
+                    int pageid = 0;
+                        if(spageid != null) {
+                            pageid = Integer.parseInt(spageid);
+                        }
+                        %>
+                        <c:forEach var="i" begin="0" end="${counter - 1}">
+                          <a href="BookController?page=${i}">${i}</a>
+                        </c:forEach>
         </section>
 
 

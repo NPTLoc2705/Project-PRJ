@@ -35,41 +35,53 @@ public class BookUpload extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String extension = "";
+            String extension_image="";
              String Booknames="";
             String author = request.getParameter("author");
             String description = request.getParameter("description");
             int UserID = Integer.parseInt(request.getParameter("userID"));
               Part part = request.getPart("file");
-              Part cover = request.getPart("cover-image");
-              String original_name = part.getSubmittedFileName();
+              String original_name = part.getSubmittedFileName(); //book
               InputStream input_file = part.getInputStream();
+              
+                Part cover = request.getPart("cover-image"); //image
               String cover_name = cover.getSubmittedFileName();
               InputStream input_cover= cover.getInputStream();
-             String Image_path = request.getServletContext().getRealPath("") + File.separator + "img" + File.separator;
+             
               int dot_index = original_name.lastIndexOf('.');
               if (dot_index > 0 && dot_index < original_name.length() - 1) {
             extension = original_name.substring(dot_index + 1);
         }
+            int dot_index_image = cover_name.lastIndexOf('.');
+              if (dot_index_image > 0 && dot_index_image < cover_name.length() - 1) {
+            extension_image = cover_name.substring(dot_index_image + 1);
+        }
+              
               
 if ("pdf".equals(extension) || "epub".equals(extension)) {
             String Bookname = request.getParameter("bookname");
             if (Bookname != null && !Bookname.trim().isEmpty()) {
                     Booknames = Bookname + "." + extension;
             } else {
-                out.println("Need book name");
+                request.setAttribute("error","Need book name" );
             }
         } else {
-         System.out.println( "Only PDF and EPUB files are allowed.");
+            request.setAttribute("error","Only PDF and EPUB files are allowed." );
         }
-
-              
+if(!extension_image.equals("jpg") && !extension_image.equals("png")){
+    System.out.println(extension_image);
+            request.setAttribute("error","Only PNG and JPG files are allowed for cover image" );
+             request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
+             return;
+        }
             BookDAO dao = new BookDAO();
-            BookDTO book = dao.FileUploader(input_file, Booknames,author,description,input_cover,cover_name,Image_path,UserID);
+            BookDTO book = dao.FileUploader(input_file, Booknames,author,description,input_cover,cover_name,UserID);
              if (book != null){
-                response.sendRedirect("./FileUpload.jsp");
+                 request.setAttribute("success","Book submited successfuly" );
+                 request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
              }
              else{
-                 response.sendRedirect("./FileUpload.jsp");
+                 request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
              }
         }
     }

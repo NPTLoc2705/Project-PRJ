@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class BookDAO {
 
-    public BookDTO FileUploader(InputStream input, String Title, String Author, String Description, InputStream CoverImage, String CoverName, String Imagepath, int UserID) {
+    public BookDTO FileUploader(InputStream input, String Title, String Author, String Description, InputStream CoverImage, String CoverName, int UserID) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
 
             String sql = "INSERT INTO  Books(Title, Author, Description,DownloadLink,CoverImage,UserID) ";
@@ -75,12 +75,16 @@ public class BookDAO {
         return null;
     }
 
-    public List<BookDTO> list(String Title) {
+    public List<BookDTO> list(String Title,int offset, int mode) {
         List<BookDTO> list = new ArrayList<>();
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = " SELECT BookID,Title, Description, CoverImage,AverageRating FROM Books WHERE Title LIKE ? ";
+            String sql = " SELECT BookID,Title, Description, CoverImage,AverageRating from Books  WHERE Title like ? ";
+            if(mode != 0){
+                sql +="ORDER BY bookid offset ? rows fetch first 6 rows only";
+            }
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, '%' + Title + '%');
+            if(mode != 0) stmt.setInt(2, offset);
             ResultSet rs = stmt.executeQuery();
 
             if (rs != null) {
@@ -110,7 +114,7 @@ public class BookDAO {
     public BookDTO load(int Title) {
 
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = " SELECT BookID,Title,Author, Description, CoverImage,AverageRating,DownloadLink FROM Books WHERE BookID = ? ";
+            String sql = " SELECT BookID,Title,Author, Description, CoverImage,AverageRating,DownloadLink,UserID FROM Books WHERE BookID = ? ";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, Title);
             ResultSet rs = stmt.executeQuery();
@@ -124,6 +128,7 @@ public class BookDAO {
                     String book_cover = rs.getString("CoverImage");
                     double average_rating = rs.getDouble("AverageRating");
                     String book_link = rs.getString("DownloadLink");
+                    int UserID = rs.getInt("UserID");
 
                     BookDTO book = new BookDTO();
                     book.setTitle(book_title);
@@ -133,6 +138,7 @@ public class BookDAO {
                     book.setAverageRating(average_rating);
                     book.setDownloadLink(book_link);
                     book.setBookID(book_ID);
+                    book.setUserID(UserID);
                     return book;
                 }
             }

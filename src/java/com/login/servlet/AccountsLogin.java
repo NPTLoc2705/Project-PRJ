@@ -49,7 +49,7 @@ public class AccountsLogin extends HttpServlet {
                     if (user != null) {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("loginSession", user);
-                        RequestDispatcher rd = request.getRequestDispatcher("BookController");
+                        RequestDispatcher rd = request.getRequestDispatcher("BookController?pageid=0");
                         rd.forward(request, response);
                         
                     } else {

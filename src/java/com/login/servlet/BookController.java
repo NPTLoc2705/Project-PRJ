@@ -25,18 +25,27 @@ public class BookController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
+            
             String action = request.getParameter("action");
             BookDAO dao = new BookDAO();
             String keyword = request.getParameter("keyword");
             if (action == null || action.equals("list") || action.equals("login")) {
-
+                int pageId = 0;
+                String SpageId = request.getParameter("page");
+                if(SpageId !=null){
+                    pageId = Integer.parseInt(SpageId) * 6;
+                }
+                
                 if (keyword == null) {
                     keyword = "";
                 }
-                System.out.println(getServletContext().getRealPath("img"));
-
-                List<BookDTO> list = dao.list(keyword);
+                List<BookDTO> list = dao.list(keyword,pageId,1); // cái khúc này là để lấy 6 cuốn sách trong một trang 
+                
+                int page_counter = dao.list(keyword,pageId,0).size() /6 + 1; // cái khúc này để lấy tổng số sách để chia trang
+                
+                System.out.println(page_counter);
                 request.setAttribute("booklist", list);
+                request.setAttribute("counter", page_counter);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
             } else if (action.equals("download")) {

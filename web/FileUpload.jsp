@@ -61,6 +61,14 @@
                     <div class="description-field">
                         <textarea placeholder="Description" class="textarea-input" name = "description"></textarea>
                     </div>
+                    <% String error = (String) request.getAttribute("error");
+                            String success = (String) request.getAttribute("success");
+                        if(error != null){%>
+                            <h3 style="color: red"><%= error%> </h3>
+                         <%}%>
+                         <% if(success != null){%>
+                            <h3 style="color: lime"><%= success%> </h3>
+                         <%}%>
                     <button type="submit" class="upload-button">Upload</button>
                 </form>
             </div>
