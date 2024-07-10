@@ -38,6 +38,7 @@ public class BookUpload extends HttpServlet {
              String Booknames="";
             String author = request.getParameter("author");
             String description = request.getParameter("description");
+            int UserID = Integer.parseInt(request.getParameter("userID"));
               Part part = request.getPart("file");
               Part cover = request.getPart("cover-image");
               String original_name = part.getSubmittedFileName();
@@ -63,9 +64,9 @@ if ("pdf".equals(extension) || "epub".equals(extension)) {
 
               
             BookDAO dao = new BookDAO();
-            BookDTO book = dao.FileUploader(input_file, Booknames,author,description,input_cover,cover_name,Image_path);
+            BookDTO book = dao.FileUploader(input_file, Booknames,author,description,input_cover,cover_name,Image_path,UserID);
              if (book != null){
-                 out.println("Done: ");
+                response.sendRedirect("./FileUpload.jsp");
              }
              else{
                  response.sendRedirect("./FileUpload.jsp");

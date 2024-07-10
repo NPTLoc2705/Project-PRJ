@@ -6,6 +6,8 @@
 package com.books;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -14,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,11 +25,11 @@ import java.util.List;
  */
 public class BookDAO {
 
-    public BookDTO FileUploader(InputStream input, String Title, String Author, String Description,InputStream CoverImage,String CoverName,String Imagepath) {
+    public BookDTO FileUploader(InputStream input, String Title, String Author, String Description,InputStream CoverImage,String CoverName,String Imagepath,int UserID) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
             
-            String sql = "INSERT INTO  Books(Title, Author, Description,DownloadLink,CoverImage) ";
-            sql += " values(?,?,?,?,?)";
+            String sql = "INSERT INTO  Books(Title, Author, Description,DownloadLink,CoverImage,UserID) ";
+            sql += " values(?,?,?,?,?,?)";
             String path = "D:\\PUBLIC_DB\\Books\\" + Title;
             String image_path =  "D:\\PUBLIC_DB\\Image\\"+ CoverName;
             File bookFile = new File(path);
@@ -52,6 +56,7 @@ public class BookDAO {
                 stmt.setString(3, Description);
                 stmt.setString(4, path);
                 stmt.setString(5, CoverName);
+                stmt.setInt(6, UserID);
 
                 int rs = stmt.executeUpdate();
                 if (rs >= 1) {
@@ -138,6 +143,32 @@ public class BookDAO {
         }
         return null;
     }
+   public BookDTO FileDownloader(int id){
+       try(Connection conn = ConnectDb.ConnectDB.getConnect()){
+           String sql = "Select DownloadLink, Title  from Books where BookID = ?";
+           PreparedStatement stmt = conn.prepareStatement(sql);
+           stmt.setInt(1, id);
+           
+            ResultSet rs = stmt.executeQuery();
+           
+        if (rs != null) {
+                while (rs.next()) {
+                    BookDTO book = new BookDTO();
+                    String book_link = rs.getString("DownloadLink");
+                    String Title = rs.getString("Title");
+                    book.setDownloadLink(book_link);
+                    book.setTitle(Title);
+                    return book;
+                }
+            }
+        
+           
+       }catch(SQLException ex){
+           ex.printStackTrace();
+       } 
+       return null;
+   }
+
    
 
 }

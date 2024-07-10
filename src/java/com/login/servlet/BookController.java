@@ -7,7 +7,9 @@ package com.login.servlet;
 
 import com.books.BookDAO;
 import com.books.BookDTO;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,21 +24,38 @@ public class BookController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         try (PrintWriter out = response.getWriter()) {
         String action = request.getParameter("action");
-        String keyword = request.getParameter("keyword");
-        BookDAO bd = new BookDAO();
-        if (keyword == null) {
-            keyword = "";
-        }
-
-        if (action == null || action.equals("list") || action.equals("login")) {
-            System.out.println(getServletContext().getRealPath("img"));
             BookDAO dao = new BookDAO();
+        if (action == null || action.equals("list") || action.equals("login")) {
+                String keyword = request.getParameter("keyword");
+                    if (keyword == null) {
+                        keyword = "";
+                    }
+            System.out.println(getServletContext().getRealPath("img"));
+            
             List<BookDTO> list = dao.list(keyword);
             request.setAttribute("booklist", list);
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
-        } 
+        }
+        else if(action.equals("download")){
+            int id = Integer.parseInt(request.getParameter("id"));
+            BookDTO book = dao.FileDownloader(id);
+
+            response.setContentType("APPLICATION/OCTET-STREAM");
+           response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition","attachment; filename="+ book.getTitle());
+            
+            FileInputStream input = new FileInputStream(book.getDownloadLink());
+            int i;
+            while((i = input.read()) != -1){
+                out.write(i);
+            }
+            input.close();
+            out.close();
+        }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

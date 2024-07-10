@@ -15,10 +15,12 @@ public class UserDAO{
     public UserDTO login(String username, String password){
          try(Connection con = ConnectDb.ConnectDB.getConnect()) {
                 String sql = "select UserID, UserName, Password from Users ";
-                sql +=" where UserName = ? and Password = ?";
+                sql +=" where (UserName = ? and Password = ?) OR (Email = ? and Password = ?)";
             try(PreparedStatement stmt = con.prepareStatement(sql);){
                 stmt.setString(1, username);
                 stmt.setString(2,password);
+                stmt.setString(3, username);
+                stmt.setString(4,password);   
                 
                 ResultSet rs = stmt.executeQuery(); //Quẻy trả về kết quả
                     if (rs.next()){
@@ -58,7 +60,7 @@ public class UserDAO{
             stmt.setString(2, username);
             stmt.setString(3, password);
 
-            int rowsInserted = stmt.executeUpdate(); // Returns number of rows inserted
+            int rowsInserted = stmt.executeUpdate(); 
             if (rowsInserted >= 1) {
                 UserDTO user = new UserDTO();
                 user.setEmail(email);

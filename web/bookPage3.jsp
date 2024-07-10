@@ -82,7 +82,7 @@
                 </p>
             </div>
             <div class="buyTicket">
-                <a href="seat.html" class="navbar-link btn-box"> Download </a>
+                <a href="./BookController?action=download&id=${requestScope.object.bookID}" class="navbar-link btn-box"> Download </a>
             </div>
 
             <div class="synopsis">

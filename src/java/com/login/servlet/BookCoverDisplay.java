@@ -32,7 +32,6 @@ public class BookCoverDisplay extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-// Get the filename parameter from the request (optional)
     String filename = request.getParameter("filename");
  
     // Replace with your actual external directory path

@@ -33,7 +33,7 @@
                     <i class="fas fa-upload"></i>
                 </div>
                 <h2>Upload your book</h2>
-                <form action="Upload" method = "POST" enctype="multipart/form-data">
+                <form action="Upload?userID=${sessionScope.loginSession.userID}" method = "POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <label for="file-upload" class="file-label">Choose file</label>
                         <input type="file" id="file-upload" class="file-input" name ="file">
