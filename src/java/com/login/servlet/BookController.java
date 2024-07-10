@@ -24,37 +24,46 @@ public class BookController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try (PrintWriter out = response.getWriter()) {
-        String action = request.getParameter("action");
+        try (PrintWriter out = response.getWriter()) {
+            String action = request.getParameter("action");
             BookDAO dao = new BookDAO();
-        if (action == null || action.equals("list") || action.equals("login")) {
-                String keyword = request.getParameter("keyword");
-                    if (keyword == null) {
-                        keyword = "";
-                    }
-            System.out.println(getServletContext().getRealPath("img"));
-            
-            List<BookDTO> list = dao.list(keyword);
-            request.setAttribute("booklist", list);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            String keyword = request.getParameter("keyword");
+            if (action == null || action.equals("list") || action.equals("login")) {
 
-        }
-        else if(action.equals("download")){
-            int id = Integer.parseInt(request.getParameter("id"));
-            BookDTO book = dao.FileDownloader(id);
+                if (keyword == null) {
+                    keyword = "";
+                }
+                System.out.println(getServletContext().getRealPath("img"));
 
-            response.setContentType("APPLICATION/OCTET-STREAM");
-           response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition","attachment; filename="+ book.getTitle());
-            
-            FileInputStream input = new FileInputStream(book.getDownloadLink());
-            int i;
-            while((i = input.read()) != -1){
-                out.write(i);
+                List<BookDTO> list = dao.list(keyword);
+                request.setAttribute("booklist", list);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            } else if (action.equals("download")) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                BookDTO book = dao.FileDownloader(id);
+
+                response.setContentType("APPLICATION/OCTET-STREAM");
+                response.setContentType("application/pdf");
+                response.setHeader("Content-Disposition", "attachment; filename=" + book.getTitle());
+
+                FileInputStream input = new FileInputStream(book.getDownloadLink());
+                int i;
+                while ((i = input.read()) != -1) {
+                    out.write(i);
+                }
+                input.close();
+                out.close();
+            } else if (action.equals("delete")) {
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("bookid"));
+                } catch (NumberFormatException e) {
+                    log("Parameter id has wrong format");
+                }
+                dao.delete(id);
+                response.sendRedirect("BookController");
             }
-            input.close();
-            out.close();
-        }
         }
     }
 

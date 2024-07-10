@@ -63,15 +63,19 @@
                                     <p class="book-meta">${book.description}</p>
                                     <div class="book-actions">
                                         <button>Download</button>
-                            <%
-                            UserDTO user = (UserDTO) sessions.getAttribute("loginSession");
-                            if(user != null){
-                            if(user.getUsername().equals("Tab135")){
-                                %>
-                                <button>Ban thg Loc</button>
-                                <%}%>
-                                  <%}%>
-                                    
+                                        <%
+                                            UserDTO user = (UserDTO) sessions.getAttribute("loginSession");
+                                            if (user != null) {
+                                                if (user.getUsername().equals("Tab135")) {
+                                        %>
+                                        <form action="BookController">
+                                        <button>Delete</button>
+                                        <input name="action" value="delete" type="hidden">
+                                        <input name="bookid" value="${book.bookID}" type="hidden">
+                                        </form>
+                                        <%}%>
+                                        <%}%>
+
                                         <form action="Bookdetail">
                                             <button class="like-button">Detail</button>
                                             <input name="action" value="detail" type="hidden">
