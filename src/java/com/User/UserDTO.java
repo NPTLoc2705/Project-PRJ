@@ -5,11 +5,12 @@
 package com.User;
 
 public class UserDTO {
-    private String Username;
-    private int UserID;
-    private String Email;
-    private String Password;
+    private String username;
+    private int userID;
+    private String email;
+    private String password;
     private boolean isAdmin;
+    private boolean isBanned; // New field
 
     public boolean isAdmin() {
         return isAdmin;
@@ -19,37 +20,43 @@ public class UserDTO {
         this.isAdmin = isAdmin;
     }
 
-
-    public String getUsername() {
-        return Username;
+    public boolean isBanned() {
+        return isBanned;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setBanned(boolean isBanned) {
+        this.isBanned = isBanned;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getUserID() {
-        return UserID;
+        return userID;
     }
 
-    public void setUserID(int UserID) {
-        this.UserID = UserID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
 }

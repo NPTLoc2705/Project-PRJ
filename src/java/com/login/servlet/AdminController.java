@@ -18,9 +18,7 @@ public class AdminController extends HttpServlet {
         String action = request.getParameter("action");
         UserDAO userDao = new UserDAO();
         BookDAO bookDao = new BookDAO();
-        
-        
-        
+
         if (action != null) {
             if ("ban".equals(action)) {
                 int userId = Integer.parseInt(request.getParameter("userId"));
@@ -35,11 +33,16 @@ public class AdminController extends HttpServlet {
             } else if ("searchUser".equals(action)) {
                 String searchUser = request.getParameter("searchUser");
                 List<UserDTO> users = userDao.searchUsers(searchUser);
-                List<BookDTO> books = bookDao.list("", 0, 0);  
+                // Set isBanned field if needed
+                for (UserDTO user : users) {
+                    user.setBanned(true); // Example of setting isBanned flag
+                }
+                List<BookDTO> books = bookDao.list("", 0, 0);
                 request.setAttribute("users", users);
                 request.setAttribute("books", books);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
                 return;
+
             } else if ("searchBook".equals(action)) {
                 String searchBook = request.getParameter("searchBook");
                 List<UserDTO> users = userDao.getAllUsers();
@@ -52,6 +55,10 @@ public class AdminController extends HttpServlet {
         }
 
         List<UserDTO> users = userDao.getAllUsers();
+        // Set isBanned field if needed
+        for (UserDTO user : users) {
+            user.setBanned(true); // Example of setting isBanned flag
+        }
         List<BookDTO> books = bookDao.list("", 0, 0);
 
         request.setAttribute("users", users);

@@ -9,11 +9,11 @@ import java.util.List;
 
 public class UserDAO {
 
-   public UserDTO login(String username, String password) {
+    public UserDTO login(String username, String password) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = "SELECT u.UserID, u.UserName, a.AdminID FROM Users u " +
-                         "LEFT JOIN Admins a ON u.UserID = a.UserID " +
-                         "WHERE (u.UserName = ? AND u.Password = ?) OR (u.Email = ? AND u.Password = ?)";
+            String sql = "SELECT u.UserID, u.UserName, a.AdminID FROM Users u "
+                    + "LEFT JOIN Admins a ON u.UserID = a.UserID "
+                    + "WHERE (u.UserName = ? AND u.Password = ?) OR (u.Email = ? AND u.Password = ?)";
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, username);
                 stmt.setString(2, password);
@@ -118,12 +118,12 @@ public class UserDAO {
 
     public void banUser(int userId) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = "DELETE FROM Users WHERE UserID = ?";
+            String sql = "UPDATE Users SET IsBanned = 1 WHERE UserID = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, userId);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("Error in servlet. Details: " + ex.getMessage());
+            System.out.println("Error in UserDAO - banUser method: " + ex.getMessage());
             ex.printStackTrace();
         }
     }
