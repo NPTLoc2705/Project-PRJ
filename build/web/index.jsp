@@ -62,16 +62,17 @@
                                     </p>
                                     <p class="book-meta">${book.description}</p>
                                     <div class="book-actions">
-                                        <button>Download</button>
+
+                                        <a href="./BookController?action=download&id=${book.bookID}"><button>Download</button></a>
                                         <%
                                             UserDTO user = (UserDTO) sessions.getAttribute("loginSession");
                                             if (user != null) {
                                                 if (user.getUsername().equals("Tab135")) {
                                         %>
                                         <form action="BookController">
-                                        <button>Delete</button>
-                                        <input name="action" value="delete" type="hidden">
-                                        <input name="bookid" value="${book.bookID}" type="hidden">
+                                            <button color=blue>Delete</button>
+                                            <input name="action" value="delete" type="hidden">
+                                            <input name="bookid" value="${book.bookID}" type="hidden">
                                         </form>
                                         <%}%>
                                         <%}%>
@@ -90,16 +91,16 @@
                         <div>Cannot fetch book</div>
                     </c:if>
                 </table>
-                    <%
-                        String spageid = request.getParameter("page");
+                <%
+                    String spageid = request.getParameter("page");
                     int pageid = 0;
-                        if(spageid != null) {
-                            pageid = Integer.parseInt(spageid);
-                        }
-                        %>
-                        <c:forEach var="i" begin="0" end="${counter - 1}">
-                          <a href="BookController?page=${i}">${i}</a>
-                        </c:forEach>
+                    if (spageid != null) {
+                        pageid = Integer.parseInt(spageid);
+                    }
+                %>
+                <c:forEach var="i" begin="0" end="${counter - 1}">
+                    <a href="BookController?page=${i}">${i}</a>
+                </c:forEach>
         </section>
 
 
