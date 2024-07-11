@@ -42,8 +42,6 @@ public class BookController extends HttpServlet {
                 List<BookDTO> list = dao.list(keyword,pageId,1); // cái khúc này là để lấy 6 cuốn sách trong một trang 
                 
                 int page_counter = dao.list(keyword,pageId,0).size() /6 + 1; // cái khúc này để lấy tổng số sách để chia trang
-                
-                System.out.println(page_counter);
                 request.setAttribute("booklist", list);
                 request.setAttribute("counter", page_counter);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
