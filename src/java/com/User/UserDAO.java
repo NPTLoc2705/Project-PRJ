@@ -9,10 +9,11 @@ import java.util.List;
 
 public class UserDAO {
 
-    public UserDTO login(String username, String password) {
+   public UserDTO login(String username, String password) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = "SELECT UserID, UserName, Password FROM Users "
-                    + "WHERE (UserName = ? AND Password = ?) OR (Email = ? AND Password = ?)";
+            String sql = "SELECT u.UserID, u.UserName, a.AdminID FROM Users u " +
+                         "LEFT JOIN Admins a ON u.UserID = a.UserID " +
+                         "WHERE (u.UserName = ? AND u.Password = ?) OR (u.Email = ? AND u.Password = ?)";
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, username);
                 stmt.setString(2, password);
@@ -24,6 +25,10 @@ public class UserDAO {
                     UserDTO user = new UserDTO();
                     user.setUserID(rs.getInt("UserID"));
                     user.setUsername(rs.getString("UserName"));
+                    // Check if the user is an admin
+                    if (rs.getInt("AdminID") != 0) {
+                        user.setAdmin(true);
+                    }
                     return user;
                 }
             }

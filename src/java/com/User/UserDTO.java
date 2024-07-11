@@ -9,14 +9,14 @@ public class UserDTO {
     private int UserID;
     private String Email;
     private String Password;
-    private int Admin;
+    private boolean isAdmin;
 
-    public int getAdmin() {
-        return Admin;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setAdmin(int Admin) {
-        this.Admin = Admin;
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 
