@@ -75,16 +75,18 @@ public class BookDAO {
         return null;
     }
 
-    public List<BookDTO> list(String Title,int offset, int mode) {
+    public List<BookDTO> list(String Title, int offset, int mode) {
         List<BookDTO> list = new ArrayList<>();
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
             String sql = " SELECT BookID,Title, Description, CoverImage,AverageRating from Books  WHERE Title like ? ";
-            if(mode != 0){
-                sql +="ORDER BY bookid offset ? rows fetch first 6 rows only";
+            if (mode != 0) {
+                sql += "ORDER BY bookid offset ? rows fetch first 6 rows only";
             }
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, '%' + Title + '%');
-            if(mode != 0) stmt.setInt(2, offset);
+            if (mode != 0) {
+                stmt.setInt(2, offset);
+            }
             ResultSet rs = stmt.executeQuery();
 
             if (rs != null) {
@@ -176,18 +178,16 @@ public class BookDAO {
     }
 
     public boolean delete(int id) {
-        String sql = " DELETE FROM Review WHERE BookID = ? ";
-        sql += " Delete FROM Books WHERE BookID = ? ";
-        try (Connection cn = ConnectDb.ConnectDB.getConnect()) {
-            PreparedStatement ps = cn.prepareStatement(sql);
+        String sql = " DELETE FROM Review WHERE BookID = ?; DELETE FROM Books WHERE BookID = ?";
+        try (Connection cn = ConnectDb.ConnectDB.getConnect();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.setInt(2, id);
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
-            System.out.println("Error at delete BookDAO:Detail " + ex.getMessage());
             ex.printStackTrace();
         }
         return false;
     }
-
 }
