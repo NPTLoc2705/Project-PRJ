@@ -9,7 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <title>Stolen Books</title>
-
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" />
         <link rel="stylesheet" href="CSS/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/templatemo-style.css" />
@@ -55,7 +58,7 @@
                                             <input name="action" value="deleteBook" type="hidden">
                                             <input name="bookId" value="${book.bookID}" type="hidden">
                                         </form>
-                                        
+
                                         <form action="./admin">
                                             <button style="color: green;">Go to Admin Page</button>
                                         </form>
@@ -161,6 +164,7 @@
 
         <!-- load JS files -->
         <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/script.js"></script>
         <!-- jQuery (https://jquery.com/download/) -->
         <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
         <!-- Tether for Bootstrap, http://stackoverflow.com/questions/34567939/how-to-fix-the-error-error-bootstrap-tooltips-require-tether-http-github-h -->
