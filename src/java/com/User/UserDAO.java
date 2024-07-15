@@ -157,4 +157,24 @@ public class UserDAO {
             ex.printStackTrace();
         }
     }
+      public UserDTO checkAccountExits(String account) {
+        try (Connection cn = ConnectDb.ConnectDB.getConnect()) {
+            String sql = " SELECT * from Users where UserName = ?";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, account);
+            try(ResultSet rs = ps.executeQuery())
+            {
+                if(rs.next())
+                {
+                    UserDTO users = new UserDTO();
+                    users.setUsername(rs.getString("UserName"));
+                    users.setPassword(rs.getString("Password"));
+                    return users;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

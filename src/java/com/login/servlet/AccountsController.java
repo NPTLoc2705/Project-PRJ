@@ -42,35 +42,43 @@ public class AccountsController extends HttpServlet {
         String auth_password = request.getParameter("pass");
         System.out.println(action);
         switch (action) {
-            case "login":
-                {
-                    UserDAO dao = new UserDAO();
-                    UserDTO user = dao.login(auth_name, auth_password);
-                    if (user != null) {
-                        HttpSession session = request.getSession(true);
-                        session.setAttribute("loginSession", user);
-                        response.sendRedirect("BookController?pageid=0");
-                        
-                    } else {
-                        request.setAttribute("error", "Username or password is incorrect");
-                        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                        rd.forward(request, response);
-                    }           break;
+            case "login": {
+                UserDAO dao = new UserDAO();
+                UserDTO user = dao.login(auth_name, auth_password);
+                if (user != null) {
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("loginSession", user);
+                    response.sendRedirect("BookController?pageid=0");
+
+                } else {
+                    request.setAttribute("error", "Username or password is incorrect");
+                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                    rd.forward(request, response);
                 }
-            case "signup":
-                {
-                    String auth_email = request.getParameter("email");
-                    UserDAO dao = new UserDAO();
-                    UserDTO user = dao.signup(auth_email, auth_name, auth_password);
-                    if(user != null){
+                break;
+            }
+            case "signup": {
+                String auth_email = request.getParameter("email");
+                UserDAO dao = new UserDAO();
+                UserDTO check = null;
+                UserDTO user = dao.signup(auth_email, auth_name, auth_password);
+                check = dao.checkAccountExits(auth_name);
+                if (check == null) {
+                    if (user != null) {
                         RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                         rd.forward(request, response);
-                    }else{
+                    } else {
                         request.setAttribute("error", "User name or email already exist, please sign up again");
                         RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                         rd.forward(request, response);
-                    }           break;
+                    }
+                } else {
+                    request.setAttribute("error", "UserName already exits");
+                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                    rd.forward(request, response);
                 }
+                break;
+            }
             case "signout":
                 HttpSession session = request.getSession(false);
                 request.getSession().invalidate();
@@ -79,7 +87,6 @@ public class AccountsController extends HttpServlet {
             default:
                 break;
         }
-     
 
     }
 
