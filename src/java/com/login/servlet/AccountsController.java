@@ -60,20 +60,13 @@ public class AccountsController extends HttpServlet {
             case "signup": {
                 String auth_email = request.getParameter("email");
                 UserDAO dao = new UserDAO();
-                UserDTO check = null;
                 UserDTO user = dao.signup(auth_email, auth_name, auth_password);
-                check = dao.checkAccountExits(auth_name);
-                if (check == null) {
-                    if (user != null) {
-                        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                        rd.forward(request, response);
-                    } else {
-                        request.setAttribute("error", "User name or email already exist, please sign up again");
-                        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                        rd.forward(request, response);
-                    }
+                if (user != null) {
+                    request.setAttribute("error", "Sign Up successfully");
+                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                    rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "UserName already exits");
+                    request.setAttribute("error", "User name or email already exist, please sign up again");
                     RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                     rd.forward(request, response);
                 }

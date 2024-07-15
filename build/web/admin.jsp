@@ -1,3 +1,4 @@
+<%@page import="com.User.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -6,6 +7,12 @@
         <meta charset="UTF-8">
         <title>Admin Page</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" href="CSS/nav.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" />
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -70,6 +77,55 @@
         </style>
     </head>
     <body>
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a href="BookController"><img src="img/hinh.png"  alt="logo" /></a>
+            </div>
+            <ul class="navbar-list">
+                <li><a href="BookController">Home</a></li>
+                <li><a href="FileUpload.jsp">Upload</a></li>
+
+                <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
+                    if (user != null
+                            && user.isAdmin()) { %>
+                <li class="profile-dropdown-list-item">
+                    <a href="./admin?action=list" class="nav-link"
+                       >Go to Admin Page</a
+                    >
+                </li>
+            </ul>
+            <% }%>
+            <% HttpSession sessions = request.getSession(false);
+                if (sessions.getAttribute("loginSession") != null) {%>
+            <div class="profile-dropdown">
+                <div onclick="toggle()" class="profile-dropdown-btn">
+                    <div class="profile-img">
+
+                    </div>
+                    <span
+                        >${sessionScope.loginSession.username}
+                        <i class="fa-solid fa-angle-down"></i>
+                    </span>
+                </div>
+                <ul class="profile-dropdown-list">
+                    <li class="profile-dropdown-list-item">
+                        <a href="User.jsp">                    
+                            User
+                        </a>
+                    </li>
+
+                    <li class="profile-dropdown-list-item">
+                        <a href="Login?action=signout"> Log out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <%} else {%>
+
+            <li><a href="Login.jsp">Sign In</a></li>
+
+            <%}%>
+        </nav>
         <h2>Admin Page</h2>
 
         <c:if test="${not empty message}">
@@ -156,5 +212,6 @@
                 </c:forEach>
             </tbody>
         </table>
+        <script src="js/script.js"></script>
     </body>
 </html>

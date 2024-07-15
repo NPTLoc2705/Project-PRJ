@@ -1,89 +1,59 @@
+
 <%@page import="com.User.UserDTO"%>
-<div class="tm-header">
-    <div class="container-fluid">
-        <div class="tm-header-inner">
-            <div class="tm-header-logo">
-                <a href="BookController" class="navbar-brand tm-site-name"
-                   ><img src="img/hinh.png" alt=""
-                      /></a>
-            </div>
-
-            <!-- navbar -->
-            <nav class="navbar tm-main-nav">
-                <button
-                    class="navbar-toggler hidden-md-up"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#tmNavbar"
-                    >
-                    &#9776;
-                </button>
-
-                <div class="collapse navbar-toggleable-sm" id="tmNavbar">
-                    <ul class="nav navbar-nav">
-                        <div class ="search-box">
-                            <form action="BookController" method="GET">
-                                <input class="search-box-input" type="text" name="keyword" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                                <button class="search-box-bth" type="submit" value="search"><ion-icon name="search-outline"></ion-icon></button>
-                            </form>
-
-                        </div>
-                        <li class="nav-item ">
-                            <a href="BookController" class="nav-link">Home</a>
-                        </li>
-                        <% HttpSession sessions = request.getSession(false);
-                            if (sessions.getAttribute("loginSession") != null) {
-                        %>
-
-                        <li class="nav-item">
-                            <a href="FileUpload.jsp" class="nav-link">Upload</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="profile-dropdown">
-                                <div onclick="toggle()" class="profile-dropdown-btn">
-                                    <div class="profile-img">
-                                        <i class="fa-solid fa-circle"></i>
-                                    </div>
-
-                                    <span
-                                        >${sessionScope.loginSession.username}
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </span>
-                                </div>
-
-                                <ul class="profile-dropdown-list">
-                                    <li class="profile-dropdown-list-item">
-                                        <a href="Login?action=signout">
-                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                            Log out
-                                        </a>
-
-                                    </li>
-                        <%
-                            UserDTO user = (UserDTO) session.getAttribute("loginSession");
-                            if (user != null && user.isAdmin()) {
-                        %>
-                                    <li class="profile-dropdown-list-item">
-                                        <a href="./admin?action=list" class="nav-link">Go to Admin Page</a>
-                                    </li>
-                        <%
-                            }
-                        %>
-                                </ul>
-                            </div>
-                        </li>
-                        <% } else {%>
-                        <li class="nav-item">
-                            <a href="Login.jsp" class="nav-link">Upload</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="Login.jsp" class="nav-link">Sign up</a>
-                        </li>
-                        <% }%>
-
-                    </ul>
-                </div>
-            </nav>
-        </div>
+<nav class="navbar">
+    <div class="navbar-logo">
+        <a href="BookController"><img src="img/hinh.png"  alt="logo" /></a>
     </div>
-</div>
+    <ul class="navbar-list">
+        <li>
+            <div class="search">
+                <form action="BookController" method="POST">          
+                    <input type="text" name="keyword" value="${param.keyword}" placeholder="Search">
+                    <i class="fa-solid fa-magnifying-glass"> </i>
+                </form>
+            </div>
+        </li>
+        <li><a href="BookController">Home</a></li>
+        <li><a href="FileUpload.jsp">Upload</a></li>
+
+        <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
+            if (user != null
+                    && user.isAdmin()) { %>
+        <li class="profile-dropdown-list-item">
+            <a href="./admin?action=list" class="nav-link"
+               >Go to Admin Page</a
+            >
+        </li>
+    </ul>
+    <% }%>
+    <% HttpSession sessions = request.getSession(false);
+        if (sessions.getAttribute("loginSession") != null) {%>
+    <div class="profile-dropdown">
+        <div onclick="toggle()" class="profile-dropdown-btn">
+            <div class="profile-img">
+
+            </div>
+            <span
+                >${sessionScope.loginSession.username}
+                <i class="fa-solid fa-angle-down"></i>
+            </span>
+        </div>
+        <ul class="profile-dropdown-list">
+            <li class="profile-dropdown-list-item">
+                <a href="User.jsp">                    
+                    User
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="Login?action=signout"> Log out
+                </a>
+            </li>
+        </ul>
+    </div>
+    <%} else {%>
+
+    <li><a href="Login.jsp">Sign In</a></li>
+
+    <%}%>
+</nav>

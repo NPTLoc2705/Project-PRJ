@@ -12,16 +12,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" />
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"
-        />
+            />
         <link rel="stylesheet" href="CSS/bootstrap.min.css" />
         <link rel="stylesheet" href="CSS/templatemo-style.css" />
         <link rel="stylesheet" href="CSS/Upload.css"/>
+        <link rel="stylesheet" href="CSS/nav.css" /> 
+
         <title>File Upload</title>
-        
+
         <style>
             .upload-box {
                 max-width: 600px;
@@ -120,7 +126,7 @@
                         <input type="file" id="cover-upload" class="file-input" name="cover-image">
                         <span id="file-chosen2">No file chosen</span>
                     </div>
-                    
+
                     <div class="input-group">
                         <label for="genres">Choose a book genre(s):</label>
                         <div class="genres-container">
@@ -136,7 +142,7 @@
                             <div><input type="checkbox" id="historical-fiction" name="genres" value="Historical-Fiction"><label for="historical-fiction">Historical Fiction</label></div>
                         </div>
                     </div>
-                    
+
                     <div class="text-fields">
                         <input type="text" placeholder="Author" class="text-input" name="author">
                         <input type="text" placeholder="Book name" class="text-input" name="bookname">
@@ -145,13 +151,13 @@
                         <textarea placeholder="Description" class="textarea-input" name="description"></textarea>
                     </div>
                     <% String error = (String) request.getAttribute("error");
-                       String success = (String) request.getAttribute("success");
-                       if (error != null) {%>
-                        <h3 style="color: red"><%= error %></h3>
+                        String success = (String) request.getAttribute("success");
+                        if (error != null) {%>
+                    <h3 style="color: red"><%= error%></h3>
                     <% } %>
-                    <% if (success != null) { %>
-                        <h3 style="color: lime"><%= success %></h3>
-                    <% } %>
+                    <% if (success != null) {%>
+                    <h3 style="color: lime"><%= success%></h3>
+                    <% }%>
                     <button type="submit" class="upload-button">Upload</button>
                 </form>
             </div>
@@ -170,4 +176,5 @@
             fileChosen2.textContent = this.files[0].name;
         });
     </script>
+    <script src="js/script.js"></script>
 </html>

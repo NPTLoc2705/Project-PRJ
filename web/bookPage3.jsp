@@ -1,3 +1,4 @@
+<%@page import="com.User.UserDTO"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.review.ReviewDTO"%>
@@ -12,62 +13,69 @@
         <link rel="stylesheet" href="Adventure messengercss/navBar.css"> 
         <link rel="stylesheet" href="CSS/bookPage3.css"> 
         <link rel="stylesheet" href="CSS/templatemo-style.css" /> 
+        <link rel="stylesheet" href="CSS/nav.css" /> 
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" />
 
         <script src="https://kit.fontawesome.com/bca396df6c.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
 
-        <div class="tm-header">
-            <div class="container-fluid">
-                <div class="tm-header-inner">
-                    <div class="tm-header-logo">
-                        <a href="BookController" class="navbar-brand tm-site-name"
-                           ><img src="img/hinh.png" alt=""
-                              /></a>
-                    </div>
-
-                    <!-- navbar -->
-                    <nav class="navbar tm-main-nav">
-                        <button
-                            class="navbar-toggler hidden-md-up"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#tmNavbar"
-                            >
-                            &#9776;
-                        </button>
-
-                        <div class="collapse navbar-toggleable-sm" id="tmNavbar">
-                            <ul class="nav navbar-nav">
-                                <div class ="search-box">
-                                    <input class="search-box-input" type="text">
-                                    <button class="search-box-bth" type="submit"><ion-icon name="search-outline"></ion-icon></button>
-
-                                </div>
-                                <li class="nav-item ">
-                                    <a href="BookController" class="nav-link">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="FileUpload.jsp" class="nav-link">Upload</a>
-                                </li>
-                                <% HttpSession sessions = request.getSession(false);
-                                    if (sessions.getAttribute("loginSession") != null) {
-                                %>
-                                <li class="nav-item">
-                                    <a href="Login?action=signout" class="nav-link">Sign out</a>
-                                </li>
-                                <% } else {%>
-                                <li class="nav-item">
-                                    <a href="Login.jsp" class="nav-link">Sign up</a>
-                                </li>
-                                <% }%>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a href="BookController"><img src="img/hinh.png"  alt="logo" /></a>
             </div>
-        </div>
+            <ul class="navbar-list">
+              
+                <li><a href="BookController">Home</a></li>
+                <li><a href="FileUpload.jsp">Upload</a></li>
+
+                <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
+                    if (user != null
+                            && user.isAdmin()) { %>
+                <li class="profile-dropdown-list-item">
+                    <a href="./admin?action=list" class="nav-link"
+                       >Go to Admin Page</a
+                    >
+                </li>
+            </ul>
+            <% }%>
+            <% HttpSession sessions = request.getSession(false);
+                if (sessions.getAttribute("loginSession") != null) {%>
+            <div class="profile-dropdown">
+                <div onclick="toggle()" class="profile-dropdown-btn">
+                    <div class="profile-img">
+
+                    </div>
+                    <span
+                        >${sessionScope.loginSession.username}
+                        <i class="fa-solid fa-angle-down"></i>
+                    </span>
+                </div>
+                <ul class="profile-dropdown-list">
+                    <li class="profile-dropdown-list-item">
+                        <a href="User.jsp">                    
+                            User
+                        </a>
+                    </li>
+
+                    <li class="profile-dropdown-list-item">
+                        <a href="Login?action=signout"> Log out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <%} else {%>
+
+            <li><a href="Login.jsp">Sign In</a></li>
+
+            <%}%>
+        </nav>
+
 
         <div class="movie-container">
             <h1 class="movie-title">${requestScope.object.title}</h1>
@@ -126,7 +134,7 @@
             List<ReviewDTO> list = (List<ReviewDTO>) request.getAttribute("reviewList");
             if (list != null) {
                 for (ReviewDTO review : list) {
-                     pageContext.setAttribute("review", review);
+                    pageContext.setAttribute("review", review);
         %>
         <!--BOX-1-------------->
         <div class="testimonial-box">
@@ -168,11 +176,11 @@
                 <p><%= review.getComment()%></p>
             </div>
         </div>
-            <form action="Bookdetail?id=${object.bookID}" method="POST">
-                        <input name="action" value="delete" type="hidden">
-                        <input name="reviewid" value="${review.reviewID}" type="hidden">
-                        <input type="submit" value="Delete">
-                    </form>
+        <form action="Bookdetail?id=${object.bookID}" method="POST">
+            <input name="action" value="delete" type="hidden">
+            <input name="reviewid" value="${review.reviewID}" type="hidden">
+            <input type="submit" value="Delete">
+        </form>
 
         <%
             }
@@ -208,6 +216,7 @@
 
     <!-- load JS files -->
     <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/script.js"></script>
     <!-- jQuery (https://jquery.com/download/) -->
     <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
     <!-- Tether for Bootstrap, http://stackoverflow.com/questions/34567939/how-to-fix-the-error-error-bootstrap-tooltips-require-tether-http-github-h -->
