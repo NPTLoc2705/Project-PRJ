@@ -72,11 +72,11 @@
         <div class="movie-container">
             <h1 class="movie-title">${requestScope.object.title}</h1>
             <div class="movie-poster">
-                <img src="testy?filename=${requestScope.object.cover}" alt=""/>
+                <img src="./BookController?action=cover&filename=${object.cover}" alt=""/>
             </div>
             <div class="movie-details">
                 <p><strong>Author:</strong>${requestScope.object.author}</p>
-                <p><strong>Uploaded by:</strong>${requestScope.object.userID}</p>
+                <p><strong>Uploaded by:</strong>${requestScope.object.username}</p>
                 <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero</p>
                 <p><strong>Rate:</strong> ${requestScope.object.averageRating}</p>
             </div>
@@ -164,7 +164,6 @@
                     </p>
                 </div>
             </div>
-            <!--Comments---------------------------------------->
             <div class="client-comment">
                 <p><%= review.getComment()%></p>
             </div>

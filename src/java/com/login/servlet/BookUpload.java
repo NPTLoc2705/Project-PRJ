@@ -5,6 +5,8 @@
  */
 package com.login.servlet;
 
+import com.User.UserDAO;
+import com.User.UserDTO;
 import com.books.BookDAO;
 import com.books.BookDTO;
 import java.io.File;
@@ -43,11 +45,9 @@ public class BookUpload extends HttpServlet {
               Part part = request.getPart("file");
               String original_name = part.getSubmittedFileName(); //book
               InputStream input_file = part.getInputStream();
-              
                 Part cover = request.getPart("cover-image"); //image
               String cover_name = cover.getSubmittedFileName();
               InputStream input_cover= cover.getInputStream();
-             
               int dot_index = original_name.lastIndexOf('.');
               if (dot_index > 0 && dot_index < original_name.length() - 1) {
             extension = original_name.substring(dot_index + 1);
@@ -55,9 +55,7 @@ public class BookUpload extends HttpServlet {
             int dot_index_image = cover_name.lastIndexOf('.');
               if (dot_index_image > 0 && dot_index_image < cover_name.length() - 1) {
             extension_image = cover_name.substring(dot_index_image + 1);
-        }
-              
-              
+        }      
 if ("pdf".equals(extension) || "epub".equals(extension)) {
             String Bookname = request.getParameter("bookname");
             if (Bookname != null && !Bookname.trim().isEmpty()) {
@@ -69,14 +67,36 @@ if ("pdf".equals(extension) || "epub".equals(extension)) {
             request.setAttribute("error","Only PDF and EPUB files are allowed." );
         }
 if(!extension_image.equals("jpg") && !extension_image.equals("png")){
-    System.out.println(extension_image);
             request.setAttribute("error","Only PNG and JPG files are allowed for cover image" );
              request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
              return;
         }
+        String image_path = "D:\\PUBLIC_DB\\Image\\" + cover_name;
             BookDAO dao = new BookDAO();
-            BookDTO book = dao.FileUploader(input_file, Booknames,author,description,input_cover,cover_name,UserID);
-             if (book != null){
+            BookDTO book = dao.FileUploader(Booknames,author,description,cover_name,UserID);
+        File imageFile = new File(image_path);
+            try (FileOutputStream outputImage = new FileOutputStream(imageFile)) {
+                byte[] buffer = new byte[1024];
+                int bytes;
+                while ((bytes = input_cover.read(buffer)) != -1) {
+                    outputImage.write(buffer, 0, bytes);
+                }
+            }
+        String path = "D:\\PUBLIC_DB\\Books\\" + Booknames;
+            File bookFile = new File(path);
+            try (FileOutputStream outputBook = new FileOutputStream(bookFile)) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = input_file.read(buffer)) != -1) {
+                    outputBook.write(buffer, 0, bytesRead);
+                }
+            }
+            UserDAO userDao = new UserDAO();
+            int ban = userDao.checkBan(UserID);
+            if(ban != 0){
+                request.setAttribute("error","You are not permitted to upload book, please contact admin" );
+            }
+             if (book != null && ban == 0){
                  request.setAttribute("success","Book submited successfuly" );
                  request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
              }

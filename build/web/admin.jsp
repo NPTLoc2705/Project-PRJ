@@ -102,7 +102,7 @@
                             <form action="admin" method="post">
                                 <input type="hidden" name="action" value="ban">
                                 <input type="hidden" name="userId" value="${user.userID}">
-                                <input type="submit" value="Ban">
+                                <input type="submit" value="Ban upload">
                             </form>
                         </div>
                     </td>
@@ -134,7 +134,7 @@
                     <td>${book.title}</td>
                     <td>
                         <div class="actions">
-                            <form action="admin" method="post">
+                            <form action="./admin" method="post">
                                 <input type="hidden" name="action" value="deleteBook">
                                 <input type="hidden" name="bookId" value="${book.bookID}">
                                 <input type="submit" value="Delete">

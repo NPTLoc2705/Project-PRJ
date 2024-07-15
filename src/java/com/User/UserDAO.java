@@ -11,7 +11,7 @@ public class UserDAO {
 
     public UserDTO login(String username, String password) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = "SELECT u.UserID, u.UserName, a.AdminID FROM Users u "
+            String sql = "SELECT u.UserID, u.UserName,a.AdminID FROM Users u "
                     + "LEFT JOIN Admins a ON u.UserID = a.UserID "
                     + "WHERE (u.UserName = ? AND u.Password = ?) OR (u.Email = ? AND u.Password = ?)";
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -126,5 +126,25 @@ public class UserDAO {
             System.out.println("Error in UserDAO - banUser method: " + ex.getMessage());
             ex.printStackTrace();
         }
+    }
+    
+    public int checkBan(int userId){
+                try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+            String sql = "Select IsBanned from Users WHERE UserID = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    UserDTO user = new UserDTO();
+                    if (rs.getInt("IsBanned") != 0) {
+                        user.setBanned(true);
+                        return 1;
+                    }
+                }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+                 return 0;
     }
 }

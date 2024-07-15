@@ -10,7 +10,7 @@ public class UserDTO {
     private String email;
     private String password;
     private boolean isAdmin;
-    private boolean isBanned; // New field
+    private boolean isBanned; 
 
     public boolean isAdmin() {
         return isAdmin;

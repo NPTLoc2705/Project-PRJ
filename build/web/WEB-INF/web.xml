@@ -2,15 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>AccountsLogin</servlet-name>
-        <servlet-class>com.login.servlet.AccountsLogin</servlet-class>
+        <servlet-class>com.login.servlet.AccountsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookDetail</servlet-name>
         <servlet-class>com.login.servlet.ReviewController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>testy</servlet-name>
-        <servlet-class>com.login.servlet.BookCoverDisplay</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountsLogin</servlet-name>
@@ -35,10 +31,6 @@
     <servlet-mapping>
         <servlet-name>BookDetail</servlet-name>
         <url-pattern>/Bookdetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>testy</servlet-name>
-        <url-pattern>/testy</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AdminController</servlet-name>

@@ -42,7 +42,7 @@
                     <c:if test="${not empty booklist}">
                         <c:forEach var="book" items="${booklist}">
                             <div class="book">
-                                <img src="testy?filename=${book.cover}" alt="Living in the Light" />
+                                <img src="BookController?action=cover&filename=${book.cover}" alt="Living in the Light" />
                                 <div class="book-details">
                                     <p class="book-title">${book.title}</p>
                                     <p class="book-meta">${book.description}</p>
@@ -53,13 +53,7 @@
                                             UserDTO user = (UserDTO) session.getAttribute("loginSession");
                                             if (user != null && user.isAdmin()) {
                                         %>
-                                        <form action="AdminController" method="post">
-                                            <button style="color: blue;">Delete</button>
-                                            <input name="action" value="deleteBook" type="hidden">
-                                            <input name="bookId" value="${book.bookID}" type="hidden">
-                                        </form>
-
-                                        <form action="./admin">
+                                        <form action="./admin?action=list" method="Post">
                                             <button style="color: green;">Go to Admin Page</button>
                                         </form>
                                         <%

@@ -25,29 +25,13 @@ import java.util.logging.Logger;
  */
 public class BookDAO {
 
-    public BookDTO FileUploader(InputStream input, String Title, String Author, String Description, InputStream CoverImage, String CoverName, int UserID) {
+    public BookDTO FileUploader(String Title, String Author, String Description, String CoverName, int UserID) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
 
             String sql = "INSERT INTO  Books(Title, Author, Description,DownloadLink,CoverImage,UserID) ";
             sql += " values(?,?,?,?,?,?)";
-            String path = "D:\\PUBLIC_DB\\Books\\" + Title;
             String image_path = "D:\\PUBLIC_DB\\Image\\" + CoverName;
-            File bookFile = new File(path);
-            try (FileOutputStream outputBook = new FileOutputStream(bookFile)) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    outputBook.write(buffer, 0, bytesRead);
-                }
-            }
-            File imageFile = new File(image_path);
-            try (FileOutputStream outputImage = new FileOutputStream(imageFile)) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = CoverImage.read(buffer)) != -1) {
-                    outputImage.write(buffer, 0, bytesRead);
-                }
-            }
+            String path = "D:\\PUBLIC_DB\\Books\\" + Title;
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, Title);
@@ -116,7 +100,7 @@ public class BookDAO {
     public BookDTO load(int Title) {
 
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = " SELECT BookID,Title,Author, Description, CoverImage,AverageRating,DownloadLink,UserID FROM Books WHERE BookID = ? ";
+            String sql = "SELECT b.BookID, b.Title, b.Author, b.Description, b.CoverImage, b.AverageRating, b.DownloadLink, u.UserName FROM Books b JOIN Users u ON b.UserID = u.UserID WHERE b.BookID = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, Title);
             ResultSet rs = stmt.executeQuery();
@@ -130,7 +114,7 @@ public class BookDAO {
                     String book_cover = rs.getString("CoverImage");
                     double average_rating = rs.getDouble("AverageRating");
                     String book_link = rs.getString("DownloadLink");
-                    int UserID = rs.getInt("UserID");
+                    String Username = rs.getString("UserName");
 
                     BookDTO book = new BookDTO();
                     book.setTitle(book_title);
@@ -140,7 +124,7 @@ public class BookDAO {
                     book.setAverageRating(average_rating);
                     book.setDownloadLink(book_link);
                     book.setBookID(book_ID);
-                    book.setUserID(UserID);
+                    book.setUsername(Username);
                     return book;
                 }
             }

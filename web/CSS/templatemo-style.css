@@ -158,6 +158,14 @@ h2 { font-size: 2.2rem; }
     background: url(./assets/profile-pic.jpg);
     background-size: cover;
 }
+.profile-img span{
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: url(./assets/profile-pic.jpg);
+    background-size: cover;
+}
 
 .profile-img i {
     position: absolute;

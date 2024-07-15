@@ -18,18 +18,31 @@ public class AdminController extends HttpServlet {
         String action = request.getParameter("action");
         UserDAO userDao = new UserDAO();
         BookDAO bookDao = new BookDAO();
+        System.out.println(action);
+        
+        if (action.equals("list")) {
+            List<UserDTO> users = userDao.getAllUsers();
 
-        if (action != null) {
-            if ("ban".equals(action)) {
+            for (UserDTO user : users) {
+                user.setBanned(true); 
+            }
+            List<BookDTO> books = bookDao.list("", 0, 0);
+
+        request.setAttribute("users", users);
+        request.setAttribute("books", books);
+
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        }
+           else if ("ban".equals(action)) {
                 int userId = Integer.parseInt(request.getParameter("userId"));
                 userDao.banUser(userId);
-                response.sendRedirect("admin");
-                return;
+                response.sendRedirect("./admin?action=list");
+
             } else if ("deleteBook".equals(action)) {
                 int bookId = Integer.parseInt(request.getParameter("bookId"));
                 bookDao.delete(bookId);
-                response.sendRedirect("admin");
-                return;
+                response.sendRedirect("./admin?action=list");
+
             } else if ("searchUser".equals(action)) {
                 String searchUser = request.getParameter("searchUser");
                 List<UserDTO> users = userDao.searchUsers(searchUser);
@@ -41,7 +54,7 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("users", users);
                 request.setAttribute("books", books);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
-                return;
+
 
             } else if ("searchBook".equals(action)) {
                 String searchBook = request.getParameter("searchBook");
@@ -50,21 +63,8 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("users", users);
                 request.setAttribute("books", books);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
-                return;
             }
-        }
 
-        List<UserDTO> users = userDao.getAllUsers();
-        // Set isBanned field if needed
-        for (UserDTO user : users) {
-            user.setBanned(true); // Example of setting isBanned flag
-        }
-        List<BookDTO> books = bookDao.list("", 0, 0);
-
-        request.setAttribute("users", users);
-        request.setAttribute("books", books);
-
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
     @Override

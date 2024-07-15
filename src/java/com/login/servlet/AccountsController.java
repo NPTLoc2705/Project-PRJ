@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @author Tab135
  */
 @WebServlet(urlPatterns = {"/Accounts"})
-public class AccountsLogin extends HttpServlet {
+public class AccountsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,8 +49,7 @@ public class AccountsLogin extends HttpServlet {
                     if (user != null) {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("loginSession", user);
-                        RequestDispatcher rd = request.getRequestDispatcher("BookController?pageid=0");
-                        rd.forward(request, response);
+                        response.sendRedirect("BookController?pageid=0");
                         
                     } else {
                         request.setAttribute("error", "Username or password is incorrect");
