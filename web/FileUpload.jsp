@@ -31,7 +31,7 @@
         <style>
             .upload-box {
                 max-width: 600px;
-                margin: 0 auto;
+                margin: 50px auto;
                 padding: 20px;
                 border: 1px solid #ddd;
                 border-radius: 10px;
@@ -108,60 +108,60 @@
     </head>
     <body>
         <%@ include file="/nav.jsp" %>
-        <div class="container">
-            <div class="upload-box">
-                <div class="upload-icon">
-                    <i class="fas fa-upload"></i>
-                </div>
-                <h2>Upload your book</h2>
-                <form action="Upload?userID=${sessionScope.loginSession.userID}" method="POST" enctype="multipart/form-data">
-                    <div class="input-group">
-                        <label for="file-upload" class="file-label">Choose file</label>
-                        <input type="file" id="file-upload" class="file-input" name="file">
-                        <span id="file-chosen">No file chosen</span>
-                    </div>
 
-                    <div class="input-group">
-                        <label for="cover-upload" class="file-label">Choose file</label>
-                        <input type="file" id="cover-upload" class="file-input" name="cover-image">
-                        <span id="file-chosen2">No file chosen</span>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="genres">Choose a book genre(s):</label>
-                        <div class="genres-container">
-                            <div><input type="checkbox" id="horror" name="categories" value="1"><label for="horror">Horror</label></div>
-                            <div><input type="checkbox" id="romance" name="categories" value="2"><label for="romance">Romance</label></div>
-                            <div><input type="checkbox" id="dark-fantasy" name="categories" value="3"><label for="dark-fantasy">Dark Fantasy</label></div>
-                            <div><input type="checkbox" id="science-fiction" name="categories" value="4"><label for="science-fiction">Science Fiction</label></div>
-                            <div><input type="checkbox" id="mystery" name="categories" value="5"><label for="mystery">Mystery</label></div>
-                            <div><input type="checkbox" id="thriller" name="categories" value="6"><label for="thriller">Thriller</label></div>
-                            <div><input type="checkbox" id="fantasy" name="categories" value="7"><label for="fantasy">Fantasy</label></div>
-                            <div><input type="checkbox" id="adventure" name="categories" value="8"><label for="adventure">Adventure</label></div>
-                            <div><input type="checkbox" id="non-fiction" name="categories" value="9"><label for="non-fiction">Non-Fiction</label></div>
-                            <div><input type="checkbox" id="historical-fiction" name="categories" value="10"><label for="historical-fiction">Historical Fiction</label></div>
-                        </div>
-                    </div>
-
-                    <div class="text-fields">
-                        <input type="text" placeholder="Author" class="text-input" name="author">
-                        <input type="text" placeholder="Book name" class="text-input" name="bookname">
-                    </div>
-                    <div class="description-field">
-                        <textarea placeholder="Description" class="textarea-input" name="description"></textarea>
-                    </div>
-                    <% String error = (String) request.getAttribute("error");
-                        String success = (String) request.getAttribute("success");
-                        if (error != null) {%>
-                    <h3 style="color: red"><%= error%></h3>
-                    <% } %>
-                    <% if (success != null) {%>
-                    <h3 style="color: lime"><%= success%></h3>
-                    <% }%>
-                    <button type="submit" class="upload-button">Upload</button>
-                </form>
+        <div class="upload-box">
+            <div class="upload-icon">
+                <i class="fas fa-upload"></i>
             </div>
+            <h2>Upload your book</h2>
+            <form action="Upload?userID=${sessionScope.loginSession.userID}" method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="file-upload" class="file-label">Choose file</label>
+                    <input type="file" id="file-upload" class="file-input" name="file">
+                    <span id="file-chosen">No file chosen</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="cover-upload" class="file-label">Choose file</label>
+                    <input type="file" id="cover-upload" class="file-input" name="cover-image">
+                    <span id="file-chosen2">No file chosen</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="genres">Choose a book genre(s):</label>
+                    <div class="genres-container">
+                        <div><input type="checkbox" id="horror" name="categories" value="1"><label for="horror">Horror</label></div>
+                        <div><input type="checkbox" id="romance" name="categories" value="2"><label for="romance">Romance</label></div>
+                        <div><input type="checkbox" id="dark-fantasy" name="categories" value="3"><label for="dark-fantasy">Dark Fantasy</label></div>
+                        <div><input type="checkbox" id="science-fiction" name="categories" value="4"><label for="science-fiction">Science Fiction</label></div>
+                        <div><input type="checkbox" id="mystery" name="categories" value="5"><label for="mystery">Mystery</label></div>
+                        <div><input type="checkbox" id="thriller" name="categories" value="6"><label for="thriller">Thriller</label></div>
+                        <div><input type="checkbox" id="fantasy" name="categories" value="7"><label for="fantasy">Fantasy</label></div>
+                        <div><input type="checkbox" id="adventure" name="categories" value="8"><label for="adventure">Adventure</label></div>
+                        <div><input type="checkbox" id="non-fiction" name="categories" value="9"><label for="non-fiction">Non-Fiction</label></div>
+                        <div><input type="checkbox" id="historical-fiction" name="categories" value="10"><label for="historical-fiction">Historical Fiction</label></div>
+                    </div>
+                </div>
+
+                <div class="text-fields">
+                    <input type="text" placeholder="Author" class="text-input" name="author">
+                    <input type="text" placeholder="Book name" class="text-input" name="bookname">
+                </div>
+                <div class="description-field">
+                    <textarea placeholder="Description" class="textarea-input" name="description"></textarea>
+                </div>
+                <% String error = (String) request.getAttribute("error");
+                    String success = (String) request.getAttribute("success");
+                    if (error != null) {%>
+                <h3 style="color: red"><%= error%></h3>
+                <% } %>
+                <% if (success != null) {%>
+                <h3 style="color: lime"><%= success%></h3>
+                <% }%>
+                <button type="submit" class="upload-button">Upload</button>
+            </form>
         </div>
+
     </body>
 
     <script>

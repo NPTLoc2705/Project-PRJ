@@ -30,22 +30,13 @@
                 <a href="BookController"><img src="img/hinh.png"  alt="logo" /></a>
             </div>
             <ul class="navbar-list">
-              
                 <li><a href="BookController">Home</a></li>
                 <li><a href="FileUpload.jsp">Upload</a></li>
-
-                <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
-                    if (user != null
-                            && user.isAdmin()) { %>
-                <li class="profile-dropdown-list-item">
-                    <a href="./admin?action=list" class="nav-link"
-                       >Go to Admin Page</a
-                    >
-                </li>
             </ul>
-            <% }%>
             <% HttpSession sessions = request.getSession(false);
-                if (sessions.getAttribute("loginSession") != null) {%>
+
+                if (sessions.getAttribute(
+                        "loginSession") != null) {%>
             <div class="profile-dropdown">
                 <div onclick="toggle()" class="profile-dropdown-btn">
                     <div class="profile-img">
@@ -62,18 +53,25 @@
                             User
                         </a>
                     </li>
-
+                    <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
+                        if (user != null
+                                && user.isAdmin()) { %>
                     <li class="profile-dropdown-list-item">
-                        <a href="Login?action=signout"> Log out
-                        </a>
+                        <a href="./admin?action=list">Go to Admin Page</a>
+                    </li>
+                    <% }%>
+                    <li class="profile-dropdown-list-item">
+                        <a href="Login?action=signout"> Log out </a>
                     </li>
                 </ul>
             </div>
+
             <%} else {%>
 
             <li><a href="Login.jsp">Sign In</a></li>
 
             <%}%>
+
         </nav>
 
 
