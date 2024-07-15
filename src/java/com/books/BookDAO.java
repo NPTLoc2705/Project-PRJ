@@ -5,19 +5,15 @@
  */
 package com.books;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -33,7 +29,7 @@ public class BookDAO {
             String image_path = "D:\\PUBLIC_DB\\Image\\" + CoverName;
             String path = "D:\\PUBLIC_DB\\Books\\" + Title;
 
-            try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            try (PreparedStatement stmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
                 stmt.setString(1, Title);
                 stmt.setString(2, Author);
                 stmt.setString(3, Description);
@@ -43,13 +39,19 @@ public class BookDAO {
 
                 int rs = stmt.executeUpdate();
                 if (rs >= 1) {
-                    BookDTO books = new BookDTO();
-                    books.setTitle(Title);
-                    books.setAuthor(Author);
-                    books.setDescription(Description);
-                    books.setDownloadLink(path);
-                    books.setCover(CoverName);
-                    return books;
+                    try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int bookID = generatedKeys.getInt(1);
+                            BookDTO book = new BookDTO();
+                            book.setBookID(bookID);
+                            book.setTitle(Title);
+                            book.setAuthor(Author);
+                            book.setDescription(Description);
+                            book.setDownloadLink(path);
+                            book.setCover(CoverName);
+                            return book;
+                        }
+                    }
                 }
             }
 
@@ -57,6 +59,22 @@ public class BookDAO {
             e.printStackTrace();
         }
         return null;
+    }
+     public void saveBookCategories(int bookID, String[] categories) {
+        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+            String sql = "INSERT INTO BookCategory (CategoryID, BookID) VALUES (?, ?)";
+            try (PreparedStatement stmt = con.prepareStatement(sql)) {
+                for (String category : categories) {
+                    int categoryID = Integer.parseInt(category);
+                    stmt.setInt(1, categoryID);
+                    stmt.setInt(2, bookID);
+                    stmt.addBatch();
+                }
+                stmt.executeBatch();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<BookDTO> list(String Title, int offset, int mode) {

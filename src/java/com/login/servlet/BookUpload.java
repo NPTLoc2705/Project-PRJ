@@ -48,6 +48,7 @@ public class BookUpload extends HttpServlet {
                 Part cover = request.getPart("cover-image"); //image
               String cover_name = cover.getSubmittedFileName();
               InputStream input_cover= cover.getInputStream();
+              String[] categories = request.getParameterValues("categories");
               int dot_index = original_name.lastIndexOf('.');
               if (dot_index > 0 && dot_index < original_name.length() - 1) {
             extension = original_name.substring(dot_index + 1);
@@ -74,6 +75,7 @@ if(!extension_image.equals("jpg") && !extension_image.equals("png")){
         String image_path = "D:\\PUBLIC_DB\\Image\\" + cover_name;
             BookDAO dao = new BookDAO();
             BookDTO book = dao.FileUploader(Booknames,author,description,cover_name,UserID);
+            dao.saveBookCategories(book.getBookID(),categories);
         File imageFile = new File(image_path);
             try (FileOutputStream outputImage = new FileOutputStream(imageFile)) {
                 byte[] buffer = new byte[1024];

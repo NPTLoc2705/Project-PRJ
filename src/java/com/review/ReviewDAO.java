@@ -52,39 +52,6 @@ public class ReviewDAO {
 
         return listReview;
     }
-
-    public double getBookAverageRating(int bookID) {
-        double averageRating = 0.0;
-        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String query = "SELECT AverageRating FROM Books WHERE BookID = ?";
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setInt(1, bookID);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                averageRating = rs.getDouble("AverageRating");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return averageRating;
-    }
-    
-        public String getBookDescription(int bookID) {
-        String Description = "";
-        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String query = "SELECT Description FROM Books WHERE BookID = ?";
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setInt(1, bookID);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                Description = rs.getString("Description");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Description;
-    }
-
     public ReviewDTO postReview(int Rating, int BookID, int UserID, String Comment) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -104,13 +71,7 @@ public class ReviewDAO {
 
             if (reviewRows > 0) {
                 // Cập nhật lại AverageRating của cuốn sách đã được thêm review
-                String updateAverageRating
-                        = "UPDATE Books "
-                        + "SET AverageRating = ("
-                        + "SELECT AVG(CAST(R.Rating AS FLOAT)) "
-                        + "FROM Review R "
-                        + "WHERE R.BookID = Books.BookID) "
-                        + "WHERE BookID = ?";
+                String updateAverageRating = "UPDATE Books SET AverageRating = ROUND((SELECT AVG(CAST(R.Rating AS FLOAT)) FROM Review R WHERE R.BookID = Books.BookID), 2) WHERE BookID = ?";
 
                 stmt = con.prepareStatement(updateAverageRating);
                 stmt.setInt(1, BookID);

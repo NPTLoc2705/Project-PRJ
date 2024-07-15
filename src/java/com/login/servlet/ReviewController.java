@@ -79,11 +79,6 @@ public class ReviewController extends HttpServlet {
                             int rate_ = Integer.parseInt(rate);
                             dao.postReview(rate_, id, user.getUserID(), comment);
                         }
-
-                        // Sau khi submit review, lấy AverageRating mới nhất
-                        double averageRating = dao.getBookAverageRating(id);
-
-
                         // Chuyển tiếp đến trang JSP
                         response.sendRedirect("./Bookdetail?action=detail&bookid="+id);
                     }

@@ -130,16 +130,16 @@
                     <div class="input-group">
                         <label for="genres">Choose a book genre(s):</label>
                         <div class="genres-container">
-                            <div><input type="checkbox" id="horror" name="genres" value="Horror"><label for="horror">Horror</label></div>
-                            <div><input type="checkbox" id="romance" name="genres" value="Romance"><label for="romance">Romance</label></div>
-                            <div><input type="checkbox" id="dark-fantasy" name="genres" value="Dark-Fantasy"><label for="dark-fantasy">Dark Fantasy</label></div>
-                            <div><input type="checkbox" id="science-fiction" name="genres" value="Science-Fiction"><label for="science-fiction">Science Fiction</label></div>
-                            <div><input type="checkbox" id="mystery" name="genres" value="Mystery"><label for="mystery">Mystery</label></div>
-                            <div><input type="checkbox" id="thriller" name="genres" value="Thriller"><label for="thriller">Thriller</label></div>
-                            <div><input type="checkbox" id="fantasy" name="genres" value="Fantasy"><label for="fantasy">Fantasy</label></div>
-                            <div><input type="checkbox" id="adventure" name="genres" value="Adventure"><label for="adventure">Adventure</label></div>
-                            <div><input type="checkbox" id="non-fiction" name="genres" value="Non-Fiction"><label for="non-fiction">Non-Fiction</label></div>
-                            <div><input type="checkbox" id="historical-fiction" name="genres" value="Historical-Fiction"><label for="historical-fiction">Historical Fiction</label></div>
+                            <div><input type="checkbox" id="horror" name="categories" value="1"><label for="horror">Horror</label></div>
+                            <div><input type="checkbox" id="romance" name="categories" value="2"><label for="romance">Romance</label></div>
+                            <div><input type="checkbox" id="dark-fantasy" name="categories" value="3"><label for="dark-fantasy">Dark Fantasy</label></div>
+                            <div><input type="checkbox" id="science-fiction" name="categories" value="4"><label for="science-fiction">Science Fiction</label></div>
+                            <div><input type="checkbox" id="mystery" name="categories" value="5"><label for="mystery">Mystery</label></div>
+                            <div><input type="checkbox" id="thriller" name="categories" value="6"><label for="thriller">Thriller</label></div>
+                            <div><input type="checkbox" id="fantasy" name="categories" value="7"><label for="fantasy">Fantasy</label></div>
+                            <div><input type="checkbox" id="adventure" name="categories" value="8"><label for="adventure">Adventure</label></div>
+                            <div><input type="checkbox" id="non-fiction" name="categories" value="9"><label for="non-fiction">Non-Fiction</label></div>
+                            <div><input type="checkbox" id="historical-fiction" name="categories" value="10"><label for="historical-fiction">Historical Fiction</label></div>
                         </div>
                     </div>
 
