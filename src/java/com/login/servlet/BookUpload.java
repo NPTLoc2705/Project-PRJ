@@ -73,7 +73,10 @@ if(!extension_image.equals("jpg") && !extension_image.equals("png")){
              return;
         }
         String image_path = "D:\\PUBLIC_DB\\Image\\" + cover_name;
-            BookDAO dao = new BookDAO();
+          UserDAO userDao = new UserDAO();
+        int ban = userDao.checkBan(UserID);
+        if(ban == 0){
+                        BookDAO dao = new BookDAO();
             BookDTO book = dao.FileUploader(Booknames,author,description,cover_name,UserID);
             dao.saveBookCategories(book.getBookID(),categories);
         File imageFile = new File(image_path);
@@ -93,18 +96,17 @@ if(!extension_image.equals("jpg") && !extension_image.equals("png")){
                     outputBook.write(buffer, 0, bytesRead);
                 }
             }
-            UserDAO userDao = new UserDAO();
-            int ban = userDao.checkBan(UserID);
-            if(ban != 0){
-                request.setAttribute("error","You are not permitted to upload book, please contact admin" );
-            }
-             if (book != null && ban == 0){
+            if (book != null && ban == 0){
                  request.setAttribute("success","Book submited successfuly" );
                  request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
              }
-             else{
+        }
+            if(ban != 0){
+                request.setAttribute("error","You are not permitted to upload book, please contact admin" );
+            }
+
                  request.getRequestDispatcher("./FileUpload.jsp").forward(request, response);
-             }
+             
         }
     }
 
