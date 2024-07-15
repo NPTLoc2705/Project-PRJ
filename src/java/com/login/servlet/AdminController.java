@@ -19,51 +19,54 @@ public class AdminController extends HttpServlet {
         UserDAO userDao = new UserDAO();
         BookDAO bookDao = new BookDAO();
         System.out.println(action);
-        
-        if (action.equals("list")) {
-            List<UserDTO> users = userDao.getAllUsers();
 
+        if ("list".equals(action)) {
+            List<UserDTO> users = userDao.getAllUsers();
             for (UserDTO user : users) {
-                user.setBanned(true); 
+                if (userDao.checkBan(user.getUserID()) != 0) {
+                    user.setBanned(true);
+                }
             }
+
             List<BookDTO> books = bookDao.list("", 0, 0);
 
-        request.setAttribute("users", users);
-        request.setAttribute("books", books);
+            request.setAttribute("users", users);
+            request.setAttribute("books", books);
 
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
-        }
-           else if ("ban".equals(action)) {
-                int userId = Integer.parseInt(request.getParameter("userId"));
-                userDao.banUser(userId);
-                response.sendRedirect("./admin?action=list");
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+        } else if ("ban".equals(action)) {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            userDao.banUser(userId);
+            response.sendRedirect("./admin?action=list");
 
-            } else if ("deleteBook".equals(action)) {
-                int bookId = Integer.parseInt(request.getParameter("bookId"));
-                bookDao.delete(bookId);
-                response.sendRedirect("./admin?action=list");
+        } else if ("unban".equals(action)) {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            userDao.unbanUser(userId);
+            response.sendRedirect("./admin?action=list");
+        } else if ("deleteBook".equals(action)) {
+            int bookId = Integer.parseInt(request.getParameter("bookId"));
+            bookDao.delete(bookId);
+            response.sendRedirect("./admin?action=list");
 
-            } else if ("searchUser".equals(action)) {
-                String searchUser = request.getParameter("searchUser");
-                List<UserDTO> users = userDao.searchUsers(searchUser);
-                // Set isBanned field if needed
-                for (UserDTO user : users) {
-                    user.setBanned(true); // Example of setting isBanned flag
-                }
-                List<BookDTO> books = bookDao.list("", 0, 0);
-                request.setAttribute("users", users);
-                request.setAttribute("books", books);
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
-
-
-            } else if ("searchBook".equals(action)) {
-                String searchBook = request.getParameter("searchBook");
-                List<UserDTO> users = userDao.getAllUsers();
-                List<BookDTO> books = bookDao.list(searchBook, 0, 0);
-                request.setAttribute("users", users);
-                request.setAttribute("books", books);
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
+        } else if ("searchUser".equals(action)) {
+            String searchUser = request.getParameter("searchUser");
+            List<UserDTO> users = userDao.searchUsers(searchUser);
+            for (UserDTO user : users) {
+                user.setBanned(true);
             }
+            List<BookDTO> books = bookDao.list("", 0, 0);
+            request.setAttribute("users", users);
+            request.setAttribute("books", books);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+
+        } else if ("searchBook".equals(action)) {
+            String searchBook = request.getParameter("searchBook");
+            List<UserDTO> users = userDao.getAllUsers();
+            List<BookDTO> books = bookDao.list(searchBook, 0, 0);
+            request.setAttribute("users", users);
+            request.setAttribute("books", books);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+        }
 
     }
 

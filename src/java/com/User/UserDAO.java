@@ -41,7 +41,6 @@ public class UserDAO {
 
     public UserDTO signup(String email, String username, String password) {
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            // Check if user exists
             String checkSql = "SELECT COUNT(*) FROM Users WHERE Email = ? OR UserName = ?";
             try (PreparedStatement checkStmt = con.prepareStatement(checkSql)) {
                 checkStmt.setString(1, email);
@@ -53,7 +52,6 @@ public class UserDAO {
                 }
             }
 
-            // Sign up user
             String sql = "INSERT INTO Users(Email, UserName, Password) VALUES (?, ?, ?)";
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, email);
@@ -127,24 +125,36 @@ public class UserDAO {
             ex.printStackTrace();
         }
     }
-    
-    public int checkBan(int userId){
-                try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+
+    public int checkBan(int userId) {
+        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
             String sql = "Select IsBanned from Users WHERE UserID = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, userId);
             stmt.executeQuery();
             ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    UserDTO user = new UserDTO();
-                    if (rs.getInt("IsBanned") != 0) {
-                        user.setBanned(true);
-                        return 1;
-                    }
+            if (rs.next()) {
+                UserDTO user = new UserDTO();
+                if (rs.getInt("IsBanned") != 0) {
+                    user.setBanned(true);
+                    return 1;
                 }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-                 return 0;
+        return 0;
+    }
+
+    public void unbanUser(int userId) {
+        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+            String sql = "UPDATE Users SET IsBanned = 0 WHERE UserID = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error in UserDAO - unbanUser method: " + ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 }
