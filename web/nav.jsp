@@ -57,7 +57,18 @@
                                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                             Log out
                                         </a>
+
                                     </li>
+                        <%
+                            UserDTO user = (UserDTO) session.getAttribute("loginSession");
+                            if (user != null && user.isAdmin()) {
+                        %>
+                                    <li class="profile-dropdown-list-item">
+                                        <a href="./admin?action=list" class="nav-link">Go to Admin Page</a>
+                                    </li>
+                        <%
+                            }
+                        %>
                                 </ul>
                             </div>
                         </li>

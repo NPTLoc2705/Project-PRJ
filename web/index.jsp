@@ -21,9 +21,7 @@
     <body>
 
         <%@ include file="/nav.jsp" %>
-        <div class="tm-home-img-container">
-            <img src="img/1_6Jp3vJWe7VFlFHZ9WhSJng.jpg" alt="Image" class="hidden-lg-up img-fluid" />
-        </div>
+        
 
         <section class="tm-section">
             <div class="container-fluid">
@@ -49,16 +47,6 @@
                                     <div class="book-actions">
 
                                         <a href="./BookController?action=download&id=${book.bookID}"><button>Download</button></a>
-                                        <%
-                                            UserDTO user = (UserDTO) session.getAttribute("loginSession");
-                                            if (user != null && user.isAdmin()) {
-                                        %>
-                                        <form action="./admin?action=list" method="Post">
-                                            <button style="color: green;">Go to Admin Page</button>
-                                        </form>
-                                        <%
-                                            }
-                                        %>
 
                                         <form action="Bookdetail">
                                             <button class="like-button">Detail</button>
