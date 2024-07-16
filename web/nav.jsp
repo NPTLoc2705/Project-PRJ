@@ -9,14 +9,12 @@
             <div class="search">
                 <form action="BookController" method="POST">          
                     <input type="text" name="keyword" value="${param.keyword}" placeholder="Search">
-                    
+
                 </form>
             </div>
         </li>
         <li><a href="BookController">Home</a></li>
         <li><a href="FileUpload.jsp">Upload</a></li>
-
-
     </ul>
 
     <% HttpSession sessions = request.getSession(false);
@@ -36,7 +34,7 @@
         </div>
         <ul class="profile-dropdown-list">
             <li class="profile-dropdown-list-item">
-                <a href="UserController?action=detail&id=${sessionScope.loginSession.userID}">                    
+                <a href="Login?action=detail&id=${sessionScope.loginSession.userID}">                    
                     User Profile
                 </a>
             </li>
@@ -56,7 +54,11 @@
     <%} else {%>
 
     <li><a href="Login.jsp">Sign In</a></li>
-
+    <style>
+        a{
+            color: black;
+        }
+    </style>
     <%}%>
 
 </nav>

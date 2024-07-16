@@ -116,13 +116,13 @@
             <h2>Upload your book</h2>
             <form action="Upload?userID=${sessionScope.loginSession.userID}" method="POST" enctype="multipart/form-data">
                 <div class="input-group">
-                    <label for="file-upload" class="file-label">Choose file</label>
+                    <label for="file-upload" class="file-label">Choose Book</label>
                     <input type="file" id="file-upload" class="file-input" name="file">
                     <span id="file-chosen">No file chosen</span>
                 </div>
 
                 <div class="input-group">
-                    <label for="cover-upload" class="file-label">Choose file</label>
+                    <label for="cover-upload" class="file-label">Book Cover</label>
                     <input type="file" id="cover-upload" class="file-input" name="cover-image">
                     <span id="file-chosen2">No file chosen</span>
                 </div>

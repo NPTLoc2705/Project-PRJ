@@ -25,6 +25,7 @@
 
     <body>
 
+        <%@page import="com.User.UserDTO"%>
         <nav class="navbar">
             <div class="navbar-logo">
                 <a href="BookController"><img src="img/hinh.png"  alt="logo" /></a>
@@ -32,11 +33,15 @@
             <ul class="navbar-list">
                 <li><a href="BookController">Home</a></li>
                 <li><a href="FileUpload.jsp">Upload</a></li>
+
+
             </ul>
+
             <% HttpSession sessions = request.getSession(false);
 
                 if (sessions.getAttribute(
                         "loginSession") != null) {%>
+
             <div class="profile-dropdown">
                 <div onclick="toggle()" class="profile-dropdown-btn">
                     <div class="profile-img">
@@ -49,8 +54,8 @@
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
-                        <a href="User.jsp">                    
-                            User
+                        <a href="Login?action=detail&id=${requestScope.userID}">                    
+                            User Profile
                         </a>
                     </li>
                     <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
@@ -73,6 +78,7 @@
             <%}%>
 
         </nav>
+
 
 
         <div class="movie-container">

@@ -50,7 +50,7 @@
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
-                        <a href="UserController?action=detail&id=${sessionScope.loginSession.userID}">                    
+                        <a href="Login?action=detail&id=${requestScope.userID}">                    
                             User Profile
                         </a>
                     </li>
@@ -78,7 +78,7 @@
 
         <div class="container">
             <h2>Account Settings</h2>
-            <form action="UserController?action=edit&id=${requestScope.user.userID}" method="post">
+            <form action="Login?action=edit&id=${requestScope.user.userID}" method="post">
 
                 <h1>Welcome ${sessionScope.loginSession.username}</h1>
                 <p><strong>Account Name:</strong>${requestScope.user.username}</p>

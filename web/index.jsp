@@ -23,10 +23,7 @@
     <body>
         <%@ include file="/nav.jsp" %>       
         <section class="tm-section">
-            <div class="container-fluid">
-                <div class="row">
-                    
-                </div>
+            
 
                 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                 <table>

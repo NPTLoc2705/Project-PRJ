@@ -36,7 +36,7 @@ public class AccountsController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
@@ -74,10 +74,70 @@ public class AccountsController extends HttpServlet {
                 }
                 break;
             }
-            case "signout":{
+            case "signout": {
                 HttpSession session = request.getSession(false);
                 request.getSession().invalidate();
                 response.sendRedirect("Login.jsp");
+                break;
+            }
+            case "detail": {
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException e) {
+                    log("Parameter has wrong format");
+                }
+                System.out.println(id);
+                UserDAO dao = new UserDAO();
+                UserDTO ud = null;
+                if (id != null) {
+                    ud = dao.load(id);
+                }
+                request.setAttribute("user", ud);
+                RequestDispatcher rd = request.getRequestDispatcher("User.jsp");
+                rd.forward(request, response);
+                break;
+            }
+            case "edit": {
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException e) {
+                    log("Parameter id has wrong format");
+                }
+                UserDAO dao = new UserDAO();
+                UserDTO user = null;
+                if (id != null) {
+                    user = dao.load(id);
+                }
+                request.setAttribute("user", user);
+                RequestDispatcher rd = request.getRequestDispatcher("EditUser.jsp");
+                rd.forward(request, response);
+                break;
+            }
+            case "update": {
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException e) {
+                    log("Parameter id has wrong format");
+                }
+                String account = request.getParameter("full_name");
+                String email = request.getParameter("email_address");
+                String pass = request.getParameter("new_password");
+                UserDAO dao = new UserDAO();
+                UserDTO user = null;
+                if (id != null) {
+                    user = dao.load(id);
+                }
+                user.setUsername(account);
+                user.setEmail(email);
+                user.setPassword(pass);
+                dao.update(user);
+                request.setAttribute("user", user);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("loginSession", user);
+                response.sendRedirect("Login?action=detail&id=" + id);
                 break;
             }
             default:

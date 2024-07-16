@@ -48,7 +48,7 @@
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
-                        <a href="UserController?action=detail&id=${requestScope.userID}">                    
+                        <a href="Login?action=detail&id=${requestScope.userID}">                    
                             User Profile
                         </a>
                     </li>
@@ -76,7 +76,7 @@
 
         <div class="container">
             <h2>Account Settings</h2>
-            <form action="UserController?action=update&id=${requestScope.user.userID}" method="post">
+            <form action="Login?action=update&id=${requestScope.user.userID}" method="post">
                 <label for="full_name">Account Name</label>
                 <input type="text" id="full_name" name="full_name" value="${requestScope.user.username}">
 
