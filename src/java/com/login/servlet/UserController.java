@@ -100,7 +100,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("user", user);
             HttpSession session = request.getSession(true);
             session.setAttribute("loginSession",user );        
-            response.sendRedirect("UserController?action=detail&id=" + id); ;
+            response.sendRedirect("UserController?action=detail&id=" + id); 
         }
 
     }
