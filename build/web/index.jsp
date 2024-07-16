@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.books.BookDTO"%>
 <%@page import="com.User.UserDTO"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
