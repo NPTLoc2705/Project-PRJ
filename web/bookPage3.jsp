@@ -54,7 +54,7 @@
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
-                        <a href="Login?action=detail&id=${sessionScope.loginSession.userID}}">                    
+                        <a href="Login?action=detail&id=${sessionScope.loginSession.userID}">                    
                             User Profile
                         </a>
                     </li>

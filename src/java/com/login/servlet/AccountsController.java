@@ -86,7 +86,7 @@ public class AccountsController extends HttpServlet {
                     id = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException e) {
                     log("Parameter has wrong format");
-                }
+                }            
                 System.out.println(id);
                 UserDAO dao = new UserDAO();
                 UserDTO ud = null;
