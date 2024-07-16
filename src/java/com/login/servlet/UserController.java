@@ -70,9 +70,7 @@ public class UserController extends HttpServlet {
             UserDTO user = null;
             if (id != null) {
                 user = dao.load(id);
-            }
-            HttpSession session = request.getSession(true);
-            session.setAttribute("loginSession",user );           
+            }   
             request.setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher("EditUser.jsp");
             rd.forward(request, response);
@@ -100,6 +98,8 @@ public class UserController extends HttpServlet {
             user.setPassword(pass);
             dao.update(user);
             request.setAttribute("user", user);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("loginSession",user );        
             response.sendRedirect("UserController?action=detail&id=" + id); ;
         }
 

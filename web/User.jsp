@@ -78,7 +78,7 @@
             <h2>Account Settings</h2>
             <form action="UserController?action=edit&id=${requestScope.user.userID}" method="post">
 
-                <h1>Welcome ${requestScope.user.username}</h1>
+                <h1>Welcome ${sessionScope.loginSession.username}</h1>
                 <p><strong>Account Name:</strong>${requestScope.user.username}</p>
                 <p><strong>Email:</strong>${requestScope.user.email}</p>
                 <p><strong>Password:</strong> ${requestScope.user.password}</p>
