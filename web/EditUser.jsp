@@ -48,7 +48,7 @@
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
-                        <a href="UserController?action=detail&id=${sessionScope.loginSession.userID}">                    
+                        <a href="UserController?action=detail&id=${requestScope.userID}">                    
                             User Profile
                         </a>
                     </li>
@@ -76,14 +76,16 @@
 
         <div class="container">
             <h2>Account Settings</h2>
-            <form action="UserController?action=edit&id=${requestScope.user.userID}" method="post">
+            <form action="UserController?action=update&id=${requestScope.user.userID}" method="post">
+                <label for="full_name">Account Name</label>
+                <input type="text" id="full_name" name="full_name" value="${requestScope.user.username}">
 
-                <h1>Welcome ${requestScope.user.username}</h1>
-                <p><strong>Account Name:</strong>${requestScope.user.username}</p>
-                <p><strong>Email:</strong>${requestScope.user.email}</p>
-                <p><strong>Password:</strong> ${requestScope.user.password}</p>
-                <button type="submit">Edit</button>
+                <label for="email_address">Email</label>
+                <input type="email" id="email_address" name="email_address" value="${requestScope.user.email}" readonly>
 
+                <label for="new_password">Password</label>
+                <input type="password" id="new_password" name="new_password"  value="${requestScope.user.password}">
+                <button type="submit">Save</button>
             </form>
         </div>
 

@@ -36,8 +36,8 @@
         </div>
         <ul class="profile-dropdown-list">
             <li class="profile-dropdown-list-item">
-                <a href="User.jsp">                    
-                    User
+                <a href="UserController?action=detail&id=${sessionScope.loginSession.userID}">                    
+                    User Profile
                 </a>
             </li>
             <% UserDTO user = (UserDTO) session.getAttribute("loginSession");

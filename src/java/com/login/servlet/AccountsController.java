@@ -72,11 +72,12 @@ public class AccountsController extends HttpServlet {
                 }
                 break;
             }
-            case "signout":
+            case "signout":{
                 HttpSession session = request.getSession(false);
                 request.getSession().invalidate();
                 response.sendRedirect("Login.jsp");
                 break;
+            }
             default:
                 break;
         }

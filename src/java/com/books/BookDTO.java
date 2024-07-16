@@ -18,7 +18,8 @@ public class BookDTO {
     private String Cover;
     private int BookID;
     private double AverageRating;
-    private String Username;
+    private int UserID;
+
     public BookDTO(String Title, String Author, String Description, String DownloadLink, String Cover) {
         this.Title = Title;
         this.Author = Author;
@@ -27,20 +28,17 @@ public class BookDTO {
         this.Cover = Cover;
     }
 
-
     BookDTO() {
-        
+
     }
 
-    public String getUsername() {
-        return Username;
+    public int getUserID() {
+        return UserID;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setUserID(int UserID) {
+        this.UserID = UserID;
     }
-
-
 
     public double getAverageRating() {
         return AverageRating;

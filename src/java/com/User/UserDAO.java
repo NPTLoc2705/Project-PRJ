@@ -97,7 +97,7 @@ public class UserDAO {
     public List<UserDTO> getAllUsers() {
         List<UserDTO> users = new ArrayList<>();
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = "SELECT UserID, UserName FROM Users";
+            String sql = "SELECT UserID, UserName , Email FROM Users";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -105,6 +105,7 @@ public class UserDAO {
                 UserDTO user = new UserDTO();
                 user.setUserID(rs.getInt("UserID"));
                 user.setUsername(rs.getString("UserName"));
+                user.setEmail(rs.getString("Email"));
                 users.add(user);
             }
         } catch (SQLException ex) {
@@ -157,5 +158,49 @@ public class UserDAO {
             ex.printStackTrace();
         }
     }
-   
+
+    public UserDTO load(int id) {
+        try (Connection con = ConnectDb.ConnectDB.getConnect()) {
+            String sql = "SELECT UserID, UserName , Email, Password FROM Users where UserID = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                UserDTO user = new UserDTO();
+                user.setUserID(rs.getInt("UserID"));
+                user.setUsername(rs.getString("UserName"));
+                user.setEmail(rs.getString("Email"));
+                user.setPassword(rs.getString("Password"));
+                return user;
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+     public boolean update(UserDTO user) {
+        String sql = " UPDATE Users SET UserName = ? , Email = ? , Password = ? ";
+        sql += " WHERE UserID = ? ";
+        try {
+            Connection cn = ConnectDb.ConnectDB.getConnect();
+            PreparedStatement ps = cn.prepareStatement(sql);
+
+           ps.setString(1,user.getUsername());
+           ps.setString(2,user.getEmail());
+           ps.setString(3,user.getPassword());
+           ps.setInt(4, user.getUserID());
+
+            ps.executeUpdate();
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Update student error:" + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
