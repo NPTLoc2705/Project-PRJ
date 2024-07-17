@@ -28,13 +28,14 @@
             </div>
             <ul class="navbar-list">
                 <li><a href="BookController">Home</a></li>               
+
+
+                <% HttpSession sessions = request.getSession(false);
+
+                    if (sessions.getAttribute(
+                            "loginSession") != null) {%>
+                <li><a href="FileUpload.jsp">Upload</a></li>
             </ul>
-
-            <% HttpSession sessions = request.getSession(false);
-
-                if (sessions.getAttribute(
-                        "loginSession") != null) {%>
-            <li><a href="FileUpload.jsp">Upload</a></li>
             <div class="profile-dropdown">
                 <div onclick="toggle()" class="profile-dropdown-btn">
                     <div class="profile-img">
@@ -78,9 +79,9 @@
             <form action="Login?action=edit&id=${requestScope.user.userID}" method="post">
 
                 <h1>Welcome ${sessionScope.loginSession.username}</h1>
-                <p><strong>Account Name:</strong>${requestScope.user.username}</p>
-                <p><strong>Email:</strong>${requestScope.user.email}</p>
-                <p><strong>Password:</strong> ${requestScope.user.password}</p>
+                <p><strong>Account Name　:</strong>　${requestScope.user.username}</p>
+                <p><strong>Email　:</strong>　${requestScope.user.email}</p>
+                <p><strong>Password　:</strong> ${requestScope.user.password}</p>
                 <button type="submit">Edit</button>
 
             </form>
