@@ -5,6 +5,9 @@
  */
 package com.books;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Tab135
@@ -19,7 +22,7 @@ public class BookDTO {
     private int BookID;
     private double AverageRating;
     private String Username;
-
+    private List<String> categories;
     public BookDTO(String Title, String Author, String Description, String DownloadLink, String Cover) {
         this.Title = Title;
         this.Author = Author;
@@ -28,10 +31,18 @@ public class BookDTO {
         this.Cover = Cover;
     }
 
-    BookDTO() {
-
+    public BookDTO() {
+        this.categories = new ArrayList<>();
+    }
+    public List<String> getCategories() {
+        return categories;
     }
 
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    
     public String getUsername() {
         return Username;
     }
@@ -39,7 +50,9 @@ public class BookDTO {
     public void setUsername(String Username) {
         this.Username = Username;
     }
-
+    public void addCategory(String category) {
+        this.categories.add(category);
+    }
 
 
     public double getAverageRating() {

@@ -81,18 +81,18 @@
 
 
 
-        <div class="movie-container">
-            <h1 class="movie-title">${requestScope.object.title}</h1>
-            <div class="movie-poster">
+        <div class="books-container">
+            <h1 class="books-title">${requestScope.object.title}</h1>
+            <div class="books-poster">
                 <img src="./BookController?action=cover&filename=${object.cover}" alt=""/>
             </div>
-            <div class="movie-details">
+            <div class="books-details">
                 <p><strong>Author:</strong>${requestScope.object.author}</p>
                 <p><strong>Uploaded by:</strong>${requestScope.object.username}</p>
-                <p><strong>Genre:</strong>Drama, Romantic, Horror, Hero</p>
+                <p><strong>Catagory:</strong>${requestScope.object.categories}</p>
                 <p><strong>Rate:</strong> ${requestScope.object.averageRating}</p>
             </div>
-            <div class="buyTicket">
+            <div class="downloader">
                 <a href="./BookController?action=download&id=${requestScope.object.bookID}" class="navbar-link btn-box"> Download </a>
             </div>
 

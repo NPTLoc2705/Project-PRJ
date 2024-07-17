@@ -1,19 +1,19 @@
 
-.movie-container {
+.books-container {
     width: 80%;
     margin: 50px auto;
     background-color: #fff;
     padding: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.movie-title {
+.books-title {
     color: #333;
     font-size: 2em;
     margin-bottom: 25px;
     margin-top: -8px;
     text-align: center;
 }
-.movie-poster img {
+.books-poster img {
     width: 100%;
     max-width: 250px;
     height: auto;
@@ -21,11 +21,11 @@
     margin-bottom: 20px;
     
 }
-.movie-poster {
+.books-poster {
     float: left;
     margin-right: 20px;
 }
-.movie-details p {
+.books-details p {
     margin: 5px 0;
     line-height: 1.6;
     text-align: justify;
@@ -41,7 +41,7 @@
     color: #333;
     margin-bottom: 10px;
 }
-div.buyTicket{
+div.downloader{
     display: grid;
     text-align: center;
     padding: inherit;

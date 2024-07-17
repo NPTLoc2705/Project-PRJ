@@ -118,11 +118,11 @@ public class BookDAO {
     public BookDTO load(int Title) {
 
         try (Connection con = ConnectDb.ConnectDB.getConnect()) {
-            String sql = "SELECT b.BookID, b.Title, b.Author, b.Description, b.CoverImage, b.AverageRating, b.DownloadLink, u.UserName FROM Books b JOIN Users u ON b.UserID = u.UserID WHERE b.BookID = ?";
+            String sql = "SELECT b.BookID, b.Title, b.Author, b.Description, b.CoverImage, b.AverageRating, b.DownloadLink, u.UserName, c.Category FROM Books b JOIN Users u ON b.UserID = u.UserID LEFT JOIN BookCategory bc ON b.BookID = bc.BookID LEFT JOIN Category c ON bc.CategoryID = c.CategoryID WHERE b.BookID = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, Title);
             ResultSet rs = stmt.executeQuery();
-
+            BookDTO book = new BookDTO();
             if (rs != null) {
                 while (rs.next()) {
                     int book_ID = rs.getInt("BookID");
@@ -132,9 +132,7 @@ public class BookDAO {
                     String book_cover = rs.getString("CoverImage");
                     double average_rating = rs.getDouble("AverageRating");
                     String book_link = rs.getString("DownloadLink");
-                    String Username = rs.getString("UserName");
-
-                    BookDTO book = new BookDTO();
+                    String Username = rs.getString("UserName");         
                     book.setTitle(book_title);
                     book.setAuthor(book_author);
                     book.setDescription(book_Des);
@@ -143,8 +141,12 @@ public class BookDAO {
                     book.setDownloadLink(book_link);
                     book.setBookID(book_ID);
                     book.setUsername(Username);
-                    return book;
+                    String category = rs.getString("Category");
+                        if (category != null) {
+                            book.addCategory(category);
+                        }
                 }
+                 return book;
             }
         } catch (SQLException ex) {
             System.out.println("Error in servlet. Details:" + ex.getMessage());

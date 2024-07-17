@@ -58,10 +58,14 @@
                     if (spageid != null) {
                         pageid = Integer.parseInt(spageid);
                     }
+                %><% 
+                    int counterValue = (Integer) request.getAttribute("counter");
+                    for (int i = 0; i < counterValue; i++) { 
                 %>
-                <c:forEach var="i" begin="0" end="${counter - 1}">
-                    <a href="BookController?page=${i}">${i}</a>
-                </c:forEach>
+                    <a href="BookController?page=<%= i %>"><%= i %></a>
+                <% 
+                    } 
+                %>
         </section>
         <div class="footer">
             <footer class="tm-footer">
