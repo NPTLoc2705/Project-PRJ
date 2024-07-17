@@ -247,6 +247,13 @@ h4 {
     font-size: 1.4rem;
     line-height: 1.6;
 }
+.srcoll{
+    border:1px solid black;
+}
+.srcoll a{
+    color:black;
+}
+
 
 
 .tm-btn-gray { background-color: #666666; }

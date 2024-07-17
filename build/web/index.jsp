@@ -23,49 +23,64 @@
     <body>
         <%@ include file="/nav.jsp" %>       
         <section class="tm-section">
-            
 
-                <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-                <table>
-                    <c:set var="booklist" value="${requestScope.booklist}" />
-                    <c:if test="${not empty booklist}">
-                        <c:forEach var="book" items="${booklist}">
-                            <div class="book">
-                                <img src="BookController?action=cover&filename=${book.cover}" alt="Living in the Light" />
-                                <div class="book-details">
-                                    <p class="book-title">${book.title}</p>
-                                    <p class="book-meta">${book.description}</p>
-                                    <div class="book-actions">
 
-                                        <a href="./BookController?action=download&id=${book.bookID}"><button class>Download</button></a>
-                                        <form action="Bookdetail">
-                                            <button class="like-button">Detail</button>
-                                            <input name="action" value="detail" type="hidden">
-                                            <input name="bookid" value="${book.bookID}" type="hidden">
-                                        </form>
-                                    </div>
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+            <table>
+                <c:set var="booklist" value="${requestScope.booklist}" />
+                <c:if test="${not empty booklist}">
+                    <c:forEach var="book" items="${booklist}">
+                        <div class="book">
+                            <img src="BookController?action=cover&filename=${book.cover}" alt="Living in the Light" />
+                            <div class="book-details">
+                                <p class="book-title">${book.title}</p>
+                                <p class="book-meta">${book.description}</p>
+                                <div class="book-actions">
+
+                                    <a href="./BookController?action=download&id=${book.bookID}"><button class>Download</button></a>
+                                    <form action="Bookdetail">
+                                        <button class="like-button">Detail</button>
+                                        <input name="action" value="detail" type="hidden">
+                                        <input name="bookid" value="${book.bookID}" type="hidden">
+                                    </form>
                                 </div>
                             </div>
-                        </c:forEach>
-                    </c:if>
-                    <c:if test="${empty booklist}">
-                        <div>Cannot fetch book</div>
-                    </c:if>
-                </table>
-                <%
-                    String spageid = request.getParameter("page");
-                    int pageid = 0;
-                    if (spageid != null) {
-                        pageid = Integer.parseInt(spageid);
-                    }
-                %><% 
-                    int counterValue = (Integer) request.getAttribute("counter");
-                    for (int i = 0; i < counterValue; i++) { 
-                %>
-                    <a href="BookController?page=<%= i %>"><%= i %></a>
-                <% 
-                    } 
-                %>
+                        </div>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${empty booklist}">
+                    <div>Book can't found</div>
+                </c:if>
+            </table>
+            <%
+                String spageid = request.getParameter("page");
+                int pageid = 0;
+                if (spageid != null) {
+                    pageid = Integer.parseInt(spageid);
+                }
+            %><%
+                int counterValue = (Integer) request.getAttribute("counter");
+                for (int i = 0; i < counterValue; i++) {
+            %>
+            <a href="BookController?page=<%= i%>"><%= i%></a>
+            <%
+                }
+            %>
+            <style>
+                .srcoll{
+                    display: flex;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                .srcoll a{
+                    display: block;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    color: #333;
+                }
+
+            </style>
         </section>
         <div class="footer">
             <footer class="tm-footer">
