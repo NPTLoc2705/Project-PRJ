@@ -182,11 +182,12 @@ public class BookDAO {
     }
 
     public boolean delete(int id) {
-        String sql = " DELETE FROM Review WHERE BookID = ?; DELETE FROM Books WHERE BookID = ?";
+        String sql = " DELETE FROM Review WHERE BookID = ?; DELETE FROM BookCategory WHERE BookID = ?;DELETE FROM Books WHERE BookID = ? ";
         try (Connection cn = ConnectDb.ConnectDB.getConnect();
                 PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.setInt(2, id);
+            ps.setInt(3, id);
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

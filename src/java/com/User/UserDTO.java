@@ -11,7 +11,7 @@ public class UserDTO {
     private String password;
     private boolean isAdmin;
     private boolean isBanned;
-    private boolean banned;
+
 
     public boolean isIsBanned() {
         return isBanned;

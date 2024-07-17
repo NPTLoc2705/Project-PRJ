@@ -13,6 +13,11 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
             />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" />
+                    <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
+                if (user == null || user.isAdmin() == false) { 
+                 response.sendRedirect("./BookController");
+                }
+%>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -109,7 +114,7 @@
                             User Profile
                         </a>
                     </li>
-                    <% UserDTO user = (UserDTO) session.getAttribute("loginSession");
+                    <% 
                         if (user != null
                                 && user.isAdmin()) { %>
                     <li class="profile-dropdown-list-item">
