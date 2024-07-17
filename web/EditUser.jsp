@@ -26,16 +26,13 @@
             </div>
             <ul class="navbar-list">
                 <li><a href="BookController">Home</a></li>
-                <li><a href="FileUpload.jsp">Upload</a></li>
-
-
             </ul>
 
             <% HttpSession sessions = request.getSession(false);
 
                 if (sessions.getAttribute(
                         "loginSession") != null) {%>
-
+            <li><a href="FileUpload.jsp">Upload</a></li>
             <div class="profile-dropdown">
                 <div onclick="toggle()" class="profile-dropdown-btn">
                     <div class="profile-img">
@@ -66,7 +63,7 @@
             </div>
 
             <%} else {%>
-
+            <li><a href="Login.jsp">Upload</a></li>
             <li><a href="Login.jsp">Sign In</a></li>
 
             <%}%>

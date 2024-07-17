@@ -19,7 +19,7 @@
 
         if (sessions.getAttribute(
                 "loginSession") != null) {%>
-        <li><a href="FileUpload.jsp">Upload</a></li>       
+                <li><a href="FileUpload.jsp">Upload</a></li>       
           </ul>
     <div class="profile-dropdown">
         <div onclick="toggle()" class="profile-dropdown-btn">
