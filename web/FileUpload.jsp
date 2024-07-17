@@ -132,8 +132,8 @@
                     <div class="genres-container">
                         <div><input type="checkbox" id="horror" name="categories" value="1"><label for="horror">Horror</label></div>
                         <div><input type="checkbox" id="romance" name="categories" value="2"><label for="romance">Romance</label></div>
-                        <div><input type="checkbox" id="dark-fantasy" name="categories" value="3"><label for="da         <div><input type="checkbox" id="science-fiction" name="categories"rk-fantasy">Dark Fantasy</label></div>
-                value="4"><label for="science-fiction">Science Fiction</label></div>
+                        <div><input type="checkbox" id="dark-fantasy" name="categories" value="3"><label for="dark-fantasy">Dark Fantasy</label></div>
+                        <div><input type="checkbox" id="science-fiction" name="categories" value="4"><label for="science-fiction">Science Fiction</label></div>
                         <div><input type="checkbox" id="mystery" name="categories" value="5"><label for="mystery">Mystery</label></div>
                         <div><input type="checkbox" id="thriller" name="categories" value="6"><label for="thriller">Thriller</label></div>
                         <div><input type="checkbox" id="fantasy" name="categories" value="7"><label for="fantasy">Fantasy</label></div>
